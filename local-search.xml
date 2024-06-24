@@ -4,11 +4,30 @@
   
   
   <entry>
+    <title>刷题心得</title>
+    <link href="/2024/06/24/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    <url>/2024/06/24/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/</url>
+    
+    <content type="html"><![CDATA[<h2 id="读题关键字"><a href="#读题关键字" class="headerlink" title="读题关键字"></a>读题关键字</h2><ul><li>满足条件的最<em><strong>小</strong></em>整数</li><li>涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>刷题记录</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>单调栈</title>
     <link href="/2024/06/24/%E5%8D%95%E8%B0%83%E6%A0%88/"/>
     <url>/2024/06/24/%E5%8D%95%E8%B0%83%E6%A0%88/</url>
     
-    <content type="html"><![CDATA[<h2 id="优质参考博客"><a href="#优质参考博客" class="headerlink" title="优质参考博客"></a>优质参考博客</h2><ul><li><a href="https://oi-wiki.org/ds/monotonous-stack/">单调栈</a></li></ul><h2 id="重要性质"><a href="#重要性质" class="headerlink" title="重要性质"></a>重要性质</h2><ul><li>弹出时只能从栈顶[st.top()]弹出</li><li>从栈顶到栈底，元素大小呈某种单调趋势</li><li>当欲压入栈的元素不满足这个单调性时，就要把不满足单调性的所有[栈顶]元素弹出 -&gt; 这个性质用到的比较多</li><li>配合数组使用时，栈内可以存储对应元素的下标，而不是元素值</li></ul><h2 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h2><ul><li>使用时要注意考虑单调顺序：1️⃣递增，2️⃣递减</li><li>要搞清楚单调栈中记录元素的意义：例如题—[503]，单调栈中记录的是还没有找到下一个更大值的<em><strong>下标</strong></em></li></ul><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><ul><li><a href="https://leetcode.cn/problems/next-greater-element-ii/description/">503.下一个更大元素 &amp;#2161</a></li></ul><h2 id="扩展-循环数组"><a href="#扩展-循环数组" class="headerlink" title="扩展-循环数组"></a>扩展-循环数组</h2><ul><li>处理方式1：将[0:n-1]个个数顺序拷贝到第n个数后面，构成一个普通数组</li><li>处理方式2：遍历[0:2n-1)次，取元素时对下标取模</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="优质参考博客"><a href="#优质参考博客" class="headerlink" title="优质参考博客"></a>优质参考博客</h2><ul><li><a href="https://oi-wiki.org/ds/monotonous-stack/">单调栈</a></li></ul><h2 id="重要性质"><a href="#重要性质" class="headerlink" title="重要性质"></a>重要性质</h2><ul><li>弹出时只能从栈顶[st.top()]弹出</li><li>从栈顶到栈底，元素大小呈某种单调趋势</li><li>当欲压入栈的元素不满足这个单调性时，就要把不满足单调性的所有[栈顶]元素弹出 -&gt; 这个性质用到的比较多</li><li>配合数组使用时，栈内可以存储对应元素的下标，而不是元素值</li></ul><h2 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h2><ul><li>使用时要注意考虑单调顺序：1️⃣递增，2️⃣递减</li><li>要搞清楚单调栈中记录元素的意义：例如题—[503]，单调栈中记录的是还没有找到下一个更大值的<em><strong>下标</strong></em>, 只要遍历到比栈顶元素值更大的数，就意味着栈顶元素找到了答案，记录答案，然后从栈顶弹出</li></ul><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><ul><li><a href="https://leetcode.cn/problems/next-greater-element-ii/description/">503.下一个更大元素2</a></li><li><a href="https://leetcode.cn/problems/next-greater-element-iii/description/">556.下一个更大元素3</a></li></ul><h2 id="题目解析"><a href="#题目解析" class="headerlink" title="题目解析"></a>题目解析</h2><ul><li>[556] 一定要注意题目的条件 -&gt; <ul><li>满足条件的最小整数</li><li>如果最小的不是32位整数，也返回-1</li></ul></li></ul><h2 id="扩展-循环数组"><a href="#扩展-循环数组" class="headerlink" title="扩展-循环数组"></a>扩展-循环数组</h2><ul><li>处理方式1：将[0:n-1]个个数顺序拷贝到第n个数后面，构成一个普通数组</li><li>处理方式2：遍历[0:2n-1)次，取元素时对下标取模</li></ul>]]></content>
     
     
     <categories>
