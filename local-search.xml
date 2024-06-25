@@ -4,11 +4,30 @@
   
   
   <entry>
+    <title>子数组相关</title>
+    <link href="/2024/06/25/%E5%AD%90%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3/"/>
+    <url>/2024/06/25/%E5%AD%90%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3/</url>
+    
+    <content type="html"><![CDATA[<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><ul><li><p><a href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/?envType=study-plan-v2&envId=top-interview-150">209. 长度最小的子数组</a></p></li><li><p><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></p></li></ul><h2 id="对应解答及注意事项"><a href="#对应解答及注意事项" class="headerlink" title="对应解答及注意事项"></a>对应解答及注意事项</h2><h3 id="长度最小的子数组"><a href="#长度最小的子数组" class="headerlink" title="长度最小的子数组"></a><a href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/?envType=study-plan-v2&envId=top-interview-150">长度最小的子数组</a></h3><blockquote><ul><li>这个题是滑动窗口的最佳实践！窗口有左右两个边界索引，有点类似于<em><strong>双指针</strong></em>的方法</li><li>官方题解有一个前缀和的做法：<strong>提前算出[0, i]的和，并保存到一个额外的数组中</strong>，接着将题目转化为：<strong>找到两个前缀和，[0, i)，[0, j)<strong>使得这两个前缀和的差 <strong>&gt;&#x3D;</strong> target，记录此时的子数组长度为：</strong>j-i+1</strong>。后续的操作全都转化为了对<em><strong>前缀和数组</strong></em>的查询操作。</li><li></li></ul></blockquote><h3 id="最大子数组和"><a href="#最大子数组和" class="headerlink" title="最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">最大子数组和</a></h3><blockquote><ul><li>这题可以用<strong>动态规划</strong>的方法</li><li>评论区有提到<strong>前缀和数组</strong>的方法：也是提前算出前缀和，<strong>子数组的和可以转化为两个前缀和的差</strong>。对于前缀和数组来说，题目转化为了<strong>股票购买&#x2F;卖出最佳时机（可以多次持有股票，但手上最多只能有一支股票）</strong></li></ul></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>刷题记录</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>刷题心得</title>
     <link href="/2024/06/24/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
     <url>/2024/06/24/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/</url>
     
-    <content type="html"><![CDATA[<h2 id="读题关键字"><a href="#读题关键字" class="headerlink" title="读题关键字"></a>读题关键字</h2><ul><li>满足条件的最<em><strong>小</strong></em>整数</li><li>涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]</li></ul><h2 id="常用数据结构及其方法"><a href="#常用数据结构及其方法" class="headerlink" title="常用数据结构及其方法"></a>常用数据结构及其方法</h2><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul><li><stcak></li><li>push()</li><li>pop() -&gt; 注意返回值为 void，因此取元素只能用top()方法 ⚠️</li><li>top()</li><li>empty()</li><li>begin() ❌ -&gt; 没有这个方法</li><li>size()</li><li>swap() -&gt; <a href="https://cplusplus.com/reference/stack/stack/swap/">交换两个栈的内容</a></li></ul><h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><ul><li><queue></li><li>push()</li><li>pop() ⚠️ -&gt; 注意返回值为 void，因此取元素只能用front()方法</li><li>top() ❌ -&gt; 没有这个方法，要使用front()</li><li>front() -&gt; 查看队列头部的元素[先插入的]</li><li>back() -&gt; 查看队列尾部的元素[后插入的]</li><li>empty()</li><li>begin() ❌ -&gt; 没有这个方法</li><li>size()</li><li>swap() -&gt; <a href="https://cplusplus.com/reference/stack/stack/swap/">交换两个栈的内容</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="读题关键字"><a href="#读题关键字" class="headerlink" title="读题关键字"></a>读题关键字</h2><ul><li>满足条件的最<em><strong>小</strong></em>整数</li><li>涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]</li></ul><h2 id="常用数据结构及其方法"><a href="#常用数据结构及其方法" class="headerlink" title="常用数据结构及其方法"></a>常用数据结构及其方法</h2><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul><li><stcak></li><li>push()</li><li>pop() -&gt; 注意返回值为 void，因此取元素只能用top()方法 ⚠️</li><li>top()</li><li>empty()</li><li>begin() ❌ -&gt; 没有这个方法</li><li>size()</li><li>swap() -&gt; <a href="https://cplusplus.com/reference/stack/stack/swap/">交换两个栈的内容</a></li></ul><h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><ul><li><queue></li><li>push()</li><li>pop() ⚠️ -&gt; 注意返回值为 void，因此取元素只能用front()方法</li><li>top() ❌ -&gt; 没有这个方法，要使用front()</li><li>front() -&gt; 查看队列头部的元素[先插入的]</li><li>back() -&gt; 查看队列尾部的元素[后插入的]</li><li>empty()</li><li>begin() ❌ -&gt; 没有这个方法</li><li>size()</li><li>swap() -&gt; <a href="https://cplusplus.com/reference/stack/stack/swap/">交换两个栈的内容</a></li></ul><h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><ul><li><map></li><li>erase() -&gt; 参数可以为 <strong>iterator</strong>，<strong>key</strong>；也可以为范围参数[first it, last it)</li></ul>]]></content>
     
     
     <categories>

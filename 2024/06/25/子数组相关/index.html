@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="读题关键字 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]  常用数据结构及其方法stack  push() pop() -&gt; 注意返回值为 void，因此取元素只能用top()方法 ⚠️ top() empty() begin() ❌ -&gt; 没有这个方法 size() swap() -&gt; 交换两个栈的内容  queue  push() pop">
+    <meta name="description" content="相关题目 209. 长度最小的子数组  53. 最大子数组和   对应解答及注意事项长度最小的子数组  这个题是滑动窗口的最佳实践！窗口有左右两个边界索引，有点类似于双指针的方法 官方题解有一个前缀和的做法：提前算出[0, i]的和，并保存到一个额外的数组中，接着将题目转化为：找到两个前缀和，[0, i)，[0, j)使得这两个前缀和的差 &gt;&#x3D; target，记录此时的子数组长度为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="刷题心得">
-<meta property="og:url" content="http://example.com/2024/06/24/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:title" content="子数组相关">
+<meta property="og:url" content="http://example.com/2024/06/25/%E5%AD%90%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="读题关键字 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]  常用数据结构及其方法stack  push() pop() -&gt; 注意返回值为 void，因此取元素只能用top()方法 ⚠️ top() empty() begin() ❌ -&gt; 没有这个方法 size() swap() -&gt; 交换两个栈的内容  queue  push() pop">
+<meta property="og:description" content="相关题目 209. 长度最小的子数组  53. 最大子数组和   对应解答及注意事项长度最小的子数组  这个题是滑动窗口的最佳实践！窗口有左右两个边界索引，有点类似于双指针的方法 官方题解有一个前缀和的做法：提前算出[0, i]的和，并保存到一个额外的数组中，接着将题目转化为：找到两个前缀和，[0, i)，[0, j)使得这两个前缀和的差 &gt;&#x3D; target，记录此时的子数组长度为">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-24T14:08:52.000Z">
-<meta property="article:modified_time" content="2024-06-25T06:58:20.225Z">
+<meta property="article:published_time" content="2024-06-25T11:46:22.000Z">
+<meta property="article:modified_time" content="2024-06-25T12:12:44.070Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>刷题心得 - Hexo</title>
+  <title>子数组相关 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="刷题心得"></span>
+            <span id="subtitle" data-typed-text="子数组相关"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 22:08" pubdate>
-          2024年6月24日 晚上
+        <time datetime="2024-06-25 19:46" pubdate>
+          2024年6月25日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          193 字
+          277 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -267,41 +267,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">刷题心得</h1>
+            <h1 id="seo-header">子数组相关</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="读题关键字"><a href="#读题关键字" class="headerlink" title="读题关键字"></a>读题关键字</h2><ul>
-<li>满足条件的最<em><strong>小</strong></em>整数</li>
-<li>涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]</li>
+                <h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/?envType=study-plan-v2&envId=top-interview-150">209. 长度最小的子数组</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></p>
+</li>
 </ul>
-<h2 id="常用数据结构及其方法"><a href="#常用数据结构及其方法" class="headerlink" title="常用数据结构及其方法"></a>常用数据结构及其方法</h2><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul>
-<li><stcak></li>
-<li>push()</li>
-<li>pop() -&gt; 注意返回值为 void，因此取元素只能用top()方法 ⚠️</li>
-<li>top()</li>
-<li>empty()</li>
-<li>begin() ❌ -&gt; 没有这个方法</li>
-<li>size()</li>
-<li>swap() -&gt; <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/swap/">交换两个栈的内容</a></li>
+<h2 id="对应解答及注意事项"><a href="#对应解答及注意事项" class="headerlink" title="对应解答及注意事项"></a>对应解答及注意事项</h2><h3 id="长度最小的子数组"><a href="#长度最小的子数组" class="headerlink" title="长度最小的子数组"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/?envType=study-plan-v2&envId=top-interview-150">长度最小的子数组</a></h3><blockquote>
+<ul>
+<li>这个题是滑动窗口的最佳实践！窗口有左右两个边界索引，有点类似于<em><strong>双指针</strong></em>的方法</li>
+<li>官方题解有一个前缀和的做法：<strong>提前算出[0, i]的和，并保存到一个额外的数组中</strong>，接着将题目转化为：<strong>找到两个前缀和，[0, i)，[0, j)<strong>使得这两个前缀和的差 <strong>&gt;&#x3D;</strong> target，记录此时的子数组长度为：</strong>j-i+1</strong>。后续的操作全都转化为了对<em><strong>前缀和数组</strong></em>的查询操作。</li>
+<li></li>
 </ul>
-<h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><ul>
-<li><queue></li>
-<li>push()</li>
-<li>pop() ⚠️ -&gt; 注意返回值为 void，因此取元素只能用front()方法</li>
-<li>top() ❌ -&gt; 没有这个方法，要使用front()</li>
-<li>front() -&gt; 查看队列头部的元素[先插入的]</li>
-<li>back() -&gt; 查看队列尾部的元素[后插入的]</li>
-<li>empty()</li>
-<li>begin() ❌ -&gt; 没有这个方法</li>
-<li>size()</li>
-<li>swap() -&gt; <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/swap/">交换两个栈的内容</a></li>
+</blockquote>
+<h3 id="最大子数组和"><a href="#最大子数组和" class="headerlink" title="最大子数组和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">最大子数组和</a></h3><blockquote>
+<ul>
+<li>这题可以用<strong>动态规划</strong>的方法</li>
+<li>评论区有提到<strong>前缀和数组</strong>的方法：也是提前算出前缀和，<strong>子数组的和可以转化为两个前缀和的差</strong>。对于前缀和数组来说，题目转化为了<strong>股票购买&#x2F;卖出最佳时机（可以多次持有股票，但手上最多只能有一支股票）</strong></li>
 </ul>
-<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><ul>
-<li><map></li>
-<li>erase() -&gt; 参数可以为 <strong>iterator</strong>，<strong>key</strong>；也可以为范围参数[first it, last it)</li>
-</ul>
+</blockquote>
 
                 
               </div>
@@ -340,8 +329,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>刷题心得</div>
-      <div>http://example.com/2024/06/24/刷题心得/</div>
+      <div>子数组相关</div>
+      <div>http://example.com/2024/06/25/子数组相关/</div>
     </div>
     <div class="license-meta">
       
@@ -353,7 +342,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月24日</div>
+          <div>2024年6月25日</div>
         </div>
       
       
@@ -385,18 +374,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/25/%E5%AD%90%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3/" title="子数组相关">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">子数组相关</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/24/%E5%8D%95%E8%B0%83%E6%A0%88/" title="单调栈">
-                        <span class="hidden-mobile">单调栈</span>
+                      <a href="/2024/06/24/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" title="刷题心得">
+                        <span class="hidden-mobile">刷题心得</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
