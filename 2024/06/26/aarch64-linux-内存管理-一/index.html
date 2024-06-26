@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考文章 力扣  记录要点两个恒等式 (a + b) mod m &#x3D; [(a mod m) + (b mod m)] mod m (a b) mod m &#x3D; [(a mod m) (b mod m)] mod m  幂运算与mod 指数不能随便取余，如果指数在 64 位整数的范围内，可以使用快速幂计算方法 注：如果指数超出 64 位整数的范围，需要用「欧拉降幂」处理。    负数与mod 如果x是">
+    <meta name="description" content="优质参考博客 Linux内存管理-专栏 Linux内存模型 arm64架构linux内核地址转换__pa(x)与__va(x)分析 底层开发必知的三个内存结构概念  内存硬件结构Linux 把物理内存划分为三个层次来管理: 存储节点(Node)、内存管理区(Zone)和页面(Page)  Node -&gt; struct pglist_data，包含的重要信息有 该 Node 包含的Zone数目">
 <meta property="og:type" content="article">
-<meta property="og:title" content="加减乘除与mod">
-<meta property="og:url" content="http://example.com/2024/06/25/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E4%B8%8Emod/index.html">
+<meta property="og:title" content="aarch64-linux-内存管理(一)">
+<meta property="og:url" content="http://example.com/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E4%B8%80/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="参考文章 力扣  记录要点两个恒等式 (a + b) mod m &#x3D; [(a mod m) + (b mod m)] mod m (a b) mod m &#x3D; [(a mod m) (b mod m)] mod m  幂运算与mod 指数不能随便取余，如果指数在 64 位整数的范围内，可以使用快速幂计算方法 注：如果指数超出 64 位整数的范围，需要用「欧拉降幂」处理。    负数与mod 如果x是">
+<meta property="og:description" content="优质参考博客 Linux内存管理-专栏 Linux内存模型 arm64架构linux内核地址转换__pa(x)与__va(x)分析 底层开发必知的三个内存结构概念  内存硬件结构Linux 把物理内存划分为三个层次来管理: 存储节点(Node)、内存管理区(Zone)和页面(Page)  Node -&gt; struct pglist_data，包含的重要信息有 该 Node 包含的Zone数目">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-25T14:16:57.000Z">
-<meta property="article:modified_time" content="2024-06-25T14:36:49.465Z">
+<meta property="article:published_time" content="2024-06-26T03:23:05.000Z">
+<meta property="article:modified_time" content="2024-06-26T09:01:27.693Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>加减乘除与mod - Hexo</title>
+  <title>aarch64-linux-内存管理(一) - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="加减乘除与mod"></span>
+            <span id="subtitle" data-typed-text="aarch64-linux-内存管理(一)"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-25 22:16" pubdate>
-          2024年6月25日 晚上
+        <time datetime="2024-06-26 11:23" pubdate>
+          2024年6月26日 上午
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          218 字
+          1.2k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          2 分钟
+          10 分钟
         
       </span>
     
@@ -267,33 +267,59 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">加减乘除与mod</h1>
+            <h1 id="seo-header">aarch64-linux-内存管理(一)</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/circle/discuss/mDfnkW/">力扣</a></li>
+                <h2 id="优质参考博客"><a href="#优质参考博客" class="headerlink" title="优质参考博客"></a>优质参考博客</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yhb1047818384/category_10345494.html">Linux内存管理-专栏</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.wowotech.net/memory_management/memory_model.html">Linux内存模型</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuhailong0112/p/14465697.html">arm64架构linux内核地址转换__pa(x)与__va(x)分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3Mjg2NDQ0NA==&mid=2247485533&idx=1&sn=bf4dc798fc2cbbe0b55dcd0f5360d933&chksm=cee9878ef99e0e98628bd41f0a733f47d955e470d26840d0f07cc5aa7c9f789e746133c39c82&scene=178&cur_album_id=2707075920913924097#rd">底层开发必知的三个内存结构概念</a></li>
+</ol>
+<h2 id="内存硬件结构"><a href="#内存硬件结构" class="headerlink" title="内存硬件结构"></a>内存硬件结构</h2><p>Linux 把物理内存划分为三个层次来管理: 存储节点(Node)、内存管理区(Zone)和页面(Page)</p>
+<ul>
+<li>Node -&gt; struct pglist_data，包含的重要信息有<ul>
+<li>该 Node 包含的Zone数目</li>
+<li>该node中内存的起始页帧号</li>
+<li>该node地址范围内的实际管理的页面数量</li>
+<li>该node地址范围内的所有页面数量，包括空洞的页面</li>
+<li>ZONE_PADDING宏：让前后的成员分布在不同的cache line中, 以空间换取时间</li>
 </ul>
-<h2 id="记录要点"><a href="#记录要点" class="headerlink" title="记录要点"></a>记录要点</h2><h3 id="两个恒等式"><a href="#两个恒等式" class="headerlink" title="两个恒等式"></a>两个恒等式</h3><ul>
-<li><code>(a + b) mod m = [(a mod m) + (b mod m)] mod m</code></li>
-<li><code>(a b) mod m = [(a mod m) (b mod m)] mod m</code></li>
-</ul>
-<h3 id="幂运算与mod"><a href="#幂运算与mod" class="headerlink" title="幂运算与mod"></a>幂运算与mod</h3><ul>
-<li><font color=DC143C>指数不能随便取余</font>，如果指数在 64 位整数的范围内，可以使用<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/powx-n/description/">快速幂</a>计算方法<blockquote>
-<p>注：如果指数超出 64 位整数的范围，需要用「欧拉降幂」处理。</p>
+</li>
+<li>Zone -&gt; struct Zone<ul>
+<li>将node拆分成zone主要还是出于Linux为了兼容各种架构和平台，对不同区域的内存需要采用不同的管理方式和映射方式；32位系统中，内核和用户地址空间按1:3划分，内核地址空间只有1GB，所以不能把1GB以上的内存直接映射到内核地址空间，因此就把不能直接映射的内存划分到了高端内存区</li>
+<li>ZONE_DMA: 只适用于Intel x86架构，ARM架构没有这个区域，用于ISA设备的DMA操作，物理地址范围为0-16MB</li>
+<li>ZONE_DMA32: 在64位的系统上使用32位地址寻址的适合DMA操作的内存区。例如在AMD64系统上，该区域为低4GB的空间。在32位系统上，本区域通常是空的</li>
+<li>ZONE_NORMAL: 指的是<u>可以直接映射到内核空间的内存</u>。也常称为“普通区域”“直接映射区域”“线性映射区域”。所谓线性映射就是物理地址和映射后的虚拟地址存在一种简单的关系，即虚拟地址&#x3D;物理地址+固定偏移。在32位系统上，内核空间和用户空间按1:3划分，那么这个固定偏移就是：<code>0xC0000000</code> - 物理内存起始地址。因此可以看到：在32位系统中，将物理内存地址的低1G[物理内存起始地址(start): start+1G]映射到内核空间[0xc0000000:0xffffffff]</li>
+<li>ZONE_HIGHMEM: 高端内存区，32位时代的产物。在32位系统上，指的是高于<code>896M</code>的物理内存。32位系统中，内核和用户地址空间按1:3划分，内核地址空间只有1GB，所以不能把1GB以上的内存直接映射到内核地址空间，因此就把不能直接映射的内存划分到了高端内存区。要将高于896MB的物理内存映射在内核空间的话，需要通过单独的映射来完成，并且这类映射不能保证物理地址和虚拟地址之间存在固定的对应关系（例如ZONE_NORMAL的固定偏移）<blockquote>
+<p>64位系统中没有这个区域，即没有高端内存。因为64系统的内核虚拟地址空间非常大，不再需要高端内存区域</p>
 </blockquote>
 </li>
+<li>指向所属的Node节点</li>
+<li>空闲内存链表，用于实现伙伴系统</li>
 </ul>
-<h3 id="负数与mod"><a href="#负数与mod" class="headerlink" title="负数与mod"></a>负数与mod</h3><ul>
-<li>如果<code>x</code>是负数，要采用<code>(x mod m + m) mod m</code>的形式，这样不用判断<code>x</code>是否为负数</li>
+</li>
+<li>Page -&gt; struct page<ul>
+<li>Linux内核使用page结构体来描述一个物理页面，每一个page frame有一个一一对应的page数据结构，系统中定义了page_to_pfn和pfn_to_page的宏用来在page frame number和page数据结构之间进行转换，具体如何转换是和<a target="_blank" rel="noopener" href="http://www.wowotech.net/memory_management/memory_model.html">memory modle</a>相关</li>
+<li>PFN是page frame number的缩写，所谓page frame，就是针对物理内存而言的，把物理内存分成一个个的page size的区域，并且给每一个page 编号，这个号码就是PFN。假设物理内存从0地址开始，那么PFN等于0的那个页帧就是0地址（物理地址）开始的那个page。假设物理内存从x地址开始，那么第一个页帧号码就是（x&gt;&gt;PAGE_SHIFT）</li>
 </ul>
-<h3 id="除法与mod"><a href="#除法与mod" class="headerlink" title="除法与mod"></a>除法与mod</h3><ul>
-<li>参考上述链接</li>
+</li>
+<li>区分系统物理地址空间 VS 内存占据的物理地址空间<ul>
+<li>整个系统的物理地址空间并不是都用于内存，有些也属于I&#x2F;O空间（当然，有些cpu arch有自己独立的io address space）。因此，内存所占据的物理地址空间应该是一个有限的区间，不可能覆盖整个物理地址空间</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>代码实现时，上面的加减乘除通常这样写：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp">MOD = <span class="hljs-number">1</span>_000_000_007<br><br><span class="hljs-comment">// 加</span><br>(a + b) % MOD<br><br><span class="hljs-comment">// 减</span><br>(a - b + MOD) % MOD<br><br><span class="hljs-comment">// 取模到 [0,MOD-1] 中，无论正负</span><br>(a % MOD + MOD) % MOD<br><br><span class="hljs-comment">// 乘</span><br>a * b % MOD<br><br><span class="hljs-comment">// 多个数相乘，要步步取模，防止溢出</span><br>a * b % MOD * c % MOD<br><br><span class="hljs-comment">// 除（MOD 是质数且 b 不是 MOD 的倍数）</span><br>a * <span class="hljs-built_in">qpow</span>(b, MOD - <span class="hljs-number">2</span>, MOD) % MOD<br></code></pre></td></tr></table></figure>
-<p>其中 <code>qpow</code> 为快速幂函数。</p>
+</li>
+</ul>
+<ol>
+<li>UMA 与 NUMA<ul>
+<li>UMA: Uniform Memory Access，统一内存访问，每个CPU共享相同的内存地址空间</li>
+<li>NUMA: Non-Uniform Memory Access，非统一内存访问。系统中会有很多的内存节点和多个CPU簇， 所有节点中的CPU可以访问全部的物理内存，但是CPU访问本地的节点速度远快于访问远端的内存节点的速度</li>
+</ul>
+</li>
+</ol>
+<h2 id="启动阶段"><a href="#启动阶段" class="headerlink" title="启动阶段"></a>启动阶段</h2><p>主要问题有：</p>
+<p>1. </p>
 
                 
               </div>
@@ -312,7 +338,17 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="category-chain-item">内存管理</a>
   
   
 
@@ -332,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>加减乘除与mod</div>
-      <div>http://example.com/2024/06/25/加减乘除与mod/</div>
+      <div>aarch64-linux-内存管理(一)</div>
+      <div>http://example.com/2024/06/26/aarch64-linux-内存管理-一/</div>
     </div>
     <div class="license-meta">
       
@@ -345,7 +381,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月25日</div>
+          <div>2024年6月26日</div>
         </div>
       
       
@@ -377,18 +413,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/26/%E5%8A%A8%E6%80%81%E5%BA%93vs%E9%9D%99%E6%80%81%E5%BA%93/" title="动态库vs静态库">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">动态库vs静态库</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/25/%E5%AD%90%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3/" title="子数组相关">
-                        <span class="hidden-mobile">子数组相关</span>
+                      <a href="/2024/06/26/%E5%8A%A8%E6%80%81%E5%BA%93vs%E9%9D%99%E6%80%81%E5%BA%93/" title="动态库vs静态库">
+                        <span class="hidden-mobile">动态库vs静态库</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
