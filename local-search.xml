@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>提问记录</title>
+    <link href="/2024/06/28/%E6%8F%90%E9%97%AE%E8%AE%B0%E5%BD%95/"/>
+    <url>/2024/06/28/%E6%8F%90%E9%97%AE%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h2 id="24-06-27"><a href="#24-06-27" class="headerlink" title="24-06-27"></a>24-06-27</h2><ol><li><p>DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？</p><ul><li>DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。</li><li>上述可能会出现接收端缓存满，而尚有消息未处理的情况：此时，就需要扩大History的消息缓存数目。这里就是History QoS 与 Resource QoS这两种不同服务质量要求之间的trade了。</li></ul></li><li><p>MCU上做开发与Linux用户态开发有什么不同？分别有哪些需要注意的内容？</p><ul><li>MCU上直接看到真实物理内存，Linux用户态多了一层虚拟地址转换。因此在MCU上做开发时，更要注意对指针的使用。</li><li>MCU上有时Linker，链接脚本，程序、变量存放位置；Linux用户态不用考虑这些问题。</li><li>调试时，MCU上遇到TRAP等问题，要去翻具体的芯片架构手册进行排查；Linux用户态有一套标准的exception机制。</li><li>MCU上做开发更类似于Linux内核态驱动开发。</li><li>MCU上有时需要考虑boot的问题，Linux用户态不用考虑。</li><li>MCU上开发一般只会用到静态库，而Linux上还会有动态库。</li></ul></li><li><p>(之前软硬件结合提到了对指针的“恍然大悟”)那你现在是如何理解指针的？</p><ul><li>指针就是一个普通的变量，对它进行加减乘除，函数参数，就像普通变量那样使用</li><li>重点在于如何使用指针变量，如何解释指针 -&gt; 这里就得说一下指针类型转换</li><li>使用时，相比于普通变量，要多考虑一层：它指向了某块内存区域！内存区域的大小与指针指向的对象类型有关</li><li>指针使用：大部分都会取成员 -&gt; 指针指向的对象类型是什么？这个问题也要时刻注意</li><li>c++中，class C 继承于 class B , class A。<code>C v_c; B* p_b = &amp;v_c; A* p_a = &amp;v_c</code>，这三行语句，p_b的值与p_a的值是不一样的！</li></ul></li><li><p>用一个词形容操作系统</p><ul><li>管理者</li><li>根据管理的内容不同，OS又可以分为宏内核&#x2F;微内核</li><li>MCU上的OS一般只有CPU管理的功能</li><li>SoC上使用基于Linux的操作系统，还会有内存管理，进程通信，文件系统等功能</li></ul></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>面经</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>aarch64-linux-内存管理（二）</title>
     <link href="/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <url>/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
