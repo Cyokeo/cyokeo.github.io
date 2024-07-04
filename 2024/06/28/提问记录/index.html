@@ -24,7 +24,7 @@
 <meta property="og:description" content="24-06-27 DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？  DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。 上述可能会出现接收端缓存满，而尚有消息未处理的情">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-28T01:58:51.000Z">
-<meta property="article:modified_time" content="2024-06-28T02:24:37.676Z">
+<meta property="article:modified_time" content="2024-07-04T10:02:33.664Z">
 <meta property="article:author" content="Cyokeo">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          672 字
+          955 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          6 分钟
+          8 分钟
         
       </span>
     
@@ -305,6 +305,32 @@
 <li>根据管理的内容不同，OS又可以分为宏内核&#x2F;微内核</li>
 <li>MCU上的OS一般只有CPU管理的功能</li>
 <li>SoC上使用基于Linux的操作系统，还会有内存管理，进程通信，文件系统等功能</li>
+</ul>
+</li>
+</ol>
+<h2 id="24-07-04"><a href="#24-07-04" class="headerlink" title="24-07-04"></a>24-07-04</h2><ol>
+<li><p>如何在不使用额外变量的情况下，交换两个整形变量的值</p>
+<ul>
+<li>方法一：采用数学运算 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x + y<span class="hljs-comment">;  // -&gt; 虽然这里可能会有溢出的情况，但**由于**负数采用补码的方式表示，后续运算后，也能实现交换的目的</span><br><span class="hljs-attr">y</span> = x - y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x - y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
+<li>方法二： 采用异或运算 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">y</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>叠砖块问题</p>
+<ul>
+<li>要保证第二块及以上所有砖的“重心和”落在第一块砖内<br> 这题要分情况讨论：</li>
+<li>如果每块砖伸出的长度可以自由调整， <a target="_blank" rel="noopener" href="https://max.book118.com/html/2018/0103/147107237.shtm">参考</a>，可以证明：以1&#x2F;2n的规律无限延伸</li>
+<li>如果每块砖伸出的长度为固定大小，可以证明：最远可伸出1&#x2F;2n</li>
+</ul>
+</li>
+<li><p>“叠砖块问题”的启发</p>
+<ul>
+<li>面试时要大胆的说出自己的直觉，并且额外补充说明：需要进一步的分析与证明</li>
+</ul>
+</li>
+<li><p>有符号数溢出问题</p>
+<ul>
+<li>要注意负数以补码的形式存储：绝对值的反码+1</li>
+<li>unsigned char 和 signed char表示的数据范围是不一样的</li>
 </ul>
 </li>
 </ol>
