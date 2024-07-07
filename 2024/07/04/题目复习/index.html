@@ -24,7 +24,7 @@
 <meta property="og:description" content="滑动窗口 904.水果成篮，结合题解，深入理解：  最大滑动窗口 - 模版  123456while j &lt; len(nums):    &#x2F;&#x2F; 判断[i, j]是否满足条件    while 不满足条件：        i +&#x3D; 1 &#x2F;&#x2F;（最保守的压缩i，一旦满足条件了就退出压缩i的过程，使得滑窗尽可能的大）    &#x2F;&#x2F; 不断更新结果（注意在while外更新！）    j +&#x3D; 1 最小滑动">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-04T13:27:21.000Z">
-<meta property="article:modified_time" content="2024-07-06T11:17:37.927Z">
+<meta property="article:modified_time" content="2024-07-07T13:01:56.961Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          776 字
+          798 字
         
       </span>
     
@@ -301,6 +301,12 @@
 <li>加深理解：如果字串长度为奇数，则只能为<code>aba</code>类型；但是当字串长度为偶数是，可以为<code>aa</code>，也可以为<code>abaaba</code></li>
 <li>自己想到了使用dp数组，记忆化遍历，以减小重复遍历。但是时间表现还是很差❗️❗️</li>
 <li>注意到回文串的中间部分一定是由连续且相同的字符串组成，因此可以定位到中间字符，再左右扩展查询，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/comments/59461">参考</a>❗️  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestPalindrome</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br><span class="hljs-comment">//         保存起始位置，测试了用数组似乎能比全局变量稍快一点</span><br>        <span class="hljs-type">int</span>[] range = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span>];<br>        <span class="hljs-type">char</span>[] str = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br><span class="hljs-comment">//             把回文看成中间的部分全是同一字符，左右部分相对称</span><br><span class="hljs-comment">//             找到下一个与当前字符不同的字符</span><br>            i = findLongest(str, i, range);<br>        &#125;<br>        <span class="hljs-keyword">return</span> s.substring(range[<span class="hljs-number">0</span>], range[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLongest</span><span class="hljs-params">(<span class="hljs-type">char</span>[] str, <span class="hljs-type">int</span> low, <span class="hljs-type">int</span>[] range)</span> &#123;<br><span class="hljs-comment">//         查找中间部分</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">high</span> <span class="hljs-operator">=</span> low;<br>        <span class="hljs-keyword">while</span> (high &lt; str.length - <span class="hljs-number">1</span> &amp;&amp; str[high + <span class="hljs-number">1</span>] == str[low]) &#123;<br>            high++;<br>        &#125;<br><span class="hljs-comment">//         定位中间部分的最后一个字符</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> high;<br><span class="hljs-comment">//         从中间向左右扩散</span><br>        <span class="hljs-keyword">while</span> (low &gt; <span class="hljs-number">0</span> &amp;&amp; high &lt; str.length - <span class="hljs-number">1</span> &amp;&amp; str[low - <span class="hljs-number">1</span>] == str[high + <span class="hljs-number">1</span>]) &#123;<br>            low--;<br>            high++;<br>        &#125;<br><span class="hljs-comment">//         记录最大长度</span><br>        <span class="hljs-keyword">if</span> (high - low &gt; range[<span class="hljs-number">1</span>] - range[<span class="hljs-number">0</span>]) &#123;<br>            range[<span class="hljs-number">0</span>] = low;<br>            range[<span class="hljs-number">1</span>] = high;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-product-subarray/description/">152. 乘积最大子数组</a><ul>
+<li>double, long long等数据类型的区别</li>
 </ul>
 </li>
 </ul>
