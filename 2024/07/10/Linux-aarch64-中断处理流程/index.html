@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我的动态规划题单动态规划有两个难点：  不知道是否应该使用动态规划 动态规划的递推推导不出来  递推关系不太难想的，一般都很难想到使用动态规划的方法 44. 通配符匹配 这个题目有个点：‘’是万能的，连续的‘’和一个‘*’是一样的   [10. 正则表达式匹配]">
+    <meta name="description" content="中断处理流程总结*    *        *  aarch64 参考《vectors.md》可知，中断响应时，执行部分汇编码[kernel_ventry宏]后，进入el0t_64_irq[in file entry.S，用entry_handler宏定义]，紧接着调用el0t_64_irq_handler[in file: entry-common.c]，进行后续的处理  el0t_64_irq">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动规题单">
-<meta property="og:url" content="http://example.com/2024/07/07/%E5%8A%A8%E8%A7%84%E9%A2%98%E5%8D%95/index.html">
+<meta property="og:title" content="Linux-aarch64-中断处理流程">
+<meta property="og:url" content="http://example.com/2024/07/10/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="我的动态规划题单动态规划有两个难点：  不知道是否应该使用动态规划 动态规划的递推推导不出来  递推关系不太难想的，一般都很难想到使用动态规划的方法 44. 通配符匹配 这个题目有个点：‘’是万能的，连续的‘’和一个‘*’是一样的   [10. 正则表达式匹配]">
+<meta property="og:description" content="中断处理流程总结*    *        *  aarch64 参考《vectors.md》可知，中断响应时，执行部分汇编码[kernel_ventry宏]后，进入el0t_64_irq[in file entry.S，用entry_handler宏定义]，紧接着调用el0t_64_irq_handler[in file: entry-common.c]，进行后续的处理  el0t_64_irq">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-07T11:46:51.000Z">
-<meta property="article:modified_time" content="2024-07-07T12:00:52.982Z">
+<meta property="article:published_time" content="2024-07-10T11:06:40.000Z">
+<meta property="article:modified_time" content="2024-07-10T11:07:31.626Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>动规题单 - Hexo</title>
+  <title>Linux-aarch64-中断处理流程 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="动规题单"></span>
+            <span id="subtitle" data-typed-text="Linux-aarch64-中断处理流程"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-07 19:46" pubdate>
-          2024年7月7日 晚上
+        <time datetime="2024-07-10 19:06" pubdate>
+          2024年7月10日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          102 字
+          369 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -267,24 +267,43 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">动规题单</h1>
+            <h1 id="seo-header">Linux-aarch64-中断处理流程</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="我的动态规划题单"><a href="#我的动态规划题单" class="headerlink" title="我的动态规划题单"></a>我的动态规划题单</h2><p>动态规划有两个难点：</p>
+                <h2 id="中断处理流程"><a href="#中断处理流程" class="headerlink" title="中断处理流程"></a>中断处理流程</h2><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>*<br>    *<br>        * </p>
+<h3 id="aarch64"><a href="#aarch64" class="headerlink" title="aarch64"></a>aarch64</h3><ul>
+<li><p>参考《vectors.md》可知，中断响应时，执行部分汇编码[kernel_ventry宏]后，进入<code>el0t_64_irq</code>[in file entry.S，用entry_handler宏定义]，紧接着调用<br><code>el0t_64_irq_handler</code>[in file: entry-common.c]，进行后续的处理</p>
+</li>
+<li><p>el0t_64_irq_handler -&gt; __el0_irq_handler_common -&gt; el0_interrupt(regs, handle_arch_irq);</p>
 <ul>
-<li>不知道是否应该使用动态规划</li>
-<li>动态规划的递推推导不出来</li>
-</ul>
-<h2 id="递推关系不太难想的，一般都很难想到使用动态规划的方法"><a href="#递推关系不太难想的，一般都很难想到使用动态规划的方法" class="headerlink" title="递推关系不太难想的，一般都很难想到使用动态规划的方法"></a>递推关系不太难想的，一般都很难想到使用<u>动态规划</u>的方法</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wildcard-matching/description/">44. 通配符匹配</a><ul>
-<li>这个题目有个点：‘<em>’是万能的，连续的‘</em>’和一个‘*’是一样的</li>
+<li><p>这里要注意：<code>handle_arch_irq</code>是一个全局的变量，定义在&#x2F;arch&#x2F;arm64&#x2F;kernel&#x2F;irq.c文件中</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> (*handle_arch_irq)(<span class="hljs-keyword">struct</span> pt_regs *) __ro_after_init = default_handle_irq;     <span class="hljs-comment">// __ro_after_init 是编译器提供的属性</span><br><span class="hljs-type">void</span> (*handle_arch_fiq)(<span class="hljs-keyword">struct</span> pt_regs *) __ro_after_init = default_handle_fiq;<br><br><span class="hljs-type">int</span> __init <span class="hljs-title function_">set_handle_irq</span><span class="hljs-params">(<span class="hljs-type">void</span> (*handle_irq)(<span class="hljs-keyword">struct</span> pt_regs *))</span><br>&#123;<br>    <span class="hljs-keyword">if</span> (handle_arch_irq != default_handle_irq)<br>        <span class="hljs-keyword">return</span> -EBUSY;<br><br>    handle_arch_irq = handle_irq;<br>    pr_info(<span class="hljs-string">&quot;Root IRQ handler: %ps\n&quot;</span>, handle_irq);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>结合<code>__init set_handle_irq</code>可知，在系统启动阶段，irqchip的驱动会调用set_handle_irq，根据使用的中断控制器，将handle_arch_irq设置为对应的处理函数</p>
+</li>
+<li><p>对应的中断处理函数有：gic_handel_irq -&gt; GIC控制器</p>
+</li>
 </ul>
 </li>
-<li>[10. 正则表达式匹配]</li>
-</ul>
+<li><p>gic_handle_irq</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// in file: drivers/irqchip/irq-gic-v3.c</span><br><span class="hljs-type">static</span> asmlinkage <span class="hljs-type">void</span> __exception_irq_entry <span class="hljs-title function_">gic_handle_irq</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pt_regs *regs)</span><br>&#123;<br>    <span class="hljs-keyword">if</span> (unlikely(gic_supports_nmi() &amp;&amp; !interrupts_enabled(regs)))<br>        __gic_handle_irq_from_irqsoff(regs);<br>    <span class="hljs-keyword">else</span><br>        __gic_handle_irq_from_irqson(regs);<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<ul>
+<li><p>如果不是NMI中断，则__gic_handle_irq_from_irqson -&gt; __gic_handle_irq -&gt; generic_handle_domain_irq. 注意这里的irqnr为从相应寄存器[iar]读出的硬件中断号</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> __gic_handle_irq(u32 irqnr, <span class="hljs-keyword">struct</span> pt_regs *regs)<br>&#123;<br>    <span class="hljs-keyword">if</span> (gic_irqnr_is_special(irqnr))<br>        <span class="hljs-keyword">return</span>;<br><br>    gic_complete_ack(irqnr);<br><br>    <span class="hljs-keyword">if</span> (generic_handle_domain_irq(gic_data.domain, irqnr)) &#123;<br>        WARN_ONCE(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;Unexpected interrupt (irqnr %u)\n&quot;</span>, irqnr);<br>        gic_deactivate_unhandled(irqnr);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>generic_handle_domain_irq : irqdomain 管理hwirq 到 Linux irqnr的映射，有四种映射类型[Documentation\translations\zh_CN\core-api\irq\irq-domain.rst]</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// in file: /kernel/irq/irqdesc.c</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">generic_handle_domain_irq</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> irq_domain *domain, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> hwirq)</span><br>&#123;<br>    <span class="hljs-keyword">return</span> handle_irq_desc(irq_resolve_mapping(domain, hwirq));<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>handle_irq_desc</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">handle_irq_desc</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> irq_desc *desc)</span><br>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">irq_data</span> *<span class="hljs-title">data</span>;</span><br><br>    <span class="hljs-keyword">if</span> (!desc)<br>        <span class="hljs-keyword">return</span> -EINVAL;<br><br>    data = irq_desc_get_irq_data(desc);<br>    <span class="hljs-keyword">if</span> (WARN_ON_ONCE(!in_hardirq() &amp;&amp; handle_enforce_irqctx(data)))<br>        <span class="hljs-keyword">return</span> -EPERM;<br><br>    generic_handle_irq_desc(desc);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>generic_handle_irq_desc：根据描述符中的内容，执行相应的回调</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title function_">generic_handle_irq_desc</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> irq_desc *desc)</span><br>&#123;<br>    desc-&gt;handle_irq(desc);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="x86-64"><a href="#x86-64" class="headerlink" title="x86-64"></a>x86-64</h3>
                 
               </div>
             
@@ -302,7 +321,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
   
   
 
@@ -322,8 +341,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>动规题单</div>
-      <div>http://example.com/2024/07/07/动规题单/</div>
+      <div>Linux-aarch64-中断处理流程</div>
+      <div>http://example.com/2024/07/10/Linux-aarch64-中断处理流程/</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +354,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月7日</div>
+          <div>2024年7月10日</div>
         </div>
       
       
@@ -367,9 +386,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/09/%E8%B7%9D%E7%A6%BB%E7%9B%B8%E5%85%B3/" title="距离相关">
+                      <a href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" title="Linux-aarch64-系统调用-1">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">距离相关</span>
+                        <span class="hidden-mobile">Linux-aarch64-系统调用-1</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +396,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/06/c-cpp%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="c/cpp小技巧">
-                        <span class="hidden-mobile">c/cpp小技巧</span>
+                      <a href="/2024/07/10/Linux-aarch64-%E5%90%91%E9%87%8F%E8%A1%A8/" title="Linux-aarch64-向量表">
+                        <span class="hidden-mobile">Linux-aarch64-向量表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我的动态规划题单动态规划有两个难点：  不知道是否应该使用动态规划 动态规划的递推推导不出来  递推关系不太难想的，一般都很难想到使用动态规划的方法 44. 通配符匹配 这个题目有个点：‘’是万能的，连续的‘’和一个‘*’是一样的   [10. 正则表达式匹配]">
+    <meta name="description" content="C语言再学习 #incude &lt;&gt; &#x2F; #include “”的区别  有三个路径需要区分： 系统库路径 -&gt; 无需配置，这个路径已经硬写入了编译器的配置中 工程定义头文件搜索目录 -&gt; 需要使用编译器提供的参数选项进行配置，例如gcc -I &lt;search_path&gt; 当前目录 -&gt; 无需配置，但是只有使用#include &quot;xxx.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动规题单">
-<meta property="og:url" content="http://example.com/2024/07/07/%E5%8A%A8%E8%A7%84%E9%A2%98%E5%8D%95/index.html">
+<meta property="og:title" content="C语言再学习">
+<meta property="og:url" content="http://example.com/2024/07/10/C%E8%AF%AD%E8%A8%80%E5%86%8D%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="我的动态规划题单动态规划有两个难点：  不知道是否应该使用动态规划 动态规划的递推推导不出来  递推关系不太难想的，一般都很难想到使用动态规划的方法 44. 通配符匹配 这个题目有个点：‘’是万能的，连续的‘’和一个‘*’是一样的   [10. 正则表达式匹配]">
+<meta property="og:description" content="C语言再学习 #incude &lt;&gt; &#x2F; #include “”的区别  有三个路径需要区分： 系统库路径 -&gt; 无需配置，这个路径已经硬写入了编译器的配置中 工程定义头文件搜索目录 -&gt; 需要使用编译器提供的参数选项进行配置，例如gcc -I &lt;search_path&gt; 当前目录 -&gt; 无需配置，但是只有使用#include &quot;xxx.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-07T11:46:51.000Z">
-<meta property="article:modified_time" content="2024-07-07T12:00:52.982Z">
+<meta property="article:published_time" content="2024-07-10T10:59:24.000Z">
+<meta property="article:modified_time" content="2024-07-10T11:00:07.432Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>动规题单 - Hexo</title>
+  <title>C语言再学习 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="动规题单"></span>
+            <span id="subtitle" data-typed-text="C语言再学习"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-07 19:46" pubdate>
-          2024年7月7日 晚上
+        <time datetime="2024-07-10 18:59" pubdate>
+          2024年7月10日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          102 字
+          558 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -267,22 +267,56 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">动规题单</h1>
+            <h1 id="seo-header">C语言再学习</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="我的动态规划题单"><a href="#我的动态规划题单" class="headerlink" title="我的动态规划题单"></a>我的动态规划题单</h2><p>动态规划有两个难点：</p>
+                <h2 id="C语言再学习"><a href="#C语言再学习" class="headerlink" title="C语言再学习"></a>C语言再学习</h2><ul>
+<li><p>#incude &lt;&gt; &#x2F; #include “”的区别</p>
 <ul>
-<li>不知道是否应该使用动态规划</li>
-<li>动态规划的递推推导不出来</li>
-</ul>
-<h2 id="递推关系不太难想的，一般都很难想到使用动态规划的方法"><a href="#递推关系不太难想的，一般都很难想到使用动态规划的方法" class="headerlink" title="递推关系不太难想的，一般都很难想到使用动态规划的方法"></a>递推关系不太难想的，一般都很难想到使用<u>动态规划</u>的方法</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wildcard-matching/description/">44. 通配符匹配</a><ul>
-<li>这个题目有个点：‘<em>’是万能的，连续的‘</em>’和一个‘*’是一样的</li>
+<li>有三个路径需要区分：<ul>
+<li>系统库路径 -&gt; <strong>无需配置</strong>，这个路径已经<u>硬</u>写入了编译器的配置中</li>
+<li>工程定义头文件搜索目录 -&gt; 需要使用编译器提供的参数选项进行配置，例如<code>gcc -I &lt;search_path&gt;</code></li>
+<li>当前目录 -&gt; 无需配置，但是只有使用<code>#include &quot;xxx.h&quot;</code>格式的才会在当前路径下查找</li>
 </ul>
 </li>
-<li>[10. 正则表达式匹配]</li>
+<li>前两种路径都可以使用<code>#inlcude &lt;&gt;</code>进行包含</li>
+</ul>
+</li>
+<li><p>数组与指针变量的区别</p>
+<ul>
+<li>char str[20]; char *ptr_s &#x3D; “abcdefg”;   -&gt; 索引操作：str[5] 与 pstr_s[5]</li>
+<li>str[5]，[汇编层面理解：str表示数组所在的地址]，因此只需要将这个地址加上索引*size，再对新得到的地址进行取值操作即可</li>
+<li>pstr_s[5]，[pstr_s是一个变量，要先取值得到地址值]，之后的操作同上</li>
+<li><strong>作为函数形参</strong>：char *ptr 与 char ptr[]是一样的。这是由于出于性能的考虑，一般把数组传递给函数时，只会传递数组首元素的地址。因此，这两种形参，在函数内部都是得到一个指针。</li>
+</ul>
+</li>
+<li><p>gcc相关编译参数</p>
+<ul>
+<li>-L ：链接时库搜索路径</li>
+<li>-R ：运行时库搜索路径。这个信息会被写入到最终的可执行文件中，并被动态加载其解析使用</li>
+<li>-l : 指定需要参与链接的库</li>
+</ul>
+</li>
+<li><p>little trick -&gt; 静态链接</p>
+<ul>
+<li>gcc -c main.c -lmath -o main  -&gt; 这里源文件出现在库之前</li>
+<li>gcc -lmath -c main.c -o main  -&gt; 库出现在main之前，此时还没有未定义的符号，因此不从库中提取任何符号；因此在链接时可能会报“符号未定义”的错误</li>
+</ul>
+</li>
+<li><p>局部变量及初始化</p>
+<ul>
+<li>不会出现在最终的可执行文件中，运行时在栈上创建</li>
+<li>有明确的代码进行栈空间的开辟，且<strong>初始值会作为指令的操作数</strong>出现在代码段中</li>
+</ul>
+</li>
+<li><p>常见错误：</p>
+<ul>
+<li>总线错误：一般都是由于未对齐的读或写引起</li>
+<li>段错误：通常是由于解引用一个未初始化或非法的地址值引起</li>
+</ul>
+</li>
 </ul>
 
                 
@@ -302,7 +336,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
   
   
 
@@ -322,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>动规题单</div>
-      <div>http://example.com/2024/07/07/动规题单/</div>
+      <div>C语言再学习</div>
+      <div>http://example.com/2024/07/10/C语言再学习/</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月7日</div>
+          <div>2024年7月10日</div>
         </div>
       
       
@@ -367,9 +401,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/09/%E8%B7%9D%E7%A6%BB%E7%9B%B8%E5%85%B3/" title="距离相关">
+                      <a href="/2024/07/10/APUE-Learning-1/" title="APUE-Learning-1">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">距离相关</span>
+                        <span class="hidden-mobile">APUE-Learning-1</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +411,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/06/c-cpp%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="c/cpp小技巧">
-                        <span class="hidden-mobile">c/cpp小技巧</span>
+                      <a href="/2024/07/10/%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" title="设计规范">
+                        <span class="hidden-mobile">设计规范</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

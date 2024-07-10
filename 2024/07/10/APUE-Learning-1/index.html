@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我的动态规划题单动态规划有两个难点：  不知道是否应该使用动态规划 动态规划的递推推导不出来  递推关系不太难想的，一般都很难想到使用动态规划的方法 44. 通配符匹配 这个题目有个点：‘’是万能的，连续的‘’和一个‘*’是一样的   [10. 正则表达式匹配]">
+    <meta name="description" content="UNIX基础知识主要介绍了基础的UNIX知识，帮助初学者在UNIX环境下“存活下来”  标准系统函数的返回值，一般来解释如下  &gt;&#x3D; 0 -&gt; 表示程序正常执行 &lt; 0 -&gt; 表示程序出错，返回的负数可以表征具体的错误码   三个标准“文件描述符”  STDIN_FILENO &#x3D; 0 STDOUT_FILENO &#x3D; 1 STDERR_FILENO &#x3D; 2   &lt;uni">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动规题单">
-<meta property="og:url" content="http://example.com/2024/07/07/%E5%8A%A8%E8%A7%84%E9%A2%98%E5%8D%95/index.html">
+<meta property="og:title" content="APUE-Learning-1">
+<meta property="og:url" content="http://example.com/2024/07/10/APUE-Learning-1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="我的动态规划题单动态规划有两个难点：  不知道是否应该使用动态规划 动态规划的递推推导不出来  递推关系不太难想的，一般都很难想到使用动态规划的方法 44. 通配符匹配 这个题目有个点：‘’是万能的，连续的‘’和一个‘*’是一样的   [10. 正则表达式匹配]">
+<meta property="og:description" content="UNIX基础知识主要介绍了基础的UNIX知识，帮助初学者在UNIX环境下“存活下来”  标准系统函数的返回值，一般来解释如下  &gt;&#x3D; 0 -&gt; 表示程序正常执行 &lt; 0 -&gt; 表示程序出错，返回的负数可以表征具体的错误码   三个标准“文件描述符”  STDIN_FILENO &#x3D; 0 STDOUT_FILENO &#x3D; 1 STDERR_FILENO &#x3D; 2   &lt;uni">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-07T11:46:51.000Z">
-<meta property="article:modified_time" content="2024-07-07T12:00:52.982Z">
+<meta property="article:published_time" content="2024-07-10T11:00:38.000Z">
+<meta property="article:modified_time" content="2024-07-10T11:02:01.562Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>动规题单 - Hexo</title>
+  <title>APUE-Learning-1 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="动规题单"></span>
+            <span id="subtitle" data-typed-text="APUE-Learning-1"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-07 19:46" pubdate>
-          2024年7月7日 晚上
+        <time datetime="2024-07-10 19:00" pubdate>
+          2024年7月10日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          102 字
+          1.9k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          16 分钟
         
       </span>
     
@@ -267,22 +267,152 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">动规题单</h1>
+            <h1 id="seo-header">APUE-Learning-1</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="我的动态规划题单"><a href="#我的动态规划题单" class="headerlink" title="我的动态规划题单"></a>我的动态规划题单</h2><p>动态规划有两个难点：</p>
+                <h1 id="UNIX基础知识"><a href="#UNIX基础知识" class="headerlink" title="UNIX基础知识"></a>UNIX基础知识</h1><p>主要介绍了基础的UNIX知识，帮助初学者在UNIX环境下“存活下来”</p>
 <ul>
-<li>不知道是否应该使用动态规划</li>
-<li>动态规划的递推推导不出来</li>
-</ul>
-<h2 id="递推关系不太难想的，一般都很难想到使用动态规划的方法"><a href="#递推关系不太难想的，一般都很难想到使用动态规划的方法" class="headerlink" title="递推关系不太难想的，一般都很难想到使用动态规划的方法"></a>递推关系不太难想的，一般都很难想到使用<u>动态规划</u>的方法</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wildcard-matching/description/">44. 通配符匹配</a><ul>
-<li>这个题目有个点：‘<em>’是万能的，连续的‘</em>’和一个‘*’是一样的</li>
+<li><p>标准系统函数的返回值，一般来解释如下</p>
+<ul>
+<li><code>&gt;= 0</code> -&gt; 表示程序正常执行</li>
+<li><code>&lt; 0</code> -&gt; 表示程序出错，返回的负数可以表征具体的错误码</li>
 </ul>
 </li>
-<li>[10. 正则表达式匹配]</li>
+<li><p>三个标准“文件描述符”</p>
+<ul>
+<li><code>STDIN_FILENO = 0</code></li>
+<li><code>STDOUT_FILENO = 1</code></li>
+<li><code>STDERR_FILENO = 2</code></li>
+</ul>
+</li>
+<li><p>&lt;unistd.h&gt; : unix std -&gt; 标准头文件，包含了很多UNIX系统服务的函数原型</p>
+<ul>
+<li>有很多<code>unistd.h</code>头文件，用户开发应该使用&lt;unistd.h&gt;，其具体指<code>/usr/inlcude/unistd.h</code></li>
+</ul>
+</li>
+<li><p>不带缓冲的I&#x2F;O <code>VS</code> 标准I&#x2F;O (带缓冲)</p>
+<ul>
+<li>&lt;unistd.h&gt; -&gt; 提供不带缓冲I&#x2F;O的函数原型: read, write, lseek。使用时需要提供<code>缓冲区大小</code>参数</li>
+<li>&lt;stdio.h&gt; -&gt; 提供标准I&#x2F;O的函数原型: scanf, printf。使用时无需担心最优缓冲区大小，因为开发人员无需提供缓冲区大小参数。此外，还定义了标准常量<code>stdin</code>，<code>stdout</code></li>
+</ul>
+</li>
+<li><p>用于进程控制的三个主要函数</p>
+<ul>
+<li>fork：返回值为0，表示处于子进程中；返回值大于0，表示处于父进程中，且返回值为子进程的PID；返回值小于0，fork出错</li>
+<li>exec：有7个变体，统称exec函数</li>
+<li>waitpid：</li>
+<li>fork -&gt; exec函数，创建新进程，执行新的程序</li>
+</ul>
+</li>
+<li><p>头文件组织</p>
+<ul>
+<li>&#x2F;usr&#x2F;include&#x2F;linux, &#x2F;usr&#x2F;inlcude&#x2F;asm* 下的头文件是与Linux内核一起分发的</li>
+<li>&#x2F;usr&#x2F;include&#x2F;sys&#x2F;*.h, &#x2F;usr&#x2F;include&#x2F;bits&#x2F;*.h 下的头文件是与C库一起分发的</li>
+<li><code>LC_ALL=C gcc -v -xc -E /dev/null 2&gt;&amp;1 | sed -ne &#39;/search starts here/,/End of search list/p&#39;</code>用于输出gcc的头文件搜索路径</li>
+</ul>
+</li>
+<li><p>时间相关</p>
+<ul>
+<li><strong>日历时间</strong>：UNIX系统的基本时间服务计算自世界协调时间[1970年1月1日00:00:00]以来经过的秒数，以<code>time_t</code>类型表示，可使用<code>time()</code>获取</li>
+<li><strong>进程时间</strong>[CPU时间]：用以度量进程使用的中央处理器资源，以时钟滴答计算，每秒钟多少个滴答是一种系统配置，使用<code>clock_t</code>类型表示</li>
+</ul>
+<p>  UNIX系统为一个进程维护了3个时间值【进程时间】：</p>
+<ul>
+<li><p>时钟时间[real][墙上时间]，进程运行的时间总量，与系统中同时运行的进程数有关</p>
+</li>
+<li><p>用户CPU时间[user]：执行用户指令所用的时间总量</p>
+</li>
+<li><p>系统CPU时间[sys]：程序执行内核服务的时间总量</p>
+</li>
+<li><p>POSIX扩展规范增加了对多个<strong>系统</strong>时钟的支持，通过<code>clockid_t</code>类型标识不同的POSIX系统时钟</p>
+<ul>
+<li>CLOCK_REALTIME：类型于UNIX系统提供的[real]，但是在系统支持高精度时间值的情况下，可以获得更高精度的时间值</li>
+<li>CLOCK_MONOTONIC：不带负跳数的CLOCK_REALTIME</li>
+<li>CLOCK_PROCESS_CPUTIME_ID：调用函数获取该时间的进程的CPU时间<br>  使用<code>clock_gettime(clockid_t id, struct timespec *tsp)</code>获取不同的系统时钟时间，其中<code> struct timespec</code>采用秒+纳秒的方式来表示时间值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="UNIX标准及实现"><a href="#UNIX标准及实现" class="headerlink" title="UNIX标准及实现"></a>UNIX标准及实现</h1><ul>
+<li>相关的两个标准<ul>
+<li>ISO C</li>
+<li>IEEE POSIX -&gt; 不区分接口是系统调用还是库函数，统称为函数</li>
+<li>这些标准规范了符号标准的UNIX操作系统必须提供的接口。当然，操作系统要发挥作用，还要有其一般的通用功能。因此可以说，<u>标准定义了任一实际系统的子集</u>。</li>
+<li>有些属于UNIX系统必须，但在符合POSIX标准的系统中是可选的功能</li>
+</ul>
+</li>
+<li>限制<ul>
+<li>幻数、常量的值，在不同系统下的值究竟为多少？具体分为如下两种类型：<ul>
+<li>编译时限制（例如，短整型的最大值是多少？）可在头文件中定义</li>
+<li>运行时限制（例如，文件名最多能有多少个字符？），要求进程调用一个相关的函数获取具体的限制值</li>
+<li>然而有些限制在一个给定的UNIX实现中可能是固定的，而在另一个UNIX实现中则可能是变动的</li>
+</ul>
+</li>
+<li>为了解决这类问题，提供了以下三种限制：<ul>
+<li>编译时限制（头文件）</li>
+<li>与文件或目录无关的运行时限制（<code>sysconf</code>函数）</li>
+<li>与文件或目录有关的运行时限制（<code>pathconf</code>和<code>fpathconf</code>函数）</li>
+<li>如果一个运行时限制在一个给定的UNIX实现上并不改变，则可将其静态地定义在一个头文件中。如果没有将其定义在头文件中，应用程序就必须调用上述的三个<code>conf</code>函数之一以确定其运行时值</li>
+</ul>
+</li>
+<li>ISO C 标准的所有限制都在&lt;limits.h&gt;文件中</li>
+</ul>
+</li>
+</ul>
+<h1 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h1><ul>
+<li><p>Unbuffered I&#x2F;O: “不带缓冲”指每个read&#x2F;write都调用内核中的一个系统调用[实际还是会使用内核的缓冲区的]。它们不是ISO C标准，而是POSIX.I的组成部分</p>
+<ul>
+<li>open(), 除非指定<code>O_APPEND</code>flag，否则打开文件时的偏移量都为0，返回值为文件描述符</li>
+<li>lseek(), 显式地为一个已经打开的文件设置偏移量。返回值为添加之后新的文件偏移量。它仅将当前的文件偏移量记录在内核，不会引起任何I&#x2F;O操作<ul>
+<li>相对文件开始的偏移量，只能为+</li>
+<li>相对当前值的偏移量，+-均可</li>
+<li>相对文件结尾的偏移量，+-均可</li>
+</ul>
+</li>
+<li>read(), 返回读到的字节数</li>
+<li>write(), 返回实际写入的字节数</li>
+</ul>
+</li>
+<li><p>多个进程间如何共享文件？【涉及到多进程间资源共享】</p>
+<ul>
+<li>文件描述符表，独属于某个进程，每个描述符表项，包含一个指向某文件表项的指针</li>
+<li>打开文件表，由<strong>内核</strong>维护。每个文件表项包含: 文件状态，<strong>当前文件偏移量</strong>，指向i节点的指针。</li>
+<li>文件系统的i节点表，由<strong>内核</strong>维护。每个打开文件都唯一对应一个i-node节点</li>
+<li>如果有两个进程打开同一个文件：则该文件会有两个文件表项分别对应每个进程；该文件在这两个进程中分别有一个文件描述符；但是该文件只有一个i-node</li>
+</ul>
+</li>
+<li><p>原子操作</p>
+<ul>
+<li>write() 是原子操作的吗？两个进程对该文件同时进行写，如果不加互斥，会出问题吗？</li>
+<li>pwrite() 应该是原子的？</li>
+</ul>
+</li>
+<li><p>文件高级操作</p>
+<ul>
+<li>dup(int fd), dup2(int fd, int fd2)<ul>
+<li>dup() 返回的新描述符一定是当前可用描述符中最小的</li>
+<li>dup2() 可由用户指定fd2为新的描述符；如果fd2已经打开，则先关闭fd2</li>
+<li>这两个函数返回的新描述符与原描述符共享打开文件表项</li>
+</ul>
+</li>
+<li>sync(), fsync(), fdatasync()<ul>
+<li>UNIX系统内核中设有缓冲区，大多数磁盘I&#x2F;O都通过缓冲区进行。例如，当写文件时，内核通常先将数据复制到缓冲区，然后排入队列，晚些时候再写入磁盘，<br>  这种方式称为“延迟写”。</li>
+<li>提供了上述3个函数以保证磁盘上实际文件内容与缓冲区中内容一致</li>
+<li>sync()，将修改过的块缓冲区排入队列，返回。不等待磁盘写操作</li>
+<li>fsync(int fd)，只对由fd指定的文件起作用，且等待实际磁盘I&#x2F;O操作完成</li>
+<li>fdatasync(int fd)，与fsync类型，但是只影响文件数据部分</li>
+</ul>
+</li>
+<li>fcntl(int fd, int cmd, &#x2F;* int arg *&#x2F;)<ul>
+<li>根据cmd的不同，可以提供5大类的功能</li>
+</ul>
+</li>
+<li>ioctl()</li>
+</ul>
+</li>
 </ul>
 
                 
@@ -302,7 +432,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
   
   
 
@@ -322,8 +452,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>动规题单</div>
-      <div>http://example.com/2024/07/07/动规题单/</div>
+      <div>APUE-Learning-1</div>
+      <div>http://example.com/2024/07/10/APUE-Learning-1/</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +465,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月7日</div>
+          <div>2024年7月10日</div>
         </div>
       
       
@@ -367,9 +497,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/09/%E8%B7%9D%E7%A6%BB%E7%9B%B8%E5%85%B3/" title="距离相关">
+                      <a href="/2024/07/10/Linux-aarch64-%E5%90%91%E9%87%8F%E8%A1%A8/" title="Linux-aarch64-向量表">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">距离相关</span>
+                        <span class="hidden-mobile">Linux-aarch64-向量表</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +507,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/06/c-cpp%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="c/cpp小技巧">
-                        <span class="hidden-mobile">c/cpp小技巧</span>
+                      <a href="/2024/07/10/C%E8%AF%AD%E8%A8%80%E5%86%8D%E5%AD%A6%E4%B9%A0/" title="C语言再学习">
+                        <span class="hidden-mobile">C语言再学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
