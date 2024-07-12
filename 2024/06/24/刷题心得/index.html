@@ -24,7 +24,7 @@
 <meta property="og:description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]  常用编程技巧 (long long)(m-1) * (m-2) -&gt; 强制类型转换的优先级高于加减乘除  使用程序块为变量赋值，要注意函数块需要使用()包裹起来：   12345double sum &#x3D; (&#123;        double tmp &#x3D; 0;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-24T14:08:52.000Z">
-<meta property="article:modified_time" content="2024-07-09T13:57:35.981Z">
+<meta property="article:modified_time" content="2024-07-11T14:52:44.649Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -365,6 +365,7 @@
 <h2 id="常用库函数运算"><a href="#常用库函数运算" class="headerlink" title="常用库函数运算"></a>常用库函数运算</h2><h3 id="lower-bound-iterator-start-iterator-end-value"><a href="#lower-bound-iterator-start-iterator-end-value" class="headerlink" title="lower_bound(iterator_start, iterator_end, value) -&gt;"></a>lower_bound(iterator_start, iterator_end, value) -&gt;</h3><ul>
 <li>返回第一个迭代器it，其值<strong>不满足</strong> <code>(*it) &lt; value</code></li>
 <li>即找到第一个迭代器，其值<strong>满足</strong> <code>value &lt;= (*it)</code></li>
+<li>参数可以为&amp;arr[i]，返回值也为该类型，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/submissions/545900287/">参考</a></li>
 </ul>
 <h3 id="upper-bound-start-end-value"><a href="#upper-bound-start-end-value" class="headerlink" title="upper_bound(start, end, value) -&gt;"></a>upper_bound(start, end, value) -&gt;</h3><ul>
 <li>返回第一个迭代器，其值<strong>满足</strong> <code>value &lt; (*it)</code></li>
