@@ -16,15 +16,15 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="如何计算负数的补码 负数一般以补码的形式存储 如果位数为(8), 则负数a的补码为pow(2,n) - abs(a) 另外，负数a的补码也可根据：abs(a)的反码 + 1 得到">
+    <meta name="description" content="如何计算负数的补码 负数一般以补码的形式存储 如果位数为(8), 则负数a的补码为pow(2,n) - abs(a) 另外，负数a的补码也可根据：abs(a)的反码 + 1 得到  lambda把自身作为形参12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c&#x2F;cpp小技巧">
 <meta property="og:url" content="http://example.com/2024/07/06/c-cpp%E5%B0%8F%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="如何计算负数的补码 负数一般以补码的形式存储 如果位数为(8), 则负数a的补码为pow(2,n) - abs(a) 另外，负数a的补码也可根据：abs(a)的反码 + 1 得到">
+<meta property="og:description" content="如何计算负数的补码 负数一般以补码的形式存储 如果位数为(8), 则负数a的补码为pow(2,n) - abs(a) 另外，负数a的补码也可根据：abs(a)的反码 + 1 得到  lambda把自身作为形参12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&#x2F;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-06T13:45:20.000Z">
-<meta property="article:modified_time" content="2024-07-06T13:48:07.377Z">
+<meta property="article:modified_time" content="2024-07-16T14:36:47.936Z">
 <meta property="article:author" content="Cyokeo">
 <meta property="article:tag" content="c&#x2F;cpp">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          59 字
+          249 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -278,7 +278,7 @@
 <li>如果位数为(8), 则负数a的补码为<code>pow(2,n) - abs(a)</code></li>
 <li>另外，负数a的补码也可根据：abs(a)的反码 + 1 得到</li>
 </ul>
-
+<h2 id="lambda把自身作为形参"><a href="#lambda把自身作为形参" class="headerlink" title="lambda把自身作为形参"></a>lambda把自身作为形参</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// bool u_compare(string&amp; l, string* r)</span><br><span class="hljs-comment">// &#123;</span><br><br><span class="hljs-comment">// &#125;</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">accountsMerge</span>(vector&lt;vector&lt;string&gt;&gt;&amp; accounts) &#123;<br>        unordered_map&lt;string, vector&lt;<span class="hljs-type">int</span>&gt;&gt; mp;<br>        vector&lt;vector&lt;string&gt;&gt; ans;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; accounts.<span class="hljs-built_in">size</span>(); i++)<br>        &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt; accounts[i].<span class="hljs-built_in">size</span>(); j++)<br>            &#123;<br>                mp[accounts[i][j]].<span class="hljs-built_in">push_back</span>(i);<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">vis</span><span class="hljs-params">(accounts.size(), <span class="hljs-literal">false</span>)</span></span>;<br>        unordered_set&lt;string&gt; mails;<br>        <span class="hljs-keyword">auto</span> dfs = [&amp;](<span class="hljs-keyword">auto</span>&amp;&amp; dfs, <span class="hljs-type">int</span> idx) -&gt; <span class="hljs-type">void</span> &#123;<br>            <span class="hljs-keyword">if</span> (vis[idx] == <span class="hljs-literal">false</span>)<br>            &#123;<br>                vis[idx] = <span class="hljs-literal">true</span>;<br>               <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; accounts[idx].<span class="hljs-built_in">size</span>(); i++)<br>               &#123;<br>                    mails.<span class="hljs-built_in">insert</span>(accounts[idx][i]);<br>                    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> it : mp[accounts[idx][i]])<br>                    &#123;<br>                        <span class="hljs-built_in">dfs</span>(dfs, it);<br>                    &#125;<br>               &#125; <br>            &#125;<br>        &#125;;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; vis.<span class="hljs-built_in">size</span>(); i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span> (!vis[i])<br>            &#123;<br>                mails.<span class="hljs-built_in">clear</span>();<br>                <span class="hljs-built_in">dfs</span>(dfs, i);<br>                vector&lt;string&gt; tmp&#123;accounts[i][<span class="hljs-number">0</span>]&#125;;<br>                tmp.<span class="hljs-built_in">insert</span>(tmp.<span class="hljs-built_in">end</span>(), mails.<span class="hljs-built_in">begin</span>(), mails.<span class="hljs-built_in">end</span>());<br>                <span class="hljs-built_in">sort</span>(tmp.<span class="hljs-built_in">begin</span>()+<span class="hljs-number">1</span>, tmp.<span class="hljs-built_in">end</span>());<br>                ans.<span class="hljs-built_in">push_back</span>(tmp);<br>            &#125;<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
