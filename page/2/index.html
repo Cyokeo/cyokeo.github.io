@@ -224,6 +224,492 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" target="_self">
+          Linux-aarch64-系统调用-1
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" target="_self">
+        <div>
+          Linux系统调用定义相关 相关代码：   for general arch: sys_*name -&gt; aliased to _se_sys*name -&gt; call _do_sys*name to do actual work for arm64 arch: _arm64_sys* -&gt; call  _se_sys* -&gt; call _do_sys*name to do
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 19:10" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/10/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/" target="_self">
+          Linux-aarch64-中断处理流程
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/" target="_self">
+        <div>
+          中断处理流程总结*    *        *  aarch64 参考《vectors.md》可知，中断响应时，执行部分汇编码[kernel_ventry宏]后，进入el0t_64_irq[in file entry.S，用entry_handler宏定义]，紧接着调用el0t_64_irq_handler[in file: entry-common.c]，进行后续的处理  el0t_64_irq
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 19:06" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/10/Linux-aarch64-%E5%90%91%E9%87%8F%E8%A1%A8/" target="_self">
+          Linux-aarch64-向量表
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/Linux-aarch64-%E5%90%91%E9%87%8F%E8%A1%A8/" target="_self">
+        <div>
+          arm64(aarch64)的中断入口 总结  部分汇编码，由宏kernel_ventry定义 el0t_64_irq el0t_64_irq_handler ret_to_user&#x2F;kernel   相关两个宏定义：下面 \el，对宏参数展开   1234567891011121314151617181920212223242526272829303132333435363738394
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 19:02" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/10/APUE-Learning-1/" target="_self">
+          APUE-Learning-1
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/APUE-Learning-1/" target="_self">
+        <div>
+          UNIX基础知识主要介绍了基础的UNIX知识，帮助初学者在UNIX环境下“存活下来”  标准系统函数的返回值，一般来解释如下  &gt;= 0 -&gt; 表示程序正常执行 &lt; 0 -&gt; 表示程序出错，返回的负数可以表征具体的错误码   三个标准“文件描述符”  STDIN_FILENO = 0 STDOUT_FILENO = 1 STDERR_FILENO = 2   &lt;uni
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 19:00" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/10/C%E8%AF%AD%E8%A8%80%E5%86%8D%E5%AD%A6%E4%B9%A0/" target="_self">
+          C语言再学习
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/C%E8%AF%AD%E8%A8%80%E5%86%8D%E5%AD%A6%E4%B9%A0/" target="_self">
+        <div>
+          C语言再学习 #incude &lt;&gt; &#x2F; #include “”的区别  有三个路径需要区分： 系统库路径 -&gt; 无需配置，这个路径已经硬写入了编译器的配置中 工程定义头文件搜索目录 -&gt; 需要使用编译器提供的参数选项进行配置，例如gcc -I &lt;search_path&gt; 当前目录 -&gt; 无需配置，但是只有使用#include &quot;xxx.
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 18:59" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/10/%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" target="_self">
+          设计规范
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" target="_self">
+        <div>
+          设计规范 使用指定长度的数据类型，需编译器提供&lt;stdint.h&gt;头文件，或者已知硬件芯片字长的情况下自定义  在结构体中，人为添加pad以实现结构体内成员的自然对齐，不要依赖编译器进行  CPU间通信的数据结构中，不能包含enum类型的变量  静态数据表应使用const进行修饰  一方面，const修饰的通常保存在flash中，节省RAM空间 其次，防止数据被篡改   指针对齐考虑
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 18:58" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/10/CI-CD%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80/" target="_self">
+          CI/CD相关基础
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/CI-CD%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80/" target="_self">
+        <div>
+          CI&#x2F;CD相关 CI -&gt; 自动化测试持续集成， 参考 **持续集成(CI)**：借助工具对软件项目进行持续的自动化的编译、打包、构建、测试、发布，来检查软件交付质量的一种行为 **持续部署(CD)**：基于__持续交付__的优势自动将经过测试的代码推入生产环境的过程  CI各阶段 代码提交阶段：会用到“版本控制工具”进行源代码的版本控制 静态代码检查阶段：只能检查代码语法错误等问
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 18:57" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/10/SVN%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" target="_self">
+          SVN简单学习
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/SVN%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" target="_self">
+        <div>
+          SVN command “改名”操作需要使用SVN进行，不要使用Windows下面的重命名，因为这个操作不受 SVN 控制，SVN 会将其理解为删除原文件、增加一个新文件，从而导致文件改名后不能跟踪到改名前的状态  “受SVN控制”是个挺重要的概念，在本地新建文件后，需要使用add操作将该新建文件纳入SVN的控制中；因此所有的操作最好都使用SVN进行，包括  创建新文件&#x2F;夹，创建后要使用
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-10 18:56" pubdate>
+              2024-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/09/%E8%B7%9D%E7%A6%BB%E7%9B%B8%E5%85%B3/" target="_self">
+          距离相关
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/09/%E8%B7%9D%E7%A6%BB%E7%9B%B8%E5%85%B3/" target="_self">
+        <div>
+          参考博客 距离  曼哈顿距离 D(A, B) &#x3D; abs(x1 - x2) + abs(y1 - y2) (x, y) -&gt; (x+y, y-x)后，新坐标系下的切比雪夫距离为原坐标系下的曼哈顿距离 3102. 最小化曼哈顿距离   切比雪夫距离 D(A, B) &#x3D; max(|x1 - x2|, |y1 - y2|)
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-09 21:58" pubdate>
+              2024-07-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2024/07/07/%E5%8A%A8%E8%A7%84%E9%A2%98%E5%8D%95/" target="_self">
           动规题单
         </a>
@@ -272,483 +758,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/06/c-cpp%E5%B0%8F%E6%8A%80%E5%B7%A7/" target="_self">
-          c/cpp小技巧
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/06/c-cpp%E5%B0%8F%E6%8A%80%E5%B7%A7/" target="_self">
-        <div>
-          如何计算负数的补码 负数一般以补码的形式存储 如果位数为(8), 则负数a的补码为pow(2,n) - abs(a) 另外，负数a的补码也可根据：abs(a)的反码 + 1 得到  lambda把自身作为形参12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152/
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-06 21:45" pubdate>
-              2024-07-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/" class="category-chain-item">编程技巧</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/c-cpp/">#c/cpp</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/06/KMP%E7%AE%97%E6%B3%95/" target="_self">
-          KMP算法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/06/KMP%E7%AE%97%E6%B3%95/" target="_self">
-        <div>
-          参考博客 leetcode 宫水三叶 从next数组的求解解读KMP算法 还是carl的好理解一些  解决场景 如何快速在「原字符串」中找到「匹配字符串」 时间复杂度：O(m + n)，其中m，n分别为原字符串，待匹配字符串的长度 其能在「非完全匹配」的过程中提取到有效信息进行复用，以减少「重复匹配」的消耗。  心得体会 next数组是模式串的相同最长前后缀长度表 next[j]表示模式串中，字串
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-06 15:46" pubdate>
-              2024-07-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/04/%E9%A2%98%E7%9B%AE%E5%A4%8D%E4%B9%A0/" target="_self">
-          题目复习
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/04/%E9%A2%98%E7%9B%AE%E5%A4%8D%E4%B9%A0/" target="_self">
-        <div>
-          滑动窗口 904.水果成篮，结合题解，深入理解：  最大滑动窗口 - 模版  123456while j &lt; len(nums):    // 判断[i, j]是否满足条件    while 不满足条件：        i += 1 //（最保守的压缩i，一旦满足条件了就退出压缩i的过程，使得滑窗尽可能的大）    // 不断更新结果（注意在while外更新！）    j += 1 最小滑动
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-04 21:27" pubdate>
-              2024-07-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/06/28/%E6%8F%90%E9%97%AE%E8%AE%B0%E5%BD%95/" target="_self">
-          提问记录
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/28/%E6%8F%90%E9%97%AE%E8%AE%B0%E5%BD%95/" target="_self">
-        <div>
-          24-06-27 DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？  DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。 上述可能会出现接收端缓存满，而尚有消息未处理的情
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-28 09:58" pubdate>
-              2024-06-28
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
-          aarch64-linux-内存管理（二）
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
-        <div>
-          参考博客 Linux内存管理(四)：paging_init分析
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-26 22:44" pubdate>
-              2024-06-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="category-chain-item">内存管理</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
-          aarch64-linux-内存管理（一）
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
-        <div>
-          优质参考博客 Linux内存管理-专栏 Linux内存模型 arm64架构linux内核地址转换__pa(x)与__va(x)分析 底层开发必知的三个内存结构概念  内存硬件结构Linux 把物理内存划分为三个层次来管理: 存储节点(Node)、内存管理区(Zone)和页面(Page)  Node -&gt; struct pglist_data，包含的重要信息有 该 Node 包含的Zone数目
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-26 11:23" pubdate>
-              2024-06-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="category-chain-item">内存管理</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/06/26/%E5%8A%A8%E6%80%81%E5%BA%93vs%E9%9D%99%E6%80%81%E5%BA%93/" target="_self">
-          动态库vs静态库
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/26/%E5%8A%A8%E6%80%81%E5%BA%93vs%E9%9D%99%E6%80%81%E5%BA%93/" target="_self">
-        <div>
-          
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-26 10:09" pubdate>
-              2024-06-26
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/06/25/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E4%B8%8Emod/" target="_self">
-          加减乘除与mod
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/25/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E4%B8%8Emod/" target="_self">
-        <div>
-          参考文章 力扣  记录要点两个恒等式 (a + b) mod m = [(a mod m) + (b mod m)] mod m (a b) mod m = [(a mod m) (b mod m)] mod m  幂运算与mod 指数不能随便取余，如果指数在 64 位整数的范围内，可以使用快速幂计算方法 注：如果指数超出 64 位整数的范围，需要用「欧拉降幂」处理。    负数与mod 如果x是
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-25 22:16" pubdate>
-              2024-06-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/06/25/%E5%AD%90%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3/" target="_self">
-          子数组相关
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/25/%E5%AD%90%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3/" target="_self">
-        <div>
-          相关题目 209. 长度最小的子数组  53. 最大子数组和   对应解答及注意事项长度最小的子数组  这个题是滑动窗口的最佳实践！窗口有左右两个边界索引，有点类似于双指针的方法 官方题解有一个前缀和的做法：提前算出[0, i]的和，并保存到一个额外的数组中，接着将题目转化为：找到两个前缀和，[0, i)，[0, j)使得这两个前缀和的差 &gt;&#x3D; target，记录此时的子数组长度为
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-25 19:46" pubdate>
-              2024-06-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

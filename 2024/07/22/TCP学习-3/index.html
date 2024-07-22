@@ -16,21 +16,31 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://example.com/archives/2024/07/page/2/index.html">
+    <meta name="description" content="TCP学习（三） 滑动窗口是相对于确认号开始的  慢启动 核心点：新分组进入网络的速率应该与另一端返回确认的速率相同而进行工作 拥塞窗口【给发送方使用，cwnd】 发送方使用拥塞窗口与通告窗口的最小值作为发送上限： 拥塞窗口是发送方使用的流量控制：大小根据接收到的ACK数量指数增加，会与延迟确认冲突嘛？ 通告窗口则是接收方使用的流量控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP学习-3">
+<meta property="og:url" content="http://example.com/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-3/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TCP学习（三） 滑动窗口是相对于确认号开始的  慢启动 核心点：新分组进入网络的速率应该与另一端返回确认的速率相同而进行工作 拥塞窗口【给发送方使用，cwnd】 发送方使用拥塞窗口与通告窗口的最小值作为发送上限： 拥塞窗口是发送方使用的流量控制：大小根据接收到的ACK数量指数增加，会与延迟确认冲突嘛？ 通告窗口则是接收方使用的流量控制">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-22T12:47:27.000Z">
+<meta property="article:modified_time" content="2024-07-22T12:49:17.019Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>归档 - Hexo</title>
+  <title>TCP学习-3 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -80,7 +90,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -186,9 +196,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="TCP学习-3"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-22 20:47" pubdate>
+          2024年7月22日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          144 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -204,100 +254,173 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 35 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2024</p>
-    
-    <a href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">Linux-aarch64-系统调用-1</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">TCP学习-3</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="TCP学习（三）"><a href="#TCP学习（三）" class="headerlink" title="TCP学习（三）"></a>TCP学习（三）</h1><ul>
+<li>滑动窗口是相对于确认号开始的</li>
+</ul>
+<h2 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h2><ul>
+<li>核心点：新分组进入网络的速率应该与另一端返回确认的速率相同而进行工作</li>
+<li>拥塞窗口【给发送方使用，cwnd】</li>
+<li>发送方使用拥塞窗口与<strong>通告</strong>窗口的最小值作为发送上限：<ul>
+<li>拥塞窗口是发送方使用的流量控制：大小根据接收到的ACK数量指数增加，会与<strong>延迟确认</strong>冲突嘛？</li>
+<li>通告窗口则是接收方使用的流量控制</li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    
-    <a href="/2024/07/10/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">Linux-aarch64-中断处理流程</div>
-    </a>
-  
-    
-    <a href="/2024/07/10/Linux-aarch64-%E5%90%91%E9%87%8F%E8%A1%A8/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">Linux-aarch64-向量表</div>
-    </a>
-  
-    
-    <a href="/2024/07/10/APUE-Learning-1/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">APUE-Learning-1</div>
-    </a>
-  
-    
-    <a href="/2024/07/10/C%E8%AF%AD%E8%A8%80%E5%86%8D%E5%AD%A6%E4%B9%A0/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">C语言再学习</div>
-    </a>
-  
-    
-    <a href="/2024/07/10/%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">设计规范</div>
-    </a>
-  
-    
-    <a href="/2024/07/10/CI-CD%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">CI/CD相关基础</div>
-    </a>
-  
-    
-    <a href="/2024/07/10/SVN%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" class="list-group-item list-group-item-action">
-      <time>07-10</time>
-      <div class="list-group-item-title">SVN简单学习</div>
-    </a>
-  
-    
-    <a href="/2024/07/09/%E8%B7%9D%E7%A6%BB%E7%9B%B8%E5%85%B3/" class="list-group-item list-group-item-action">
-      <time>07-09</time>
-      <div class="list-group-item-title">距离相关</div>
-    </a>
-  
-    
-    <a href="/2024/07/07/%E5%8A%A8%E8%A7%84%E9%A2%98%E5%8D%95/" class="list-group-item list-group-item-action">
-      <time>07-07</time>
-      <div class="list-group-item-title">动规题单</div>
-    </a>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2024/07/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2024/07/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2024/07/page/3/#board">3</a><a class="extend next" rel="next" href="/archives/2024/07/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>TCP学习-3</div>
+      <div>http://example.com/2024/07/22/TCP学习-3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cyokeo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-MISC/" title="TCP学习-MISC">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TCP学习-MISC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-2/" title="TCP学习-2">
+                        <span class="hidden-mobile">TCP学习-2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -391,6 +514,99 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 

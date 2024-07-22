@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux系统调用的处理 注意本系列以Linux6.9为例 这里为aarch64  总结： dup2() of POSIX interface: defined in glibc  INLINE_SYSCALL_CALL() -&gt; __INLINE_SYSCALL2() -&gt; INLINE_SYSCALL(): 针对不同的UNIX实现，定义了不同的宏实现 for Linux: INLI">
+    <meta name="description" content="TCP学习（二）连接建立 - 三次握手 - 沟通双方的初始序列号 请求端发送SYN段，包含发端初始序号（ISN-C），以及服务器端口，MSS 服务器通过发送SYN进行响应：包含收端初始序号(ISN-S)，ACK被设置为1作为对请求端SYN的确认，确认序号 &#x3D; ISN-C + 1， MSS 请求端发送ACK，响应服务器的SYN：ACK被设置为1作为对服务器SYN的确认，确认序号 &amp;#x3D">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux-aarch64-系统调用-2">
-<meta property="og:url" content="http://example.com/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-2/index.html">
+<meta property="og:title" content="TCP学习-2">
+<meta property="og:url" content="http://example.com/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Linux系统调用的处理 注意本系列以Linux6.9为例 这里为aarch64  总结： dup2() of POSIX interface: defined in glibc  INLINE_SYSCALL_CALL() -&gt; __INLINE_SYSCALL2() -&gt; INLINE_SYSCALL(): 针对不同的UNIX实现，定义了不同的宏实现 for Linux: INLI">
+<meta property="og:description" content="TCP学习（二）连接建立 - 三次握手 - 沟通双方的初始序列号 请求端发送SYN段，包含发端初始序号（ISN-C），以及服务器端口，MSS 服务器通过发送SYN进行响应：包含收端初始序号(ISN-S)，ACK被设置为1作为对请求端SYN的确认，确认序号 &#x3D; ISN-C + 1， MSS 请求端发送ACK，响应服务器的SYN：ACK被设置为1作为对服务器SYN的确认，确认序号 &amp;#x3D">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-10T11:13:48.000Z">
-<meta property="article:modified_time" content="2024-07-10T11:26:52.894Z">
+<meta property="article:published_time" content="2024-07-22T12:47:25.000Z">
+<meta property="article:modified_time" content="2024-07-22T12:48:12.592Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Linux-aarch64-系统调用-2 - Hexo</title>
+  <title>TCP学习-2 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux-aarch64-系统调用-2"></span>
+            <span id="subtitle" data-typed-text="TCP学习-2"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-10 19:13" pubdate>
-          2024年7月10日 晚上
+        <time datetime="2024-07-22 20:47" pubdate>
+          2024年7月22日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          483 字
+          1.1k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          5 分钟
+          9 分钟
         
       </span>
     
@@ -267,83 +267,64 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linux-aarch64-系统调用-2</h1>
+            <h1 id="seo-header">TCP学习-2</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Linux系统调用的处理"><a href="#Linux系统调用的处理" class="headerlink" title="Linux系统调用的处理"></a>Linux系统调用的处理</h2><ul>
-<li>注意本系列以Linux6.9为例</li>
-<li>这里为aarch64</li>
+                <h1 id="TCP学习（二）"><a href="#TCP学习（二）" class="headerlink" title="TCP学习（二）"></a>TCP学习（二）</h1><h2 id="连接建立-三次握手-沟通双方的初始序列号"><a href="#连接建立-三次握手-沟通双方的初始序列号" class="headerlink" title="连接建立 - 三次握手 - 沟通双方的初始序列号"></a>连接建立 - 三次握手 - 沟通双方的初始序列号</h2><ul>
+<li>请求端发送SYN段，包含<strong>发端初始序号（ISN-C）</strong>，以及服务器端口，MSS</li>
+<li>服务器通过发送SYN进行响应：包含<strong>收端初始序号(ISN-S)<strong>，ACK被设置为1作为对请求端SYN的确认，</strong>确认序号 &#x3D; ISN-C + 1</strong>， MSS</li>
+<li>请求端发送ACK，响应服务器的SYN：ACK被设置为1作为对服务器SYN的确认，<strong>确认序号 &#x3D; ISN-S + 1</strong></li>
 </ul>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
-<li><p>dup2() of POSIX interface: defined in glibc</p>
+<p>此外，连接建立的过程还会沟通MSS的具体数值，以避免分片的产生；但是只能沟通收发两端，无法避免链路中间节点的分片行为；此时就需要路径上的MTU发现机制</p>
+<h2 id="连接终止-四次挥手"><a href="#连接终止-四次挥手" class="headerlink" title="连接终止 - 四次挥手"></a>连接终止 - 四次挥手</h2><h3 id="全关闭-主动关闭-被动关闭"><a href="#全关闭-主动关闭-被动关闭" class="headerlink" title="全关闭 - 主动关闭 + 被动关闭"></a>全关闭 - 主动关闭 + 被动关闭</h3><p>发送第一个FIN的一方将执行主动关闭，而另一方执行被动关闭</p>
 <ul>
-<li>INLINE_SYSCALL_CALL() -&gt; __INLINE_SYSCALL2() -&gt; INLINE_SYSCALL(): 针对不同的UNIX实现，定义了不同的宏实现<ul>
-<li>for Linux: INLINE_SYSCALL() -&gt; INTERNAL_SYSCALL(): 针对不同的架构，定义了不同的宏实现<ul>
-<li>for aarch64: INTERNAL_SYSCALL_RAW()<ul>
-<li>将系统调用号放在x8寄存器，将调用参数放到x0-x6寄存器中</li>
-<li><code>svc	0</code> 触发SVC异常，陷入内核</li>
+<li>A首先发送FIN，包含序列号<code>seq-A</code>；</li>
+<li>B收到该FIN后，返回确认：ACK被设置为1，确认序列号为<code>seq-A + 1</code>;    -&gt; 由TCP协议栈内部逻辑处理进行发送<br>一般地，B会向其应用程序递送一个EOF【文件结束符】，接着B的应用程序就关闭该TCP连接，导致</li>
+<li>B主动发一个FIN，序号为<code>seq-B</code>;</li>
+<li>A收到该FIN后，返回确认：ACK被设置为1，确认序列号为<code>seq-B + 1</code>;    -&gt; 由TCP协议栈内部逻辑处理进行发送</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>可以看到，终止的过程和建立的过程在第一次回复时略有不同：<ul>
+<li>连接时，第一次回复带有SYN信息，用于沟通B端的初始序列号</li>
+<li>终止时，第一次回复仅是简单的回复 -&gt; 是否可能将第二次FIN与第一次ACK进行压缩呢？</li>
 </ul>
 </li>
 </ul>
-</li>
+<h3 id="半关闭"><a href="#半关闭" class="headerlink" title="半关闭"></a>半关闭</h3><ul>
+<li>TCP提供了连接的一端在结束它的发送后还能接收来自另一端数据的能力，这就是所谓的半关闭；需要注意，TCP是双向连接的，因此可以只关闭单方向的连接，而发送FIN的一端即主动关闭该方-&gt;对方的数据发送通道，但是对方数据发送-本地数据接收还是正常的</li>
+<li><u>为了使用这个特性</u>，必须为用户提供一个编程接口，且该接口表明：我已经完成了数据传送，因此发送一个文件结束(FIN)给另一端，但我还想接收另一端发来的数据，直到它给我发来文件结束(FIN)</li>
+<li>如果应用程序不调用close而调用<code>shutdown</code>，且第2个参数值为1，则插口的API支持半关闭。然而，大多数的应用程序通过调用<code>close</code>终止两个方向的连接</li>
 </ul>
+<h2 id="建立与终止过程中的状态迁移"><a href="#建立与终止过程中的状态迁移" class="headerlink" title="建立与终止过程中的状态迁移"></a>建立与终止过程中的状态迁移</h2><ul>
+<li><p>参考《TCPIP详解：卷1》18.6节</p>
 </li>
-</ul>
-</li>
-<li><p>陷入内核后：（SVC异常属于同步异常）</p>
+<li><p>关闭时：</p>
 <ul>
-<li>根据vectors，进入el0，64，sync处理流程<ul>
-<li>执行部分汇编码 -&gt; b(无条件，不返回)跳转到 el0t_64_sync<ul>
-<li>el0t_64_sync (由entry_handler宏定义，汇编标号) -&gt; el0t_64_sync_handler (c函数)<ul>
-<li>el0t_64_sync_handler -&gt; el0_svc -&gt; do_el0_svc<ul>
-<li>do_el0_svc(从x8获取系统调用号) -&gt; el0_svc_common<ul>
-<li>el0_svc_common: 从调用表中拿到Linux定义的系统调用函数__arm64_sym_sys_dup2()<ul>
-<li>进入执行 SYSCALL_DEFINE2(dup2, unsigned int, oldfd, unsigned int, newfd): in file.c</li>
+<li>被动关闭：接收到FIN，则进入<code>close_wait</code>状态，等待本地应用程序关闭socket，进而发送FIN进入<code>last_ack</code>状态，等待对端的ACK；接收到ACk后，连接被彻底关闭</li>
+<li>主动关闭：<ul>
+<li>应用进程主动调用<code>close()</code>等关闭连接，首先发送FIN，进入<code>fin_wait_1</code>状态；</li>
+<li>收到对端的ack后，进入<code>fin_wait_2</code>状态；</li>
+<li>之后等待对端发送FIN，进而回复ACK，进入<code>time_wait</code>状态</li>
+<li>2MSL（报文段最大生存时间）后，连接彻底关闭</li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="分步梳理"><a href="#分步梳理" class="headerlink" title="分步梳理"></a>分步梳理</h3><ul>
-<li><p>参考《vectors.md》可知，系统调用触发软件中断，为同步异常，因此会进入el0t_64_sync的处理流程</p>
-</li>
-<li><p>必要的汇编 -&gt; el0t_64_sync -&gt; el0t_64_sync_handler</p>
-</li>
-<li><p>el0t_64_sync_handler</p>
-  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c">asmlinkage <span class="hljs-type">void</span> noinstr <span class="hljs-title function_">el0t_64_sync_handler</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pt_regs *regs)</span><br>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> esr = read_sysreg(esr_el1);<br><br>    <span class="hljs-keyword">switch</span> (ESR_ELx_EC(esr)) &#123;<br>    <span class="hljs-keyword">case</span> ESR_ELx_EC_SVC64:<br>        el0_svc(regs);          <span class="hljs-comment">// 这里处理 svc 同步异常</span><br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> ESR_ELx_EC_DABT_LOW:<br>        el0_da(regs, esr);<br>        <span class="hljs-keyword">break</span>;<br><br>    <span class="hljs-comment">// ......</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>el0_svc -&gt; do_el0_svc</p>
-  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> noinstr <span class="hljs-title function_">el0_svc</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pt_regs *regs)</span><br>&#123;<br>    enter_from_user_mode(regs);<br>    cortex_a76_erratum_1463225_svc_handler();<br>    fp_user_discard();<br>    local_daif_restore(DAIF_PROCCTX);<br>    do_el0_svc(regs);<br>    exit_to_user_mode(regs);<br>&#125;<br></code></pre></td></tr></table></figure></li>
-<li><p>do_el0_svc -&gt; el0_svc_common -&gt; invoke_syscall</p>
-  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">do_el0_svc</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pt_regs *regs)</span><br>&#123;<br>    <span class="hljs-comment">// 这里从x8中获取调用号; sys_call_table为系统调用表</span><br>    el0_svc_common(regs, regs-&gt;regs[<span class="hljs-number">8</span>], __NR_syscalls, sys_call_table);<br>&#125;<br><br><span class="hljs-comment">// sys_call_table的“创建”, in file: arch\arm64\kernel\sys.c</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">* Wrappers to pass the pt_regs argument.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __arm64_sys_personality		__arm64_sys_arm64_personality</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> __SYSCALL</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __SYSCALL(nr, sym)	asmlinkage long __arm64_##sym(const struct pt_regs *);</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;asm/unistd.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> __SYSCALL</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __SYSCALL(nr, sym)	[nr] = __arm64_##sym,</span><br><br><span class="hljs-type">const</span> <span class="hljs-type">syscall_fn_t</span> sys_call_table[__NR_syscalls] = &#123;<br>    [<span class="hljs-number">0</span> ... __NR_syscalls - <span class="hljs-number">1</span>] = __arm64_sys_ni_syscall,<br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;asm/unistd.h&gt;</span></span><br>    [<span class="hljs-number">23</span>] = __arm64_sym_sys_dup,     <span class="hljs-comment">// 在《syscall-1.md》的分析中，已经见到了该函数的定义</span><br>    [<span class="hljs-number">24</span>] = __arm64_sym_sys_dup3<br>&#125;;<br><br><span class="hljs-comment">// 上面两个#include &lt;asm/unistd.h&gt;，最终会包含linux\include\uapi\asm-generic\unistd.h 这个重要文件</span><br>...<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __NR_dup 23</span><br>__SYSCALL(__NR_dup, sys_dup)<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __NR_dup3 24</span><br>__SYSCALL(__NR_dup3, sys_dup3)<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __NR3264_fcntl 25</span><br>__SC_COMP_3264(__NR3264_fcntl, sys_fcntl64, sys_fcntl, compat_sys_fcntl64)<br>...<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>invoke_syscall：从调用表中所引到某个表项，取得syscall_fn_t，调用即可</p>
+<li><p>2MSL等待状态</p>
 <ul>
-<li>对于POSIX标准规范的dup()<ul>
-<li>调用到__arm64_sym_sys_dup()<ul>
-<li>__se_sys_dup()<ul>
-<li>__do_sys_dup()<ul>
-<li>file.c 中 dup 的定义：<code>SYSCALL_DEFINE2(dup2, unsigned int, oldfd, unsigned int, newfd)</code></li>
+<li>MSL：报文段最大生存时间MSL（Maximum Segment Lifetime）</li>
+<li>该连接必须在TIME_WAIT状态停留的时间为2倍的MSL。这样可让TCP再次发送最后的ACK以防这个ACK丢失（另一端超时并重发最后的FIN）</li>
+<li>在连接处于2MSL等待时，任何迟到的报文段将被丢弃</li>
+<li>只有主动关闭连接的一端会进入该状态；而且服务器端，客户端都可以主动关闭连接</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><p><strong>当有多个连接请求时</strong></p>
+<ul>
+<li>服务器来不及处理这么多连接请求，将会把完成三次握手的连接放到内核中的连接队列中</li>
+<li>如果队列已经满了，则服务器端TCP协议栈将不理会新来的SYN报文，也不会发回RST</li>
+<li>因此后续客户端会重传其SYN，直至与服务器完成连接的建立</li>
 </ul>
 </li>
 </ul>
@@ -355,27 +336,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
 </div>
 
@@ -385,8 +345,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux-aarch64-系统调用-2</div>
-      <div>http://example.com/2024/07/10/Linux-aarch64-系统调用-2/</div>
+      <div>TCP学习-2</div>
+      <div>http://example.com/2024/07/22/TCP学习-2/</div>
     </div>
     <div class="license-meta">
       
@@ -398,7 +358,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月10日</div>
+          <div>2024年7月22日</div>
         </div>
       
       
@@ -430,9 +390,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/22/%E7%A0%B4%E9%99%A4%E8%BF%B7%E9%9B%BE-%E9%87%8D%E5%AE%9A%E4%BD%8D/" title="破除迷雾-重定位">
+                      <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-3/" title="TCP学习-3">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">破除迷雾-重定位</span>
+                        <span class="hidden-mobile">TCP学习-3</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -440,8 +400,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" title="Linux-aarch64-系统调用-1">
-                        <span class="hidden-mobile">Linux-aarch64-系统调用-1</span>
+                      <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-1/" title="TCP学习-1">
+                        <span class="hidden-mobile">TCP学习-1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

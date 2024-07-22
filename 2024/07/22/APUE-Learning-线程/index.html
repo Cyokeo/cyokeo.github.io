@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux系统调用的处理 注意本系列以Linux6.9为例 这里为aarch64  总结： dup2() of POSIX interface: defined in glibc  INLINE_SYSCALL_CALL() -&gt; __INLINE_SYSCALL2() -&gt; INLINE_SYSCALL(): 针对不同的UNIX实现，定义了不同的宏实现 for Linux: INLI">
+    <meta name="description" content="线程 每个线程都包含有表示执行环境所必须的信息  进程中标识线程的线程ID。pthread_t，所有可移植的操作系统实现不能把它作为整数处理，因此必须提供一个函数来对两个线程ID进行比较 一组寄存器值 栈 调度优先级和调度策略 信号屏蔽字 -&gt; 继承于创建它的线程 errno变量 线程私有数据   POSIX线程的功能测试宏是**_POSIX_THREADS**，可以用它在编译时确定是否支持">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux-aarch64-系统调用-2">
-<meta property="og:url" content="http://example.com/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-2/index.html">
+<meta property="og:title" content="APUE-Learning-线程">
+<meta property="og:url" content="http://example.com/2024/07/22/APUE-Learning-%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Linux系统调用的处理 注意本系列以Linux6.9为例 这里为aarch64  总结： dup2() of POSIX interface: defined in glibc  INLINE_SYSCALL_CALL() -&gt; __INLINE_SYSCALL2() -&gt; INLINE_SYSCALL(): 针对不同的UNIX实现，定义了不同的宏实现 for Linux: INLI">
+<meta property="og:description" content="线程 每个线程都包含有表示执行环境所必须的信息  进程中标识线程的线程ID。pthread_t，所有可移植的操作系统实现不能把它作为整数处理，因此必须提供一个函数来对两个线程ID进行比较 一组寄存器值 栈 调度优先级和调度策略 信号屏蔽字 -&gt; 继承于创建它的线程 errno变量 线程私有数据   POSIX线程的功能测试宏是**_POSIX_THREADS**，可以用它在编译时确定是否支持">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-10T11:13:48.000Z">
-<meta property="article:modified_time" content="2024-07-10T11:26:52.894Z">
+<meta property="article:published_time" content="2024-07-22T12:35:31.000Z">
+<meta property="article:modified_time" content="2024-07-22T12:42:09.694Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Linux-aarch64-系统调用-2 - Hexo</title>
+  <title>APUE-Learning-线程 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux-aarch64-系统调用-2"></span>
+            <span id="subtitle" data-typed-text="APUE-Learning-线程"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-10 19:13" pubdate>
-          2024年7月10日 晚上
+        <time datetime="2024-07-22 20:35" pubdate>
+          2024年7月22日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          483 字
+          2.4k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          5 分钟
+          20 分钟
         
       </span>
     
@@ -267,83 +267,180 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linux-aarch64-系统调用-2</h1>
+            <h1 id="seo-header">APUE-Learning-线程</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Linux系统调用的处理"><a href="#Linux系统调用的处理" class="headerlink" title="Linux系统调用的处理"></a>Linux系统调用的处理</h2><ul>
-<li>注意本系列以Linux6.9为例</li>
-<li>这里为aarch64</li>
-</ul>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
-<li><p>dup2() of POSIX interface: defined in glibc</p>
+                <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><ul>
+<li><p>每个线程都包含有表示执行环境所必须的信息</p>
 <ul>
-<li>INLINE_SYSCALL_CALL() -&gt; __INLINE_SYSCALL2() -&gt; INLINE_SYSCALL(): 针对不同的UNIX实现，定义了不同的宏实现<ul>
-<li>for Linux: INLINE_SYSCALL() -&gt; INTERNAL_SYSCALL(): 针对不同的架构，定义了不同的宏实现<ul>
-<li>for aarch64: INTERNAL_SYSCALL_RAW()<ul>
-<li>将系统调用号放在x8寄存器，将调用参数放到x0-x6寄存器中</li>
-<li><code>svc	0</code> 触发SVC异常，陷入内核</li>
+<li>进程中标识线程的线程ID。pthread_t，<strong>所有可移植的操作系统实现不能把它作为整数处理，因此必须提供一个函数来对两个线程ID进行比较</strong></li>
+<li>一组寄存器值</li>
+<li>栈</li>
+<li>调度优先级和调度策略</li>
+<li>信号屏蔽字 -&gt; 继承于创建它的线程</li>
+<li>errno变量</li>
+<li>线程私有数据</li>
 </ul>
 </li>
-</ul>
+<li><p>POSIX线程的功能测试宏是**_POSIX_THREADS**，可以用它在编译时确定是否支持posix线程 </p>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>陷入内核后：（SVC异常属于同步异常）</p>
+<li><p>线程终止</p>
 <ul>
-<li>根据vectors，进入el0，64，sync处理流程<ul>
-<li>执行部分汇编码 -&gt; b(无条件，不返回)跳转到 el0t_64_sync<ul>
-<li>el0t_64_sync (由entry_handler宏定义，汇编标号) -&gt; el0t_64_sync_handler (c函数)<ul>
-<li>el0t_64_sync_handler -&gt; el0_svc -&gt; do_el0_svc<ul>
-<li>do_el0_svc(从x8获取系统调用号) -&gt; el0_svc_common<ul>
-<li>el0_svc_common: 从调用表中拿到Linux定义的系统调用函数__arm64_sym_sys_dup2()<ul>
-<li>进入执行 SYSCALL_DEFINE2(dup2, unsigned int, oldfd, unsigned int, newfd): in file.c</li>
+<li>影响整个进程<ul>
+<li>如果进程中的任意线程调用了exit, _Exit, _exit，那么整个进程就会终止</li>
+<li>如果信号的默认行为是终止进程，那么发送到线程的信号就会终止整个进程</li>
+</ul>
+</li>
+<li>单个线程退出<ul>
+<li>从线程执行函数中退出</li>
+<li>被同一进程中的其他线程终止：pthread_cancel()，仅提出终止线程的请求，不等待线程终止</li>
+<li>线程调用pthread_exit()</li>
+</ul>
+</li>
+<li>pthread_join() -&gt; 传参时遇到指针一定注意：内存应该处在栈上？还是堆上？所有者是哪个线程？<ul>
+<li>调用线程一直阻塞，直到指定的线程调用pthread_exit()、从执行函数中返回、或者被其他线程取消</li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="分步梳理"><a href="#分步梳理" class="headerlink" title="分步梳理"></a>分步梳理</h3><ul>
-<li><p>参考《vectors.md》可知，系统调用触发软件中断，为同步异常，因此会进入el0t_64_sync的处理流程</p>
-</li>
-<li><p>必要的汇编 -&gt; el0t_64_sync -&gt; el0t_64_sync_handler</p>
-</li>
-<li><p>el0t_64_sync_handler</p>
-  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c">asmlinkage <span class="hljs-type">void</span> noinstr <span class="hljs-title function_">el0t_64_sync_handler</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pt_regs *regs)</span><br>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> esr = read_sysreg(esr_el1);<br><br>    <span class="hljs-keyword">switch</span> (ESR_ELx_EC(esr)) &#123;<br>    <span class="hljs-keyword">case</span> ESR_ELx_EC_SVC64:<br>        el0_svc(regs);          <span class="hljs-comment">// 这里处理 svc 同步异常</span><br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> ESR_ELx_EC_DABT_LOW:<br>        el0_da(regs, esr);<br>        <span class="hljs-keyword">break</span>;<br><br>    <span class="hljs-comment">// ......</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>el0_svc -&gt; do_el0_svc</p>
-  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> noinstr <span class="hljs-title function_">el0_svc</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pt_regs *regs)</span><br>&#123;<br>    enter_from_user_mode(regs);<br>    cortex_a76_erratum_1463225_svc_handler();<br>    fp_user_discard();<br>    local_daif_restore(DAIF_PROCCTX);<br>    do_el0_svc(regs);<br>    exit_to_user_mode(regs);<br>&#125;<br></code></pre></td></tr></table></figure></li>
-<li><p>do_el0_svc -&gt; el0_svc_common -&gt; invoke_syscall</p>
-  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">do_el0_svc</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pt_regs *regs)</span><br>&#123;<br>    <span class="hljs-comment">// 这里从x8中获取调用号; sys_call_table为系统调用表</span><br>    el0_svc_common(regs, regs-&gt;regs[<span class="hljs-number">8</span>], __NR_syscalls, sys_call_table);<br>&#125;<br><br><span class="hljs-comment">// sys_call_table的“创建”, in file: arch\arm64\kernel\sys.c</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">* Wrappers to pass the pt_regs argument.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __arm64_sys_personality		__arm64_sys_arm64_personality</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> __SYSCALL</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __SYSCALL(nr, sym)	asmlinkage long __arm64_##sym(const struct pt_regs *);</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;asm/unistd.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> __SYSCALL</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __SYSCALL(nr, sym)	[nr] = __arm64_##sym,</span><br><br><span class="hljs-type">const</span> <span class="hljs-type">syscall_fn_t</span> sys_call_table[__NR_syscalls] = &#123;<br>    [<span class="hljs-number">0</span> ... __NR_syscalls - <span class="hljs-number">1</span>] = __arm64_sys_ni_syscall,<br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;asm/unistd.h&gt;</span></span><br>    [<span class="hljs-number">23</span>] = __arm64_sym_sys_dup,     <span class="hljs-comment">// 在《syscall-1.md》的分析中，已经见到了该函数的定义</span><br>    [<span class="hljs-number">24</span>] = __arm64_sym_sys_dup3<br>&#125;;<br><br><span class="hljs-comment">// 上面两个#include &lt;asm/unistd.h&gt;，最终会包含linux\include\uapi\asm-generic\unistd.h 这个重要文件</span><br>...<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __NR_dup 23</span><br>__SYSCALL(__NR_dup, sys_dup)<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __NR_dup3 24</span><br>__SYSCALL(__NR_dup3, sys_dup3)<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __NR3264_fcntl 25</span><br>__SC_COMP_3264(__NR3264_fcntl, sys_fcntl64, sys_fcntl, compat_sys_fcntl64)<br>...<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>invoke_syscall：从调用表中所引到某个表项，取得syscall_fn_t，调用即可</p>
+<li><p>线程的分离状态</p>
 <ul>
-<li>对于POSIX标准规范的dup()<ul>
-<li>调用到__arm64_sym_sys_dup()<ul>
-<li>__se_sys_dup()<ul>
-<li>__do_sys_dup()<ul>
-<li>file.c 中 dup 的定义：<code>SYSCALL_DEFINE2(dup2, unsigned int, oldfd, unsigned int, newfd)</code></li>
+<li>已被分离的线程在终止时，其底层存储资源可以立即被收回</li>
+<li>线程被分离后不能调用pthread_join()等待它终止，会产生未定义行为</li>
+<li>可以调用pthread_detach()分离线程</li>
+<li>在pthread_create时控制传入的线程属性参数，可以直接创建已处于分离状态的线程</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><ul>
+<li>程序使用变量的方式也会引起竞争，导致不一致的情况发生。例如，对某个变量+1，然后基于这个值做出某种决定。因为增量操作步骤和这个决定步骤的组合不是原子操作，所以就给不一致情况的出现提供了可能</li>
+</ul>
+<h3 id="互斥量-pthread-mutex-t"><a href="#互斥量-pthread-mutex-t" class="headerlink" title="互斥量 -&gt; pthread_mutex_t"></a>互斥量 -&gt; pthread_mutex_t</h3><ul>
+<li><p>pthread_mutex_lock -&gt; 可能会阻塞</p>
+</li>
+<li><p>pthread_mutex_trylock -&gt; 不会阻塞；不能加锁时返回EBUSY</p>
+</li>
+<li><p>如果有多个线程阻塞在获取锁的状态；当锁被释放时，所有线程都被唤醒？，最终只有一个线程能获取锁，其他线程仍进入阻塞状态?</p>
+<ul>
+<li>这种“惊群现象”会发生嘛？即线程何时被唤醒？</li>
+<li>如果等待的线程数&gt;1，内核可以只唤醒一个线程，避免惊群 &lt;- 这个是futex2（fast user mutex）【Documentation\translations\zh_CN\userspace-api\futex2.rst】<ul>
+<li>翻看pthread_mutex_unlock时，传给futex_wake的参数中nr &#x3D; 1，即只唤醒一个等待的线程</li>
+<li>翻看Linux-futex系统调用的实现，看到其先遍历futex的等待队列，把待唤醒的线程结构加入wake_q【超过nr后，不再添加】，之后调用<code>wake_up_q</code>对wake_q里面的线程进行统一的唤醒：-&gt; 线程使用task_struct结构表示，其中有个成员<code>struct wake_q_node		wake_q;</code>，辅助进行这些步骤</li>
+</ul>
+</li>
+<li>因此mutex不会产生惊群现象</li>
+<li>值得注意的是：futex簇有很多操作：wait，wake等，但都使用同一个系统调用号，最终在<code>do_futex()</code>统一处理，根据传参提取出（cmd）信息，进行细致的处理</li>
+</ul>
+</li>
+<li><p>可以仔细控制相关互斥量的加锁顺序以避免死锁：</p>
+<ul>
+<li>程序1： A -&gt; B；程序2：B -&gt; A；这种情况下可能会出现1获得A，2获得B，之后A阻塞于获取B，而B阻塞与获取A</li>
+<li>如果所有程序都以A -&gt; B的顺序加锁，那么可以避免相关的死锁</li>
+</ul>
+</li>
+<li><p>当锁比较多，不好仔细控制加锁顺序时，可以采用解除已获取锁，并进入等待，稍后再试的方式来避免死锁</p>
+<ul>
+<li>即使用trylock，如果返回EBUSY，则释放之前已获取的锁，并挂起等待</li>
+</ul>
+</li>
+</ul>
+<h3 id="读写锁-pthread-rwlock-t"><a href="#读写锁-pthread-rwlock-t" class="headerlink" title="读写锁 -&gt; pthread_rwlock_t"></a>读写锁 -&gt; pthread_rwlock_t</h3><ul>
+<li>三种状态：适合于读次数远大于写次数的情况<ul>
+<li>读加锁：后续读加锁的线程可以获得访问；而写加锁的线程被阻塞</li>
+<li>写加锁：后续任意形式的加锁都会被阻塞</li>
+<li>不加锁：-&gt;</li>
+</ul>
+</li>
+</ul>
+<h3 id="条件变量-pthread-cond-t"><a href="#条件变量-pthread-cond-t" class="headerlink" title="条件变量 -&gt; pthread_cond_t"></a>条件变量 -&gt; pthread_cond_t</h3><ul>
+<li>需要配合互斥量一起使用，条件本身由互斥量保护，线程在改变条件状态之前必须首先锁住互斥量</li>
+<li>调用pthread_cond_wait时，要把已经锁住的互斥量传递给该函数。一般在while条件循环判断条件是否成立，在while循环体里面调用cond_wiat()</li>
+<li>两个唤醒操作<ul>
+<li>pthread_cond_signal()，唤醒一个特定的线程</li>
+<li>pthread_cond_broadcast()，唤醒所有等待线程</li>
+</ul>
+</li>
+</ul>
+<h3 id="自旋锁-pthread-spinlock-t"><a href="#自旋锁-pthread-spinlock-t" class="headerlink" title="自旋锁 -&gt; pthread_spinlock_t"></a>自旋锁 -&gt; pthread_spinlock_t</h3><ul>
+<li>不通过挂起使进程阻塞，而是循环判断</li>
+<li>适用于锁持有时间短，短至自旋开销远小于线程切换、重新调度的时间开销</li>
+<li>当前只在极少数情况下适合使用</li>
+</ul>
+<h3 id="屏障-pthread-barrier-t"><a href="#屏障-pthread-barrier-t" class="headerlink" title="屏障 -&gt; pthread_barrier_t"></a>屏障 -&gt; pthread_barrier_t</h3><ul>
+<li>允许每个线程等待，知道所有合作的线程都到达某一点，然后从该点继续执行。pthread_join()就是一种屏障</li>
+<li>参数count指定必须到达屏障的线程数目</li>
+<li>线程主动调用pthread_barrier_wait，表明该线程已完成工作，等待其它线程完成</li>
+</ul>
+<h1 id="线程控制"><a href="#线程控制" class="headerlink" title="线程控制"></a>线程控制</h1><ul>
+<li><p>当互斥量&#x2F;读写锁&#x2F;条件变量&#x2F;屏障位于进程共享内存区域，则该互斥量&#x2F;读写锁&#x2F;条件变量&#x2F;屏障可以用于进程间同步</p>
+<ul>
+<li>需要设置属性为进程间共享</li>
+</ul>
+</li>
+<li><p>如果一个函数对多个线程来说是可重入的，就说这个线程是线程安全的</p>
+</li>
+<li><p>同一进程的多个线程如何保持数据的私有性？</p>
+<ul>
+<li>提供了让基于进程的接口适应多线程环境的机制 -&gt; errno<ul>
+<li>一个线程在系统调用中重置errno，也不会影响其它线程对errno的设置</li>
+</ul>
+</li>
+<li>键值与某个地址对应</li>
+</ul>
+</li>
+<li><p>线程取消：pthread_cancel()</p>
+<ul>
+<li>调用pthread_cancel()并不会阻塞等待线程结束</li>
+<li>调用后，目标线程可能还处于运行状态，只有在到达取消点时，它才会检查是否被设置了取消状态  -&gt; <strong>推迟取消模式</strong><ul>
+<li>如果被设置了取消状态，则结束自身的运行</li>
+<li>系统中有很多的cancel point</li>
+</ul>
+</li>
+<li>如果该线程取消属性被设置为：PTHREAD_CANCEL_DISABLE，<ul>
+<li>所有对该线程的取消请求会被保留，但处于挂起状态，即在线程到达取消点时，并不会检查取消状态</li>
+<li>当该线程被再次设置为PTHREAD_CANCEL_ENABLE，在到达取消点时，会检查取消状态【之前设置的取消状态还是有效的】</li>
+</ul>
+</li>
+<li>可以主动调用pthread_testcancel()，由开发人员手动加入取消点</li>
+<li><strong>异步取消模式</strong>：当线程的取消为该种类型时，线程可以在任意时间被取消</li>
+</ul>
+</li>
+<li><p>线程和信号</p>
+<ul>
+<li>每个线程都有自己的信号屏蔽字，但是信号的处理是进程中所有线程共享的</li>
+<li>进程中的信号是递送到单个线程的</li>
+<li>pthread_sigmask()用于设置线程的信号屏蔽字</li>
+<li>sigwait()，线程调用等待一个或多个信号的出现。返回之前，sigwait将从进程中移除处于挂起等待状态的信号</li>
+<li>多个线程在sigwait()调用中因同一个信号而阻塞，那么在信号递送的时候，就只有一个线程可从sigwait()返回</li>
+<li>如果一个信号被设置了sigaction()[即被捕获]，这时由操作系统决定是让sigwait返回，还是激活信号处理程序：只能2选1</li>
+<li>使用pthread_kill()将1个信号发送给线程</li>
+<li>为了避免错误行为，线程在调用sigwait()之前，必须阻塞那些它需要等待的信号。该函数内部会原子地取消即将等待信号集的阻塞状态</li>
+</ul>
+</li>
+<li><p>线程和fork()</p>
+<ul>
+<li>线程调用fork()创建子进程，从父进程继承了每个互斥量、读写锁和条件变量的状态；父进程有多个线程的情况下，子进程中只有一个线程，它是由父进程中调用fork的线程的副本。如果子进程从fork返回以后，不是紧接着调用exec的话，就需要清理锁状态</li>
+<li>但是子进程不知道它占有了哪些锁【这些占有的锁可能是父进程中的其它线程持有的】，因此它无法做细致的清理</li>
+<li>如果fork返回后，紧接着调用exec，就可以避免上述的情况，因为旧的地址空间会被丢弃，所以锁的状态无关紧要</li>
+<li>但如果子进程还要继续进行部分处理工作，就需要重点关注：<ul>
+<li>pthread_atfork，在三个阶段进行辅助清理锁资源<ul>
+<li>父进程调用fork创建子进程之前调用，获取父进程定义的所有锁</li>
+<li>fork创建子进程以后、返回之前在父进程上下文中执行，对前一步获取的所有锁进行解锁</li>
+<li>fork返回之前，在子进程上下文中执行，释放第一步中获取的所有锁</li>
+<li>注意：子进程中的锁和父进程中的锁不是同一把锁？！！！</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
+<li><p>线程和I&#x2F;O</p>
+<ul>
+<li>pread</li>
+<li>pwrite</li>
+<li>这两个函数对偏移量的设定和数据的读写操作是原子的</li>
 </ul>
 </li>
 </ul>
@@ -355,27 +452,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
 </div>
 
@@ -385,8 +461,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux-aarch64-系统调用-2</div>
-      <div>http://example.com/2024/07/10/Linux-aarch64-系统调用-2/</div>
+      <div>APUE-Learning-线程</div>
+      <div>http://example.com/2024/07/22/APUE-Learning-线程/</div>
     </div>
     <div class="license-meta">
       
@@ -398,7 +474,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月10日</div>
+          <div>2024年7月22日</div>
         </div>
       
       
@@ -430,9 +506,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/22/%E7%A0%B4%E9%99%A4%E8%BF%B7%E9%9B%BE-%E9%87%8D%E5%AE%9A%E4%BD%8D/" title="破除迷雾-重定位">
+                      <a href="/2024/07/22/APUE-Learning-%E9%AB%98%E7%BA%A7IO/" title="APUE-Learning-高级IO">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">破除迷雾-重定位</span>
+                        <span class="hidden-mobile">APUE-Learning-高级IO</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -440,8 +516,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" title="Linux-aarch64-系统调用-1">
-                        <span class="hidden-mobile">Linux-aarch64-系统调用-1</span>
+                      <a href="/2024/07/22/APUE-Learning-%E6%A0%87%E5%87%86IO-%E4%BF%A1%E5%8F%B7/" title="APUE-Learning-标准IO &amp; 信号">
+                        <span class="hidden-mobile">APUE-Learning-标准IO &amp; 信号</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
