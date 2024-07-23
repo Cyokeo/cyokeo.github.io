@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cyokeo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="中断处理初期汇编码&amp;dup2分析参考博客 ARM-GNU常用汇编伪指令 ARM64底层中断处理  总结 kernel_ventry : el 0 64 sync el0t_64_sync kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, (sp)sp_el0&#x2F;1, pc(elr_el1), pstate(spsr_el1)]到当前sp[sp_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-aarch64-中断处理初期汇编">
+<meta property="og:url" content="http://example.com/2024/07/23/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%88%9D%E6%9C%9F%E6%B1%87%E7%BC%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="中断处理初期汇编码&amp;dup2分析参考博客 ARM-GNU常用汇编伪指令 ARM64底层中断处理  总结 kernel_ventry : el 0 64 sync el0t_64_sync kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, (sp)sp_el0&#x2F;1, pc(elr_el1), pstate(spsr_el1)]到当前sp[sp_">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-23T12:33:47.000Z">
+<meta property="article:modified_time" content="2024-07-23T12:34:59.447Z">
+<meta property="article:author" content="Cyokeo">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Linux-aarch64-中断处理初期汇编 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux-aarch64-中断处理初期汇编"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-23 20:33" pubdate>
+          2024年7月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux-aarch64-中断处理初期汇编</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="中断处理初期汇编码-dup2分析"><a href="#中断处理初期汇编码-dup2分析" class="headerlink" title="中断处理初期汇编码&amp;dup2分析"></a>中断处理初期汇编码&amp;dup2分析</h2><h3 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/niezhongle/p/11088658.html">ARM-GNU常用汇编伪指令</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jasonactions/article/details/115689462">ARM64底层中断处理</a></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>kernel_ventry : el 0 64 sync<ul>
+<li>el0t_64_sync<ul>
+<li>kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, (sp)sp_el0&#x2F;1, pc(elr_el1), pstate(spsr_el1)]到当前sp[sp_el1，即当前task的内核栈]指向的地址处。因此，可以知道 -&gt; 在进行任务切换时，内核应该会把sp_el0的值设置为待切换到的task的内核栈地址。此外，这里还会使用sp_el0存储当前用户态任务的task_struct数据的地址，供get_current()使用<ul>
+<li>el0t_64_sync_handler(struct pt_regs* regs), 这里的参数就使用当前的sp+sizeof(pt_regs)了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Linux-dup2-的实现中，current返回的为什么是task-struct"><a href="#Linux-dup2-的实现中，current返回的为什么是task-struct" class="headerlink" title="Linux dup2()的实现中，current返回的为什么是task_struct?"></a>Linux dup2()的实现中，current返回的为什么是task_struct?</h3><ul>
+<li>根据下面的分析可知<ul>
+<li><p>异常发生时，在第一阶段的处理<code>macro: kernel_entry</code>中，将当前用户态任务结构体的地址保存到了sp_el0寄存器中</p>
+</li>
+<li><p>根据之后的分析可知：dup2的作用为：把当前进程文件描述符表中oldfd的文件表项指针复制到newfd所在的文件描述符表项</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>相关代码  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c">SYSCALL_DEFINE2(dup2, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>, oldfd, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>, newfd)<br>&#123;<br>    <span class="hljs-keyword">if</span> (unlikely(newfd == oldfd)) &#123; <span class="hljs-comment">/* corner case */</span><br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">files_struct</span> *<span class="hljs-title">files</span> =</span> current-&gt;files;<br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">file</span> *<span class="hljs-title">f</span>;</span><br>        <span class="hljs-type">int</span> retval = oldfd;<br><br>        rcu_read_lock();<br>        f = __fget_files_rcu(files, oldfd, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">if</span> (!f)<br>            retval = -EBADF;<br>        rcu_read_unlock();<br>        <span class="hljs-keyword">if</span> (f)<br>            fput(f);<br>        <span class="hljs-keyword">return</span> retval;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ksys_dup3(oldfd, newfd, <span class="hljs-number">0</span>);<br>&#125;<br><br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">* We don&#x27;t use read_sysreg() as we want the compiler to cache the value where</span><br><span class="hljs-comment">* possible.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-type">static</span> __always_inline <span class="hljs-keyword">struct</span> task_struct *<span class="hljs-title function_">get_current</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> sp_el0;<br>    <span class="hljs-comment">// 这里使用mrs寄存器读sp_el0，它的当前值为什么指向了被中断的task?</span><br>    <span class="hljs-comment">// 按照目前的理解：sp_el0为用户态的栈指针，是在变化的；而对应的task_struct的地址应该是一个确定的值！</span><br>    <span class="hljs-comment">// 两者是怎么对应起来的？</span><br>    <span class="hljs-keyword">asm</span> (<span class="hljs-string">&quot;mrs %0, sp_el0&quot;</span> : <span class="hljs-string">&quot;=r&quot;</span> (sp_el0));<br><br>    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">struct</span> task_struct *)sp_el0;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> current get_current()</span><br></code></pre></td></tr></table></figure></li>
+<li>疑惑探索<ul>
+<li><p>.req 汇编伪指令</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asm">/* GPRs used by entry code */<br>tsk	.req	x28		// current thread_info<br>// 伪汇编：name .req register_name -&gt; 为寄存器定义一个别名<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>stp指令：stp reg1, reg2, ptr_: 将寄存器reg1, reg2的值存储到ptr_指示的地址中</p>
+</li>
+<li><p>ldr_this_cpu 汇编宏: \arch\arm64\include\asm\assembler.h<br>  作用为加载percpu的变量值到dst</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asm">/*<br>* @dst: Result of READ_ONCE(per_cpu(sym, smp_processor_id()))<br>* @sym: The name of the per-cpu variable<br>* @tmp: scratch register<br>*/<br>.macro ldr_this_cpu dst, sym, tmp<br>adr_l	\dst, \sym<br>get_this_cpu_offset \tmp<br>ldr	\dst, [\dst, \tmp]<br>.endm<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>__entry_task: percpu变量，用于记录当前执行的用户task_struct</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment">* We store our current task in sp_el0, which is clobbered by userspace. Keep a</span><br><span class="hljs-comment">* shadow copy so that we can restore this upon entry from userspace.</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* This is *only* for exception entry from EL0, and is not valid until we</span><br><span class="hljs-comment">* __switch_to() a user task.</span><br><span class="hljs-comment">*/</span><br>DEFINE_PER_CPU(<span class="hljs-keyword">struct</span> task_struct *, __entry_task);<br><br><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">entry_task_switch</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> task_struct *next)</span><br>&#123;<br>    <span class="hljs-comment">// 这里可以看到，每次切换任务时，都会将该percpu变量的值更新为待切换任务的task_struct地址</span><br>    __this_cpu_write(__entry_task, next);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>pt_regs：软件保护的异常现场结构：arch\arm64\include\asm\ptrace.h</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment">* This struct defines the way the registers are stored on the stack during an</span><br><span class="hljs-comment">* exception. Note that sizeof(struct pt_regs) has to be a multiple of 16 (for</span><br><span class="hljs-comment">* stack alignment). struct user_pt_regs must form a prefix of struct pt_regs.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pt_regs</span> &#123;</span><br>    <span class="hljs-class"><span class="hljs-keyword">union</span> &#123;</span><br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">user_pt_regs</span> <span class="hljs-title">user_regs</span>;</span><br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>            u64 regs[<span class="hljs-number">31</span>];<br>            u64 sp;<br>            u64 pc;<br>            u64 pstate;<br>        &#125;;<br>    &#125;;<br>    u64 orig_x0;<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> __AARCH64EB__</span><br>    u32 unused2;<br>    s32 syscallno;<br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>    s32 syscallno;<br>    u32 unused2;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>    u64 sdei_ttbr1;<br>    <span class="hljs-comment">/* Only valid when ARM64_HAS_GIC_PRIO_MASKING is enabled. */</span><br>    u64 pmr_save;<br>    u64 stackframe[<span class="hljs-number">2</span>];<br><br>    <span class="hljs-comment">/* Only valid for some EL1 exceptions. */</span><br>    u64 lockdep_hardirqs;<br>    u64 exit_rcu;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+</li>
+<li><p>kernel_entry宏解析: 位于el0&#x2F;1t_64_sync&#x2F;irq中</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs asm">.macro	kernel_entry, el, regsize = 64<br>.if	\el == 0<br>alternative_insn nop, SET_PSTATE_DIT(1), ARM64_HAS_DIT<br>.endif<br>.if	\regsize == 32<br>mov	w0, w0				// zero upper 32 bits of x0<br>.endif<br>stp	x0, x1, [sp, #16 * 0]   // 从用户态陷入内核时触发el0t_sync/irq，因此当前的sp已经指向了sp_el1<br>stp	x2, x3, [sp, #16 * 1]   // 接上，此时sp_el1应该指向当前任务的内核栈：应该有一种机制在任务切换时，将sp_el1设置为待切换任务的内核栈<br>stp	x4, x5, [sp, #16 * 2]<br>stp	x6, x7, [sp, #16 * 3]<br>stp	x8, x9, [sp, #16 * 4]<br>stp	x10, x11, [sp, #16 * 5]<br>stp	x12, x13, [sp, #16 * 6]<br>stp	x14, x15, [sp, #16 * 7]<br>stp	x16, x17, [sp, #16 * 8]<br>stp	x18, x19, [sp, #16 * 9]<br>stp	x20, x21, [sp, #16 * 10]<br>stp	x22, x23, [sp, #16 * 11]<br>stp	x24, x25, [sp, #16 * 12]<br>stp	x26, x27, [sp, #16 * 13]<br>stp	x28, x29, [sp, #16 * 14]<br><br>.if	\el == 0<br>clear_gp_regs<br>mrs	x21, sp_el0                             // 这里获取用户态的栈指针<br>ldr_this_cpu	tsk, __entry_task, x20      // 加载percpu变量，用于记录当前执行的用户task_struct<br>msr	sp_el0, tsk                             // 将tsk的值加载到sp_el0，供后续get_current()使用<br>...<br>scs_load_current<br>.else                       // 注意这里.else处理异常发生在内核态的情况<br>add	x21, sp, #PT_REGS_SIZE  // 栈没有发生切换，因此栈底直接+保存的pt_regs的大小即可<br>get_current_task tsk        // 获取当前正在执行的任务；直接取sp_el0获取，因为之前一定发生过用户态陷入内核态的操作<br>.endif /* \el == 0 */<br>mrs	x22, elr_el1            // 异常发生时，硬件将异常返回地址保存到了elr_elx寄存器中。同步异常：当前地址；异步：next<br>mrs	x23, spsr_el1           // 异常发生时，硬件将PSTATE值保存到spsr_elx，用于异常返回时，恢复PE的状态<br>stp	lr, x21, [sp, #S_LR]    // 对于用户态陷入内核的情况，此时x21保存的是sp_el0，即用户态栈地址。lr保存到x[30], x21保存到sp<br>...<br>stp	x22, x23, [sp, #S_PC]   // 保存elr_el1, spsr_el1到内核栈的相应栈帧位置处<br>...<br>/*<br>* Registers that may be useful after this macro is invoked:<br>*<br>* x20 - ICC_PMR_EL1<br>* x21 - aborted SP<br>* x22 - aborted PC<br>* x23 - aborted PSTATE<br>*/<br>.endm<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux-aarch64-中断处理初期汇编</div>
+      <div>http://example.com/2024/07/23/Linux-aarch64-中断处理初期汇编/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cyokeo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-MISC/" title="TCP学习-MISC">
+                        <span class="hidden-mobile">TCP学习-MISC</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
