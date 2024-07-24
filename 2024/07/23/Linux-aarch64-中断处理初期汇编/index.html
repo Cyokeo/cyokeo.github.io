@@ -16,15 +16,15 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="中断处理初期汇编码&amp;dup2分析参考博客 ARM-GNU常用汇编伪指令 ARM64底层中断处理  总结 kernel_ventry : el 0 64 sync el0t_64_sync kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, (sp)sp_el0&#x2F;1, pc(elr_el1), pstate(spsr_el1)]到当前sp[sp_">
+    <meta name="description" content="中断处理初期汇编码&amp;dup2分析参考博客 ARM-GNU常用汇编伪指令 ARM64底层中断处理  总结 kernel_ventry : el 0 64 sync el0t_64_sync kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, sp(sp_el0&#x2F;1), pc(elr_el1), pstate(spsr_el1)]到当前spsp_e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux-aarch64-中断处理初期汇编">
 <meta property="og:url" content="http://example.com/2024/07/23/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%88%9D%E6%9C%9F%E6%B1%87%E7%BC%96/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="中断处理初期汇编码&amp;dup2分析参考博客 ARM-GNU常用汇编伪指令 ARM64底层中断处理  总结 kernel_ventry : el 0 64 sync el0t_64_sync kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, (sp)sp_el0&#x2F;1, pc(elr_el1), pstate(spsr_el1)]到当前sp[sp_">
+<meta property="og:description" content="中断处理初期汇编码&amp;dup2分析参考博客 ARM-GNU常用汇编伪指令 ARM64底层中断处理  总结 kernel_ventry : el 0 64 sync el0t_64_sync kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, sp(sp_el0&#x2F;1), pc(elr_el1), pstate(spsr_el1)]到当前spsp_e">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-23T12:33:47.000Z">
-<meta property="article:modified_time" content="2024-07-23T12:34:59.447Z">
+<meta property="article:modified_time" content="2024-07-23T12:42:40.731Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -279,7 +279,7 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
 <li>kernel_ventry : el 0 64 sync<ul>
 <li>el0t_64_sync<ul>
-<li>kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, (sp)sp_el0&#x2F;1, pc(elr_el1), pstate(spsr_el1)]到当前sp[sp_el1，即当前task的内核栈]指向的地址处。因此，可以知道 -&gt; 在进行任务切换时，内核应该会把sp_el0的值设置为待切换到的task的内核栈地址。此外，这里还会使用sp_el0存储当前用户态任务的task_struct数据的地址，供get_current()使用<ul>
+<li>kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, sp(sp_el0&#x2F;1), pc(elr_el1), pstate(spsr_el1)]到当前sp<code>sp_el1，即当前task的内核栈</code>指向的地址处。因此，可以知道 -&gt; 在进行任务切换时，内核应该会把sp_el0的值设置为待切换到的task的内核栈地址。此外，这里还会使用sp_el0存储当前用户态任务的task_struct数据的地址，供get_current()使用<ul>
 <li>el0t_64_sync_handler(struct pt_regs* regs), 这里的参数就使用当前的sp+sizeof(pt_regs)了</li>
 </ul>
 </li>
@@ -402,6 +402,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/07/24/Linux-aarch64-%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A0%88/" title="Linux-aarch64-任务切换与内核栈">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux-aarch64-任务切换与内核栈</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
