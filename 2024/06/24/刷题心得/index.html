@@ -24,7 +24,7 @@
 <meta property="og:description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]  常用编程技巧 (long long)(m-1) * (m-2) -&gt; 强制类型转换的优先级高于加减乘除  使用程序块为变量赋值，要注意函数块需要使用()包裹起来：   12345double sum &#x3D; (&#123;        double tmp &#x3D; 0;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-24T14:08:52.000Z">
-<meta property="article:modified_time" content="2024-07-24T11:45:12.644Z">
+<meta property="article:modified_time" content="2024-07-25T16:12:00.922Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -319,11 +319,14 @@
 <h2 id="常用数据结构及其方法"><a href="#常用数据结构及其方法" class="headerlink" title="常用数据结构及其方法"></a>常用数据结构及其方法</h2><h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><ul>
 <li>erase()</li>
 <li>rbegin() -&gt; 最右侧的那个节点</li>
+<li>pop_back()</li>
+<li>push_back() -&gt; 可以用来模拟栈</li>
 <li>rend() -&gt; 第一个节点前面，不在vector中</li>
 <li>insert(pos, start, end)，从pos处插入[start, end)，注意这样的话target[pos] &#x3D; src[start]</li>
 </ul>
 <h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><ul>
 <li>&lt;string&gt;</li>
+<li>insert(pos, char *, size)</li>
 <li>substr(start, len) ❗️ 注意这个方法的第二个参数为<u>长度</u></li>
 <li>operator &gt; &#x2F; &lt;   -&gt;  string 类重载了这两个运算符，可以直接用于字典序的比较</li>
 <li>compare(const string&amp; str)，返回值如下：<ul>
