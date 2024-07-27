@@ -24,7 +24,7 @@
 <meta property="og:description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]  常用编程技巧 (long long)(m-1) * (m-2) -&gt; 强制类型转换的优先级高于加减乘除  使用程序块为变量赋值，要注意函数块需要使用()包裹起来：   12345double sum &#x3D; (&#123;        double tmp &#x3D; 0;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-24T14:08:52.000Z">
-<meta property="article:modified_time" content="2024-07-25T16:12:00.922Z">
+<meta property="article:modified_time" content="2024-07-27T02:52:09.329Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.5k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          11 分钟
+          13 分钟
         
       </span>
     
@@ -327,6 +327,11 @@
 <h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><ul>
 <li>&lt;string&gt;</li>
 <li>insert(pos, char *, size)</li>
+<li>size_t find(string&amp; str, size_t pos &#x3D; 0) &#x2F; find(const char *str s, size_t pos (&#x3D;0), size_t n) &#x2F; find(char c, pos &#x3D; 0)<ul>
+<li>delimiter划分  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// for string delimiter</span><br><span class="hljs-function">std::vector&lt;std::string&gt; <span class="hljs-title">split</span><span class="hljs-params">(std::string s, std::string delimiter)</span> </span>&#123;<br>    <span class="hljs-type">size_t</span> pos_start = <span class="hljs-number">0</span>, pos_end, delim_len = delimiter.<span class="hljs-built_in">length</span>();<br>    std::string token;<br>    std::vector&lt;std::string&gt; res;<br><br>    <span class="hljs-keyword">while</span> ((pos_end = s.<span class="hljs-built_in">find</span>(delimiter, pos_start)) != std::string::npos) &#123;<br>        token = s.<span class="hljs-built_in">substr</span> (pos_start, pos_end - pos_start);<br>        pos_start = pos_end + delim_len;<br>        res.<span class="hljs-built_in">push_back</span> (token);<br>    &#125;<br><br>    res.<span class="hljs-built_in">push_back</span> (s.<span class="hljs-built_in">substr</span> (pos_start));<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>find_first_of() -&gt; 类似于find()，但是匹配str中的任一个字符</li>
 <li>substr(start, len) ❗️ 注意这个方法的第二个参数为<u>长度</u></li>
 <li>operator &gt; &#x2F; &lt;   -&gt;  string 类重载了这两个运算符，可以直接用于字典序的比较</li>
 <li>compare(const string&amp; str)，返回值如下：<ul>
@@ -337,6 +342,10 @@
 </li>
 <li>erase(start_idx, len)   -&gt; 利用索引和长度删除指定范围的字符</li>
 <li>erase(iterator start, iterator end)  -&gt; 利用迭代器删除指定范围内的字符，[start, end)</li>
+<li>delimeter划分<ul>
+<li>借助getline(<string>) 和 istringstrem(sstream)对字符串进行  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp">string str=<span class="hljs-string">&quot;She is a girl.&quot;</span>; <span class="hljs-comment">// istringstream 默认以空格进行划分</span><br><span class="hljs-function">istringstream <span class="hljs-title">is</span><span class="hljs-params">(str)</span></span>;<br>string buf;<br><span class="hljs-keyword">while</span>(is&gt;&gt;buf)<br>&#123;<br>    cout&lt;&lt;buf&lt;&lt;endl;<br>&#125;<br><br><span class="hljs-comment">// 借助geline -&gt; 缺点是只能delimeter只能为单个字符</span><br><span class="hljs-function">istream&amp; <span class="hljs-title">getline</span> <span class="hljs-params">( istream &amp;is , string &amp;str , <span class="hljs-type">char</span> delim )</span></span>;<br><span class="hljs-type">char</span> del=<span class="hljs-string">&#x27; &#x27;</span>;<br><span class="hljs-keyword">while</span>(<span class="hljs-built_in">getline</span>(is,buf,del))<br>&#123;<br>    <span class="hljs-keyword">if</span>(buf.<span class="hljs-built_in">size</span>()) cout&lt;&lt;buf;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ul>
 <h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul>
 <li>&lt;stcak&gt;</li>
