@@ -24,7 +24,7 @@
 <meta property="og:description" content="24-06-27 DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？  DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。 上述可能会出现接收端缓存满，而尚有消息未处理的情">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-28T01:58:51.000Z">
-<meta property="article:modified_time" content="2024-07-08T11:54:25.042Z">
+<meta property="article:modified_time" content="2024-08-08T15:08:55.537Z">
 <meta property="article:author" content="Cyokeo">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          971 字
+          1.4k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -312,13 +312,16 @@
 <h2 id="24-07-04"><a href="#24-07-04" class="headerlink" title="24-07-04"></a>24-07-04</h2><ol>
 <li><p>如何在不使用额外变量的情况下，交换两个整形变量的值</p>
 <ul>
-<li>方法一：采用数学运算 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x + y<span class="hljs-comment">;  // -&gt; 虽然这里可能会有溢出的情况，但**由于**负数采用补码的方式表示，后续运算后，也能实现交换的目的</span><br><span class="hljs-attr">y</span> = x - y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x - y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
-<li>方法二： 采用异或运算 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">y</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
+<li><p>方法一：采用数学运算</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x + y<span class="hljs-comment">;  // -&gt; 虽然这里可能会有溢出的情况，但**由于**负数采用补码的方式表示，后续运算后，也能实现交换的目的</span><br><span class="hljs-attr">y</span> = x - y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x - y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>方法二： 采用异或运算</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">y</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>叠砖块问题</p>
 <ul>
-<li>要保证第二块及以上所有砖的“重心和”落在第一块砖内<br> 这题要分情况讨论：</li>
+<li>要保证第二块及以上所有砖的“重心和”落在第一块砖内<br>这题要分情况讨论：</li>
 <li>如果每块砖伸出的长度可以自由调整， <a target="_blank" rel="noopener" href="https://max.book118.com/html/2018/0103/147107237.shtm">参考</a>，可以证明：以1&#x2F;2n的规律无限延伸</li>
 <li>如果每块砖伸出的长度为固定大小，可以证明：最远可伸出1&#x2F;2n</li>
 </ul>
@@ -332,6 +335,82 @@
 <ul>
 <li>要注意负数以补码的形式存储：绝对值的反码+1</li>
 <li>unsigned char 和 signed char表示的数据范围是不一样的</li>
+</ul>
+</li>
+<li><p>位数扩展</p>
+<ul>
+<li>有符号数：转为更大数据类型采用的是<strong>符号扩展</strong> -&gt; 添加最高有效位的值【正为0， 负为1】</li>
+<li>无符号数：转换为更大数据类型采用的是<strong>零扩展</strong> -&gt; 添加0</li>
+</ul>
+</li>
+<li><p>CPU位数&#x2F;字长</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/komorebi-514/p/16174395.html">机器字长、存储字长、指令字长</a></li>
+<li>CPU位数 <strong>&#x3D;</strong> CPU中寄存器位数 <strong>&#x3D;</strong> CPU一次能够并行处理的数据宽度</li>
+<li>～&#x3D; 数据总线宽度【一般来说】</li>
+<li>机器字长 <strong>～&#x3D;</strong> 数据总线宽度</li>
+</ul>
+</li>
+</ol>
+<h2 id="24-07-27"><a href="#24-07-27" class="headerlink" title="24-07-27"></a>24-07-27</h2><ol>
+<li>当一个问题卡了一段时间，切没有任何头绪的时候，说明需要补相关的知识了</li>
+<li>站在更高层级【本质层级】去看一个问题，就会很通透</li>
+</ol>
+<h2 id="24-08-01"><a href="#24-08-01" class="headerlink" title="24-08-01"></a>24-08-01</h2><ol>
+<li><p>如何理解声明与定义</p>
+<ul>
+<li>对于变量的声明与定义</li>
+</ul>
+<blockquote>
+<p><mark>声明</mark>：不会为变量分配地址和内存空间，仅说明变量的性质</p>
+<ul>
+<li><p>变量的声明必须得加上extern</p>
+</li>
+<li><p>函数的声明可加可不加</p>
+</li>
+</ul>
+<p><mark>定义</mark>：会为变量分配地址和内存空间</p>
+<ul>
+<li>函数定义时一定有函数体</li>
+</ul>
+</blockquote>
+<ul>
+<li>对于结构体类型的声明和定义</li>
+</ul>
+<blockquote>
+<p>一般前置声明用的比较多，用于解决结构体嵌套定义问题</p>
+<p>定义就比较容易理解了</p>
+</blockquote>
+</li>
+<li><p>扩展</p>
+<ul>
+<li>C语言中变量有<mark>存储类型</mark>和<mark>数据类型</mark>两种类型</li>
+</ul>
+<blockquote>
+<p>存储类型-相关的关键字</p>
+<ul>
+<li><p>自动变量（auto）—&gt; 很少使用</p>
+</li>
+<li><p>静态变量 （static）–&gt; 具有隐藏符号的作用</p>
+</li>
+<li><p>外部变量 （extern) </p>
+<ul>
+<li><p>相对于 static来识记就比较简单了</p>
+</li>
+<li><p><u>在函数外部定义的变量，如果没有为其指定存储类型，那么它默认为extern类型</u></p>
+</li>
+<li><p>int a; int a; 是可以的</p>
+</li>
+</ul>
+</li>
+<li><p>寄存器变量 (register)  -&gt; 很少使用</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p>C vs CPP</p>
+<ul>
+<li></li>
 </ul>
 </li>
 </ol>

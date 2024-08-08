@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TCP超时与重传核心问题 发送时设置一个定时器来解决数据和确认可能丢失的问题 如何确定超时判断间隔？ 如何确定重传的频率？ 1，2，4，8， 16，32，64……    典型实现 测量TCP报文段的往返时间 这样才能比较好的确定超时时间 发出数据 -&gt; 收到ACK的时间间隔？   使用测量结果对下一个将要传输的报文段建立重传超时时间  四个定时器 对每个连接，TCP管理四个不同的定时器 重传">
+    <meta name="description" content="参考博客 十大经典排序算法 八大排序算法稳定性分析，原来稳定性是这个意思…  算法稳定性 排序前后两个相等的数相对位置不变，则算法稳定  冒泡排序 小的元素往前调或者把大的元素往后调； 比较是相邻的两个元素比较，交换也发生在这两个元素之间； 稳定排序算法 排序遍历次数为len - 1，每次从头开始冒泡 示例代码 12345678template&lt;typename T&gt; &#x2F;&#x2F;整数或浮点数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP学习-超时与重传">
-<meta property="og:url" content="http://example.com/2024/07/24/TCP%E5%AD%A6%E4%B9%A0-%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0/index.html">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://example.com/2024/07/27/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="TCP超时与重传核心问题 发送时设置一个定时器来解决数据和确认可能丢失的问题 如何确定超时判断间隔？ 如何确定重传的频率？ 1，2，4，8， 16，32，64……    典型实现 测量TCP报文段的往返时间 这样才能比较好的确定超时时间 发出数据 -&gt; 收到ACK的时间间隔？   使用测量结果对下一个将要传输的报文段建立重传超时时间  四个定时器 对每个连接，TCP管理四个不同的定时器 重传">
+<meta property="og:description" content="参考博客 十大经典排序算法 八大排序算法稳定性分析，原来稳定性是这个意思…  算法稳定性 排序前后两个相等的数相对位置不变，则算法稳定  冒泡排序 小的元素往前调或者把大的元素往后调； 比较是相邻的两个元素比较，交换也发生在这两个元素之间； 稳定排序算法 排序遍历次数为len - 1，每次从头开始冒泡 示例代码 12345678template&lt;typename T&gt; &#x2F;&#x2F;整数或浮点数">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-24T11:49:45.000Z">
-<meta property="article:modified_time" content="2024-07-24T11:50:49.064Z">
+<meta property="article:published_time" content="2024-07-27T03:14:29.000Z">
+<meta property="article:modified_time" content="2024-07-27T13:47:58.823Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>TCP学习-超时与重传 - Hexo</title>
+  <title>排序算法 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="TCP学习-超时与重传"></span>
+            <span id="subtitle" data-typed-text="排序算法"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-24 19:49" pubdate>
-          2024年7月24日 晚上
+        <time datetime="2024-07-27 11:14" pubdate>
+          2024年7月27日 上午
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          205 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          14 分钟
+          2 分钟
         
       </span>
     
@@ -267,126 +267,55 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">TCP学习-超时与重传</h1>
+            <h1 id="seo-header">排序算法</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="TCP超时与重传"><a href="#TCP超时与重传" class="headerlink" title="TCP超时与重传"></a>TCP超时与重传</h1><h2 id="核心问题"><a href="#核心问题" class="headerlink" title="核心问题"></a>核心问题</h2><ul>
-<li>发送时设置一个定时器来解决<strong>数据</strong>和<strong>确认</strong>可能丢失的问题</li>
-<li>如何确定超时判断间隔？</li>
-<li>如何确定重传的频率？<ul>
-<li>1，2，4，8， 16，32，64……</li>
+                <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/bubble-sort.html">十大经典排序算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1182321">八大排序算法稳定性分析，原来稳定性是这个意思…</a></li>
+</ul>
+<h2 id="算法稳定性"><a href="#算法稳定性" class="headerlink" title="算法稳定性"></a>算法稳定性</h2><ul>
+<li>排序前后两个相等的数相对位置不变，则算法稳定</li>
+</ul>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ol>
+<li>小的元素往前调或者把大的元素往后调；</li>
+<li>比较是相邻的两个元素比较，交换也发生在这两个元素之间；</li>
+<li><strong>稳定排序算法</strong></li>
+<li>排序遍历次数为<code>len - 1</code>，每次从头开始冒泡<ul>
+<li>示例代码 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt; <span class="hljs-comment">//整数或浮点数皆可使用,若要使用类(class)或结构体(struct)时必须重载大于(&gt;)运算符</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">bubble_sort</span><span class="hljs-params">(T arr[], <span class="hljs-type">int</span> len)</span> </span>&#123;<br>        <span class="hljs-type">int</span> i, j;<br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len - <span class="hljs-number">1</span>; i++)<br>                <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; len - <span class="hljs-number">1</span> - i; j++)<br>                        <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>])<br>                                <span class="hljs-built_in">swap</span>(arr[j], arr[j + <span class="hljs-number">1</span>]);<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 </li>
-</ul>
-<h2 id="典型实现"><a href="#典型实现" class="headerlink" title="典型实现"></a>典型实现</h2><ul>
-<li>测量TCP报文段的往返时间<ul>
-<li>这样才能比较好的确定超时时间</li>
-<li>发出数据 -&gt; 收到ACK的时间间隔？</li>
-</ul>
-</li>
-<li>使用测量结果对下一个将要传输的报文段建立重传超时时间</li>
-</ul>
-<h2 id="四个定时器"><a href="#四个定时器" class="headerlink" title="四个定时器"></a>四个定时器</h2><ul>
-<li>对每个连接，TCP管理四个不同的定时器<ul>
-<li><strong>重传定时器</strong>使用于当希望收到<u>另一端的确认</u></li>
-<li><strong>坚持(persist)定时器</strong>使<u>窗口大小信息</u>保持不断流动，即使另一端关闭了其接收窗口</li>
-<li><strong>保活(keepalive)定时器</strong>可检测到一个<u>空闲连接的另一端何时崩溃或重启</u></li>
-<li><strong>2MSL定时器</strong>测量一个连接处于TIMEWAIT状态的时间</li>
-</ul>
-</li>
-</ul>
-<h2 id="往返-RTT-时间测量"><a href="#往返-RTT-时间测量" class="headerlink" title="往返(RTT)时间测量"></a>往返(RTT)时间测量</h2><ul>
-<li>该时间在民用网络中可能是会经常变化的，因此TCP需要跟踪这些变化并相应地调整其超时时间</li>
-</ul>
-<h3 id="测量演进"><a href="#测量演进" class="headerlink" title="测量演进"></a>测量演进</h3><ul>
-<li>测量某报文段和其响应之间地时间差<code>M</code>，并动态更新其RTT值；<code>RTT = k*RTT + (1-k)*M</code></li>
-<li>超时间隔设置为<code>RTO = b*RTT</code>，b地推荐值为2</li>
-<li><code>缺陷</code>：在RTT变化很大地场景下，无法跟踪变化，因此会引起不必要的重传</li>
-<li><code>改进</code>：跟踪RTT的方差并进行平滑，放到RTT估计值中去</li>
-<li><code>Karn算法</code>：当一个分组重传发生时，在重传数据的确认最后到达之前，不能更新RTT的值；这是因为不知道收到的确认不知道对应于哪一次重传</li>
-</ul>
-<h2 id="拥塞避免算法"><a href="#拥塞避免算法" class="headerlink" title="拥塞避免算法"></a>拥塞避免算法</h2><ul>
-<li>应对达到中间路由器转发极限的算法</li>
-<li>假设：分组丢失意味着在源主机和目的主机之间的某处网络上发生了拥塞</li>
-<li>两种<strong>分组丢失的指示</strong><ul>
-<li>发生超时</li>
-<li>接收到重复的确认</li>
-</ul>
-</li>
-<li><strong>慢启动算法</strong>可以降低分组进入网络中的速率，当拥塞发生时可以使用慢启动来做这一动作以减少网络拥塞。实际中，这两个算法通产一起实现：<ul>
-<li>拥塞避免相关参数：cwnd（本地拥塞窗口大小）</li>
-<li>慢启动相关参数：ssthresh（慢启动门限）</li>
-</ul>
-</li>
-</ul>
-<h3 id="流程细节"><a href="#流程细节" class="headerlink" title="流程细节"></a>流程细节</h3><ul>
-<li>未发生分组丢失时，cwnd逐渐增加，增加的速率取决于cwnd和ssthresh的关系<ul>
-<li>如果cwnd &lt;&#x3D; ssthresh，说明此时处于慢启动阶段，cwnd以指数速率增长</li>
-<li>如果cwnd &gt; ssthresh，说明此时处于拥塞避免阶段，cwnd以固定速率增长【且一个往返时间内cwnd最多增加1】</li>
-</ul>
-</li>
-<li>如果某一时刻发生了分组丢失<ul>
-<li>ssthresh被设置为当前窗口的一半: <code>min(2, min(cwnd, 通告窗口大小))/2</code></li>
-<li>cwnd的设置与分组丢失的原因有关：<ul>
-<li>如果是超时引起，则cwnd &#x3D; 1</li>
-<li>否则，被设置为？？？ -&gt; <strong>快速恢复</strong>，设置为新的ssthresh值+3个报文段大小</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="快速重传与快速恢复"><a href="#快速重传与快速恢复" class="headerlink" title="快速重传与快速恢复"></a>快速重传与快速恢复</h2><ul>
-<li>承接上面最后的问题，当收到<strong>3个及以上</strong>重复的确认，就非常有可能发生了报文丢失，因此重传丢失的数据报文段，无需等待超时器溢出 -&gt; <strong>快速重传</strong><ul>
-<li>进入拥塞避免阶段，而不是慢启动  -&gt; <strong>快速恢复</strong></li>
-</ul>
-</li>
-<li>收到重复的确认时，接收方一定收到了大于该确认号的数据段；否则接收方不会有任何响应，只能等待发送方超时器超时进行重传</li>
-</ul>
-<h3 id="流程细节【这里需要进一步的思考，记忆】"><a href="#流程细节【这里需要进一步的思考，记忆】" class="headerlink" title="流程细节【这里需要进一步的思考，记忆】"></a>流程细节【这里需要进一步的思考，记忆】</h3><ul>
-<li>当收到第3个重复的ACK时，将ssthresh设置为当前拥塞窗口cwnd的一半。重传丢失的报文段。设置cwnd为ssthresh加上3倍的报文段大小</li>
-<li>每次收到另一个重复的ACK时，cwnd增加1个报文段大小并发送1个分组（如果新的cwnd允许发送）</li>
-<li>当下一个确认新数据的ACK到达时，设置cwnd为ssthresh（在第1步中设置的值）。这个ACK应该是在进行重传后的一个往返时间内对步骤1中重传的确认。另外，这个ACK也应该<br>是对丢失的分组和收到的第1个重复的ACK之间的所有中间报文段的确认。这一步采用的是拥塞避免，因为当分组丢失时我们将当前的速率减半</li>
-</ul>
-<h2 id="坚持-persist-定时器"><a href="#坚持-persist-定时器" class="headerlink" title="坚持(persist)定时器"></a>坚持(persist)定时器</h2><ul>
-<li>当接收方通告窗口为0时，发送方将不再发送数据，直到接收方通告窗口大于0；<ul>
-<li>但是后续接收方通告窗口大小是通过ACK进行的，然而TCP不对未带数据的ACK进行确认</li>
-<li>如果这个ACK丢包了怎么办？-&gt; 可能会进入“死锁”</li>
-</ul>
-</li>
-<li>为了解决前述提到的问题，TCP在发送端维护一个<strong>坚持(persist)定时器</strong>以周期性地向接收端查询通告窗口的大小</li>
-</ul>
-<h2 id="保活定时器"><a href="#保活定时器" class="headerlink" title="保活定时器"></a>保活定时器</h2><ul>
-<li><p>保活不是TCP规范中的一部分，但是许多实现提供了保活定时器</p>
-<ul>
-<li>保活功能主要为服务器程序提供的；但客户机也可以开启这个功能</li>
-<li>用于主动关闭服务器上存在的半连接【客户机非正常宕机引起】</li>
-</ul>
-</li>
-<li><p>服务器端保活探测的结果</p>
-<ul>
-<li>如果客户机正常，则保活正常，应用程序无感</li>
-<li>如果客户机崩溃，服务器将收不到对探查的响应，服务器应用程序将收到read接口返回的差错信息</li>
-<li>如果客户机关闭后重启，这时客户机会给服务器发回探查响应，但是该响应为RST，使得服务器终止该连接</li>
-<li>如果客户机对于服务器来说不可达，类似于第二种情况</li>
-</ul>
-</li>
-<li><p>这里注意到：</p>
-<ul>
-<li>客户机程序被终止，并且发出了一个FIN，如果该FIN丢包，会重传</li>
-<li>但是整个时间可能会比较长，而客户宿主机上对客户机程序的关闭就导致TCP连接终止异常</li>
-<li>进而可能导致服务器上存在半连接</li>
-</ul>
-</li>
-</ul>
-
+</ol>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -397,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>TCP学习-超时与重传</div>
-      <div>http://example.com/2024/07/24/TCP学习-超时与重传/</div>
+      <div>排序算法</div>
+      <div>http://example.com/2024/07/27/排序算法/</div>
     </div>
     <div class="license-meta">
       
@@ -410,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月24日</div>
+          <div>2024年7月27日</div>
         </div>
       
       
@@ -442,9 +371,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/27/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" title="排序算法">
+                      <a href="/2024/07/27/Linux-%E5%9F%BA%E7%A1%80/" title="Linux-基础">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">排序算法</span>
+                        <span class="hidden-mobile">Linux-基础</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -452,8 +381,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/24/Linux-aarch64-%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A0%88/" title="Linux-aarch64-任务切换与内核栈">
-                        <span class="hidden-mobile">Linux-aarch64-任务切换与内核栈</span>
+                      <a href="/2024/07/24/TCP%E5%AD%A6%E4%B9%A0-%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0/" title="TCP学习-超时与重传">
+                        <span class="hidden-mobile">TCP学习-超时与重传</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
