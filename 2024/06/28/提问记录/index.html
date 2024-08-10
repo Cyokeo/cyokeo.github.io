@@ -24,7 +24,7 @@
 <meta property="og:description" content="24-06-27 DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？  DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。 上述可能会出现接收端缓存满，而尚有消息未处理的情">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-28T01:58:51.000Z">
-<meta property="article:modified_time" content="2024-08-08T15:08:55.537Z">
+<meta property="article:modified_time" content="2024-08-08T15:23:17.489Z">
 <meta property="article:author" content="Cyokeo">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.5k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          12 分钟
+          13 分钟
         
       </span>
     
@@ -409,8 +409,34 @@
 </blockquote>
 </li>
 <li><p>C vs CPP</p>
+</li>
+<li><p>遇到最困难的事情</p>
 <ul>
-<li></li>
+<li><p>从0到1是最困难的</p>
+</li>
+<li><p>自己也乐于从0到1的过程</p>
+</li>
+<li><p>看RTOS的代码：-&gt; 自己也希望今后有机会针对一款全新的芯片，完成Linux&#x2F;甚至自研操作系统的bring up</p>
+<ul>
+<li><p>任务切换</p>
+</li>
+<li><p>初始任务上下文的构建【栈指针、函数入口】</p>
+</li>
+<li><p>过程中涉及到架构相关的寄存器操作：</p>
+<ul>
+<li><p>特权级</p>
+</li>
+<li><p>arm64的四种特权级切换</p>
+</li>
+</ul>
+</li>
+<li><p>glibc -&gt; linux ABI规范的遵守</p>
+<ul>
+<li>系统调用约定</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
