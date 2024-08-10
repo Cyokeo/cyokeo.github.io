@@ -16,22 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="24-06-27 DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？  DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。 上述可能会出现接收端缓存满，而尚有消息未处理的情">
+    <meta name="description" content="常用开源实现 letter-shell  上位机按下按键 立即通过接口发送给下位机 触发下位机的接收中断  下位机接收中断服务例程 读取寄存器，获取接收到的字符 如果没有按下回车：下位机记录接收到的字符，可能会对特殊字符进行记录；接着回显接收到的字符； 按下回车：代表执行命令，下位机接收到后，将之前的接收缓存投给命令行parser函数，对命令行进行解析并执行相关的指令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="提问记录">
-<meta property="og:url" content="http://example.com/2024/06/28/%E6%8F%90%E9%97%AE%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="UART - Console实现">
+<meta property="og:url" content="http://example.com/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="24-06-27 DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？  DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。 上述可能会出现接收端缓存满，而尚有消息未处理的情">
+<meta property="og:description" content="常用开源实现 letter-shell  上位机按下按键 立即通过接口发送给下位机 触发下位机的接收中断  下位机接收中断服务例程 读取寄存器，获取接收到的字符 如果没有按下回车：下位机记录接收到的字符，可能会对特殊字符进行记录；接着回显接收到的字符； 按下回车：代表执行命令，下位机接收到后，将之前的接收缓存投给命令行parser函数，对命令行进行解析并执行相关的指令">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-28T01:58:51.000Z">
-<meta property="article:modified_time" content="2024-08-10T13:27:15.626Z">
+<meta property="article:published_time" content="2024-08-10T13:52:06.468Z">
+<meta property="article:modified_time" content="2024-08-10T14:02:18.313Z">
 <meta property="article:author" content="Cyokeo">
-<meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>提问记录 - Hexo</title>
+  <title>UART - Console实现 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="提问记录"></span>
+            <span id="subtitle" data-typed-text="UART - Console实现"></span>
           
         </div>
 
@@ -208,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-28 09:58" pubdate>
-          2024年6月28日 上午
+        <time datetime="2024-08-10 21:52" pubdate>
+          2024年8月10日 晚上
         </time>
       </span>
     
@@ -220,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          151 字
         
       </span>
     
@@ -231,7 +230,7 @@
         
         
         
-          14 分钟
+          2 分钟
         
       </span>
     
@@ -268,184 +267,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">提问记录</h1>
+            <h1 id="seo-header">UART - Console实现</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="24-06-27"><a href="#24-06-27" class="headerlink" title="24-06-27"></a>24-06-27</h2><ol>
-<li><p>DDS可靠性相关 -&gt; 如何保证可靠性？接收端来不及处理时，如何保证？</p>
-<ul>
-<li>DDS可以理解为是一种传输协议，它的可靠性可以保证：发端发送一条消息后，可以到达接收端的DDS协议栈中，并驻留在接收端的History中。如果接收端的应用层来不及处理新收到的消息，那就不立即处理，后续可以使用read接口从协议栈中获取之前接收到的数据。</li>
-<li>上述可能会出现接收端缓存满，而尚有消息未处理的情况：此时，就需要扩大History的消息缓存数目。这里就是History QoS 与 Resource QoS这两种不同服务质量要求之间的trade了。</li>
+                <h2 id="常用开源实现"><a href="#常用开源实现" class="headerlink" title="常用开源实现"></a>常用开源实现</h2><ul>
+<li>letter-shell</li>
+</ul>
+<h2 id="上位机按下按键"><a href="#上位机按下按键" class="headerlink" title="上位机按下按键"></a>上位机按下按键</h2><ul>
+<li>立即通过接口发送给下位机</li>
+<li>触发下位机的接收中断</li>
+</ul>
+<h2 id="下位机接收中断服务例程"><a href="#下位机接收中断服务例程" class="headerlink" title="下位机接收中断服务例程"></a>下位机接收中断服务例程</h2><ul>
+<li>读取寄存器，获取接收到的字符<ul>
+<li>如果没有按下回车：下位机记录接收到的字符，可能会对特殊字符进行记录；接着回显接收到的字符；</li>
+<li>按下回车：代表执行命令，下位机接收到后，将之前的接收缓存投给命令行<code>parser</code>函数，对命令行进行解析并执行相关的指令</li>
 </ul>
 </li>
-<li><p>MCU上做开发与Linux用户态开发有什么不同？分别有哪些需要注意的内容？</p>
-<ul>
-<li>MCU上直接看到真实物理内存，Linux用户态多了一层虚拟地址转换。因此在MCU上做开发时，更要注意对指针的使用。</li>
-<li>MCU上有时Linker，链接脚本，程序、变量存放位置；Linux用户态不用考虑这些问题。</li>
-<li>调试时，MCU上遇到TRAP等问题，要去翻具体的芯片架构手册进行排查；Linux用户态有一套标准的exception机制。</li>
-<li>MCU上做开发更类似于Linux内核态驱动开发。</li>
-<li>MCU上有时需要考虑boot的问题，Linux用户态不用考虑。</li>
-<li>MCU上开发一般只会用到静态库，而Linux上还会有动态库。</li>
-</ul>
-</li>
-<li><p>(之前软硬件结合提到了对指针的“恍然大悟”)那你现在是如何理解指针的？</p>
-<ul>
-<li>指针就是一个普通的变量，对它进行加减乘除，函数参数，就像普通变量那样使用</li>
-<li>重点在于如何使用指针变量，如何解释指针 -&gt; 这里就得说一下指针类型转换</li>
-<li>使用时，相比于普通变量，要多考虑一层：它指向了某块内存区域！内存区域的大小与指针指向的对象类型有关</li>
-<li>指针使用：大部分都会取成员 -&gt; 指针指向的对象类型是什么？这个问题也要时刻注意</li>
-<li>c++中，class C 继承于 class B , class A。<code>C v_c; B* p_b = &amp;v_c; A* p_a = &amp;v_c</code>，这三行语句，p_b的值与p_a的值是不一样的！</li>
-<li>在c语言中，常把指针和数组进行比较。</li>
-</ul>
-</li>
-<li><p>用一个词形容操作系统</p>
-<ul>
-<li>管理者</li>
-<li>根据管理的内容不同，OS又可以分为宏内核&#x2F;微内核</li>
-<li>MCU上的OS一般只有CPU管理的功能</li>
-<li>SoC上使用基于Linux的操作系统，还会有内存管理，进程通信，文件系统等功能</li>
-</ul>
-</li>
-</ol>
-<h2 id="24-07-04"><a href="#24-07-04" class="headerlink" title="24-07-04"></a>24-07-04</h2><ol>
-<li><p>如何在不使用额外变量的情况下，交换两个整形变量的值</p>
-<ul>
-<li><p>方法一：采用数学运算</p>
- <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x + y<span class="hljs-comment">;  // -&gt; 虽然这里可能会有溢出的情况，但**由于**负数采用补码的方式表示，后续运算后，也能实现交换的目的</span><br><span class="hljs-attr">y</span> = x - y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x - y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>方法二： 采用异或运算</p>
- <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">y</span> = x ^ y<span class="hljs-comment">;</span><br><span class="hljs-attr">x</span> = x ^ y<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>叠砖块问题</p>
-<ul>
-<li>要保证第二块及以上所有砖的“重心和”落在第一块砖内<br>这题要分情况讨论：</li>
-<li>如果每块砖伸出的长度可以自由调整， <a target="_blank" rel="noopener" href="https://max.book118.com/html/2018/0103/147107237.shtm">参考</a>，可以证明：以1&#x2F;2n的规律无限延伸</li>
-<li>如果每块砖伸出的长度为固定大小，可以证明：最远可伸出1&#x2F;2n</li>
-</ul>
-</li>
-<li><p>“叠砖块问题”的启发</p>
-<ul>
-<li>面试时要大胆的说出自己的直觉，并且额外补充说明：需要进一步的分析与证明</li>
-</ul>
-</li>
-<li><p>有符号数溢出问题</p>
-<ul>
-<li>要注意负数以补码的形式存储：绝对值的反码+1</li>
-<li>unsigned char 和 signed char表示的数据范围是不一样的</li>
-</ul>
-</li>
-<li><p>位数扩展</p>
-<ul>
-<li>有符号数：转为更大数据类型采用的是<strong>符号扩展</strong> -&gt; 添加最高有效位的值【正为0， 负为1】</li>
-<li>无符号数：转换为更大数据类型采用的是<strong>零扩展</strong> -&gt; 添加0</li>
-</ul>
-</li>
-<li><p>CPU位数&#x2F;字长</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/komorebi-514/p/16174395.html">机器字长、存储字长、指令字长</a></li>
-<li>CPU位数 <strong>&#x3D;</strong> CPU中寄存器位数 <strong>&#x3D;</strong> CPU一次能够并行处理的数据宽度</li>
-<li>～&#x3D; 数据总线宽度【一般来说】</li>
-<li>机器字长 <strong>～&#x3D;</strong> 数据总线宽度</li>
-</ul>
-</li>
-</ol>
-<h2 id="24-07-27"><a href="#24-07-27" class="headerlink" title="24-07-27"></a>24-07-27</h2><ol>
-<li>当一个问题卡了一段时间，切没有任何头绪的时候，说明需要补相关的知识了</li>
-<li>站在更高层级【本质层级】去看一个问题，就会很通透</li>
-</ol>
-<h2 id="24-08-01"><a href="#24-08-01" class="headerlink" title="24-08-01"></a>24-08-01</h2><ol>
-<li><p>如何理解声明与定义</p>
-<ul>
-<li>对于变量的声明与定义</li>
-</ul>
-<blockquote>
-<p><mark>声明</mark>：不会为变量分配地址和内存空间，仅说明变量的性质</p>
-<ul>
-<li><p>变量的声明必须得加上extern</p>
-</li>
-<li><p>函数的声明可加可不加</p>
-</li>
-</ul>
-<p><mark>定义</mark>：会为变量分配地址和内存空间</p>
-<ul>
-<li>函数定义时一定有函数体</li>
-</ul>
-</blockquote>
-<ul>
-<li>对于结构体类型的声明和定义</li>
-</ul>
-<blockquote>
-<p>一般前置声明用的比较多，用于解决结构体嵌套定义问题</p>
-<p>定义就比较容易理解了</p>
-</blockquote>
-</li>
-<li><p>扩展</p>
-<ul>
-<li>C语言中变量有<mark>存储类型</mark>和<mark>数据类型</mark>两种类型</li>
-</ul>
-<blockquote>
-<p>存储类型-相关的关键字</p>
-<ul>
-<li><p>自动变量（auto）—&gt; 很少使用</p>
-</li>
-<li><p>静态变量 （static）–&gt; 具有隐藏符号的作用</p>
-</li>
-<li><p>外部变量 （extern) </p>
-<ul>
-<li><p>相对于 static来识记就比较简单了</p>
-</li>
-<li><p><u>在函数外部定义的变量，如果没有为其指定存储类型，那么它默认为extern类型</u></p>
-</li>
-<li><p>int a; int a; 是可以的</p>
-</li>
-</ul>
-</li>
-<li><p>寄存器变量 (register)  -&gt; 很少使用</p>
-</li>
-</ul>
-</blockquote>
-</li>
-<li><p>C vs CPP</p>
-</li>
-<li><p>遇到最困难的事情</p>
-<ul>
-<li><p>从0到1是最困难的</p>
-</li>
-<li><p>自己也乐于从0到1的过程</p>
-</li>
-<li><p>看RTOS的代码：-&gt; 自己也希望今后有机会针对一款全新的芯片，完成Linux&#x2F;甚至自研操作系统的bring up</p>
-<ul>
-<li><p>任务切换</p>
-</li>
-<li><p>初始任务上下文的构建【栈指针、函数入口】</p>
-</li>
-<li><p>过程中涉及到架构相关的寄存器操作：</p>
-<ul>
-<li><p>特权级</p>
-</li>
-<li><p>arm64的四种特权级切换</p>
-</li>
-</ul>
-</li>
-<li><p>glibc -&gt; linux ABI规范的遵守</p>
-<ul>
-<li>系统调用约定</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="24-08-10"><a href="#24-08-10" class="headerlink" title="24-08-10"></a>24-08-10</h2><ul>
-<li>自我思考</li>
-</ul>
-<h3 id="CAN-FlexRay-Ethernet"><a href="#CAN-FlexRay-Ethernet" class="headerlink" title="CAN -&gt; FlexRay -&gt; Ethernet"></a>CAN -&gt; FlexRay -&gt; Ethernet</h3><ul>
-<li>速率提升</li>
-<li>实时性方面</li>
 </ul>
 
                 
@@ -455,13 +294,27 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E9%9D%A2%E7%BB%8F/" class="print-no-link">#面经</a>
-      
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/" class="category-chain-item">嵌入式-架构</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
     </div>
+  
   
 </div>
 
@@ -471,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>提问记录</div>
-      <div>http://example.com/2024/06/28/提问记录/</div>
+      <div>UART - Console实现</div>
+      <div>http://example.com/2024/08/10/嵌入式-开发/Console实现/</div>
     </div>
     <div class="license-meta">
       
@@ -484,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月28日</div>
+          <div>2024年8月10日</div>
         </div>
       
       
@@ -516,9 +369,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/04/%E9%A2%98%E7%9B%AE%E5%A4%8D%E4%B9%A0/" title="题目复习">
+                      <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/" title="aarch64">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">题目复习</span>
+                        <span class="hidden-mobile">aarch64</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -526,8 +379,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/26/aarch64-linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/" title="aarch64-linux-内存管理（二）">
-                        <span class="hidden-mobile">aarch64-linux-内存管理（二）</span>
+                      <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/Tricore/" title=" TRICORE">
+                        <span class="hidden-mobile"> TRICORE</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
