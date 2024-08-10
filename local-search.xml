@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>UART - Console实现</title>
+    <link href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/"/>
+    <url>/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="常用开源实现"><a href="#常用开源实现" class="headerlink" title="常用开源实现"></a>常用开源实现</h2><ul><li>letter-shell</li></ul><h2 id="上位机按下按键"><a href="#上位机按下按键" class="headerlink" title="上位机按下按键"></a>上位机按下按键</h2><ul><li>立即通过接口发送给下位机</li><li>触发下位机的接收中断</li></ul><h2 id="下位机接收中断服务例程"><a href="#下位机接收中断服务例程" class="headerlink" title="下位机接收中断服务例程"></a>下位机接收中断服务例程</h2><ul><li>读取寄存器，获取接收到的字符<ul><li>如果没有按下回车：下位机记录接收到的字符，可能会对特殊字符进行记录；接着回显接收到的字符；</li><li>按下回车：代表执行命令，下位机接收到后，将之前的接收缓存投给命令行<code>parser</code>函数，对命令行进行解析并执行相关的指令</li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>嵌入式-开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>子文件夹测试</title>
     <link href="/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/"/>
     <url>/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/</url>
@@ -28,25 +47,6 @@
     <url>/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/</url>
     
     <content type="html"><![CDATA[<h2 id="异常路由"><a href="#异常路由" class="headerlink" title="异常路由"></a>异常路由</h2><p>&#x3D;&#x3D;问题&#x3D;&#x3D;： 如果某个异常发生，处理器应该使用那个人异常等级来处理这个异常？</p><h3 id="中断路由规则"><a href="#中断路由规则" class="headerlink" title="中断路由规则"></a>中断路由规则</h3><ul><li>路由到EL3：需要设置<code>SCR_EL3.&#123;EA, IRQ, FIQ&#125;</code>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm">MRS X0, SCR_EL3 // 读取SCR_EL3到X0寄存器<br>ORR X0, X0, #(1&lt;&lt;3) // 设置EA，将SError路由到EL_3<br>ORR X0, X0, #(1&lt;&lt;1) // 设置IRQ<br>ORR X0, X0, #(1&lt;&lt;2) // 设置FIQ<br>MSR SCR_EL3, X0<br></code></pre></td></tr></table></figure></li><li>路由到EL_2：需要设置<code>HCR_EL2.&#123;AMO, FMO, IMO&#125;</code>，并清除<code>SCR_EL3.&#123;&#125;</code></li><li>路由到EL_1：如果中断没有设置路由到EL_3，EL_2，默认路由到EL_1</li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>嵌入式-架构</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>UART - Console实现</title>
-    <link href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/"/>
-    <url>/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/</url>
-    
-    <content type="html"><![CDATA[<h2 id="常用开源实现"><a href="#常用开源实现" class="headerlink" title="常用开源实现"></a>常用开源实现</h2><ul><li>letter-shell</li></ul><h2 id="上位机按下按键"><a href="#上位机按下按键" class="headerlink" title="上位机按下按键"></a>上位机按下按键</h2><ul><li>立即通过接口发送给下位机</li><li>触发下位机的接收中断</li></ul><h2 id="下位机接收中断服务例程"><a href="#下位机接收中断服务例程" class="headerlink" title="下位机接收中断服务例程"></a>下位机接收中断服务例程</h2><ul><li>读取寄存器，获取接收到的字符<ul><li>如果没有按下回车：下位机记录接收到的字符，可能会对特殊字符进行记录；接着回显接收到的字符；</li><li>按下回车：代表执行命令，下位机接收到后，将之前的接收缓存投给命令行<code>parser</code>函数，对命令行进行解析并执行相关的指令</li></ul></li></ul>]]></content>
     
     
     <categories>
