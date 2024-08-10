@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>子文件夹测试</title>
+    <link href="/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/"/>
+    <url>/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/</url>
+    
+    <content type="html"><![CDATA[<p>测试子文件夹中的md能不能被hexo识别。-&gt; 可以的！！！</p><ul><li>git 练习</li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>日常记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>aarch64</title>
     <link href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/"/>
     <url>/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/</url>
@@ -97,25 +116,6 @@
     <tags>
       
       <tag>RTOS</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>子文件夹测试</title>
-    <link href="/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/"/>
-    <url>/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/</url>
-    
-    <content type="html"><![CDATA[<p>测试子文件夹中的md能不能被hexo识别。-&gt; 可以的！！！</p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>日常记录</tag>
       
     </tags>
     
