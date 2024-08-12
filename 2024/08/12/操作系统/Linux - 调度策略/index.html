@@ -16,21 +16,22 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TCP超时与重传核心问题 发送时设置一个定时器来解决数据和确认可能丢失的问题 如何确定超时判断间隔？ 如何确定重传的频率？ 1，2，4，8， 16，32，64……    典型实现 测量TCP报文段的往返时间 这样才能比较好的确定超时时间 发出数据 -&gt; 收到ACK的时间间隔？   使用测量结果对下一个将要传输的报文段建立重传超时时间  四个定时器 对每个连接，TCP管理四个不同的定时器 重传">
+    <meta name="description" content="参考博客 Linux进程调度-实时调度器  Linux 的几种调度策略实时进程 优先级高于普通进程 SCHED_ FIFO SCHED_RR  普通进程（非实时进程） 强调公平性，防止进程饥饿 SCHED_NORMAL SCHED_BATCH SCHED_IDLE  Linux的调度器发展历程 楼梯调度 证明了完全公平思想的可行性   RSDL 对SD算法的改进 继承了“完全公平”的核心思想">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP学习-超时与重传">
-<meta property="og:url" content="http://example.com/2024/07/24/TCP%E5%AD%A6%E4%B9%A0-%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0/index.html">
+<meta property="og:title" content=" Linux - 调度策略">
+<meta property="og:url" content="http://example.com/2024/08/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="TCP超时与重传核心问题 发送时设置一个定时器来解决数据和确认可能丢失的问题 如何确定超时判断间隔？ 如何确定重传的频率？ 1，2，4，8， 16，32，64……    典型实现 测量TCP报文段的往返时间 这样才能比较好的确定超时时间 发出数据 -&gt; 收到ACK的时间间隔？   使用测量结果对下一个将要传输的报文段建立重传超时时间  四个定时器 对每个连接，TCP管理四个不同的定时器 重传">
+<meta property="og:description" content="参考博客 Linux进程调度-实时调度器  Linux 的几种调度策略实时进程 优先级高于普通进程 SCHED_ FIFO SCHED_RR  普通进程（非实时进程） 强调公平性，防止进程饥饿 SCHED_NORMAL SCHED_BATCH SCHED_IDLE  Linux的调度器发展历程 楼梯调度 证明了完全公平思想的可行性   RSDL 对SD算法的改进 继承了“完全公平”的核心思想">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-24T11:49:45.000Z">
-<meta property="article:modified_time" content="2024-08-12T07:28:17.430Z">
+<meta property="article:published_time" content="2024-08-12T13:38:52.982Z">
+<meta property="article:modified_time" content="2024-08-12T13:45:45.557Z">
 <meta property="article:author" content="Cyokeo">
+<meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>TCP学习-超时与重传 - Hexo</title>
+  <title> Linux - 调度策略 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="TCP学习-超时与重传"></span>
+            <span id="subtitle" data-typed-text=" Linux - 调度策略"></span>
           
         </div>
 
@@ -207,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-24 19:49" pubdate>
-          2024年7月24日 晚上
+        <time datetime="2024-08-12 21:38" pubdate>
+          2024年8月12日 晚上
         </time>
       </span>
     
@@ -219,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          339 字
         
       </span>
     
@@ -230,7 +231,7 @@
         
         
         
-          15 分钟
+          3 分钟
         
       </span>
     
@@ -267,127 +268,68 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">TCP学习-超时与重传</h1>
+            <h1 id="seo-header"> Linux - 调度策略</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="TCP超时与重传"><a href="#TCP超时与重传" class="headerlink" title="TCP超时与重传"></a>TCP超时与重传</h1><h2 id="核心问题"><a href="#核心问题" class="headerlink" title="核心问题"></a>核心问题</h2><ul>
-<li>发送时设置一个定时器来解决<strong>数据</strong>和<strong>确认</strong>可能丢失的问题</li>
-<li>如何确定超时判断间隔？</li>
-<li>如何确定重传的频率？<ul>
-<li>1，2，4，8， 16，32，64……</li>
+                <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LoyenWang/p/12584345.html">Linux进程调度-实时调度器</a></li>
+</ul>
+<h2 id="Linux-的几种调度策略"><a href="#Linux-的几种调度策略" class="headerlink" title="Linux 的几种调度策略"></a>Linux 的几种调度策略</h2><h4 id="实时进程"><a href="#实时进程" class="headerlink" title="实时进程"></a>实时进程</h4><ul>
+<li>优先级高于普通进程</li>
+<li>SCHED_ FIFO</li>
+<li>SCHED_RR</li>
+</ul>
+<h4 id="普通进程（非实时进程）"><a href="#普通进程（非实时进程）" class="headerlink" title="普通进程（非实时进程）"></a>普通进程（非实时进程）</h4><ul>
+<li>强调公平性，防止进程饥饿</li>
+<li>SCHED_NORMAL</li>
+<li>SCHED_BATCH</li>
+<li>SCHED_IDLE</li>
+</ul>
+<h2 id="Linux的调度器发展历程"><a href="#Linux的调度器发展历程" class="headerlink" title="Linux的调度器发展历程"></a>Linux的调度器发展历程</h2><ol>
+<li>楼梯调度<ul>
+<li>证明了完全公平思想的可行性</li>
 </ul>
 </li>
-</ul>
-<h2 id="典型实现"><a href="#典型实现" class="headerlink" title="典型实现"></a>典型实现</h2><ul>
-<li>测量TCP报文段的往返时间<ul>
-<li>这样才能比较好的确定超时时间</li>
-<li>发出数据 -&gt; 收到ACK的时间间隔？</li>
+<li>RSDL<ul>
+<li>对SD算法的改进</li>
+<li>继承了“完全公平”的核心思想</li>
 </ul>
 </li>
-<li>使用测量结果对下一个将要传输的报文段建立重传超时时间</li>
-</ul>
-<h2 id="四个定时器"><a href="#四个定时器" class="headerlink" title="四个定时器"></a>四个定时器</h2><ul>
-<li>对每个连接，TCP管理四个不同的定时器<ul>
-<li><strong>重传定时器</strong>使用于当希望收到<u>另一端的确认</u></li>
-<li><strong>坚持(persist)定时器</strong>使<u>窗口大小信息</u>保持不断流动，即使另一端关闭了其接收窗口</li>
-<li><strong>保活(keepalive)定时器</strong>可检测到一个<u>空闲连接的另一端何时崩溃或重启</u></li>
-<li><strong>2MSL定时器</strong>测量一个连接处于TIMEWAIT状态的时间</li>
+<li>CFS -&gt; 目前采用的调度策略<ul>
+<li>完全公平的核心思想<ul>
+<li>有10个进程，在CPU时间10ms内，每个进程的运行时间应为(10ms&#x2F;10) &#x3D; 1ms</li>
 </ul>
 </li>
-</ul>
-<h2 id="往返-RTT-时间测量"><a href="#往返-RTT-时间测量" class="headerlink" title="往返(RTT)时间测量"></a>往返(RTT)时间测量</h2><ul>
-<li>该时间在民用网络中可能是会经常变化的，因此TCP需要跟踪这些变化并相应地调整其超时时间</li>
-</ul>
-<h3 id="测量演进"><a href="#测量演进" class="headerlink" title="测量演进"></a>测量演进</h3><ul>
-<li>测量某报文段和其响应之间地时间差<code>M</code>，并动态更新其RTT值；<code>RTT = k*RTT + (1-k)*M</code></li>
-<li>超时间隔设置为<code>RTO = b*RTT</code>，b地推荐值为2</li>
-<li><code>缺陷</code>：在RTT变化很大地场景下，无法跟踪变化，因此会引起不必要的重传</li>
-<li><code>改进</code>：跟踪RTT的方差并进行平滑，放到RTT估计值中去</li>
-<li><code>Karn算法</code>：当一个分组重传发生时，在重传数据的确认最后到达之前，不能更新RTT的值；这是因为收到的确认不知道对应于哪一次重传</li>
-</ul>
-<h2 id="拥塞避免算法"><a href="#拥塞避免算法" class="headerlink" title="拥塞避免算法"></a>拥塞避免算法</h2><ul>
-<li>应对达到中间路由器转发极限的算法</li>
-<li>假设：分组丢失意味着在源主机和目的主机之间的某处网络上发生了拥塞</li>
-<li>两种<strong>分组丢失的指示</strong><ul>
-<li>发生超时</li>
-<li>接收到重复的确认 -&gt; &#x3D;&#x3D;这个在实际使用中占比达95%以上&#x3D;&#x3D;</li>
+<li>不跟踪进程的睡眠时间</li>
+<li>不再区分交互式进程</li>
+<li>没有将任务维护在链表式的运行队列上</li>
+<li>对每个CPU维护一个以时间为顺序的红黑树</li>
 </ul>
 </li>
-<li><strong>慢启动算法</strong>可以降低分组进入网络中的速率，当拥塞发生时可以使用慢启动来做这一动作以减少网络拥塞。实际中，这两个算法通常一起实现：<ul>
-<li>拥塞避免相关参数：cwnd（本地拥塞窗口大小）</li>
-<li>慢启动相关参数：ssthresh（慢启动门限）</li>
+</ol>
+<h4 id="调度器管理模块"><a href="#调度器管理模块" class="headerlink" title="调度器管理模块"></a>调度器管理模块</h4><ul>
+<li>为了支持实时进程</li>
+<li>CFS提供了调度器模块管理器，各种不同的调度器算法都可以作为一个模块注册到该管理器中。不同的进程可以选择使用不同的调度器模块</li>
+</ul>
+<ol>
+<li>实时调度模块 (<code>sched_rt.c</code>)<ul>
+<li>对应实时进程：SCHED_RR，SCHED_FIFO</li>
 </ul>
 </li>
-</ul>
-<h3 id="流程细节"><a href="#流程细节" class="headerlink" title="流程细节"></a>流程细节</h3><ul>
-<li>未发生分组丢失时，cwnd逐渐增加，增加的速率取决于cwnd和ssthresh的关系<ul>
-<li>如果cwnd &lt;&#x3D; ssthresh，说明此时处于慢启动阶段，cwnd以指数速率增长</li>
-<li>如果cwnd &gt; ssthresh，说明此时处于拥塞避免阶段，cwnd以固定速率增长【且一个往返时间内cwnd最多增加1】</li>
+<li>CFS调度模块 (<code>sched_fair.c</code>)<ul>
+<li>对应普通进程：SCHED_NORMAL，SCHED_BATCH，SCHED_IDLE</li>
 </ul>
 </li>
-<li>如果某一时刻发生了分组丢失<ul>
-<li>ssthresh被设置为当前窗口的一半: <code>min(2, min(cwnd, 通告窗口大小))/2</code></li>
-<li>cwnd的设置与分组丢失的原因有关：<ul>
-<li>如果是超时引起，则cwnd &#x3D; 1</li>
-<li>否则，被设置为？？？ -&gt; <strong>快速恢复</strong>，设置为新的ssthresh值+3个报文段大小 -&gt; 直接进入拥塞避免阶段</li>
+</ol>
+<h2 id="CFS调度器实现细节"><a href="#CFS调度器实现细节" class="headerlink" title="CFS调度器实现细节"></a>CFS调度器实现细节</h2><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LoyenWang/p/12495319.html">Linux进程调度- CFS调度器</a></li>
 </ul>
-</li>
+<h2 id="实时调度模块"><a href="#实时调度模块" class="headerlink" title="实时调度模块"></a>实时调度模块</h2><h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LoyenWang/p/12584345.html">Linux进程调度-实时调度器</a></li>
 </ul>
-</li>
-</ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
-<li>慢启动与拥塞避免是两个阶段</li>
-<li>快速重传与快速恢复是绑定的操作<ul>
-<li>丢包采用快速重传-恢复策略时，cwnd的值被设置为新的ssthresh的值+3；由于cwnd &gt; ssthresh 因此直接进入拥塞避免阶段</li>
-</ul>
-</li>
-</ul>
-<h2 id="快速重传与快速恢复"><a href="#快速重传与快速恢复" class="headerlink" title="快速重传与快速恢复"></a>快速重传与快速恢复</h2><ul>
-<li>承接上面最后的问题，当收到<strong>3个及以上</strong>重复的确认，就非常有可能发生了报文丢失，因此重传丢失的数据报文段，无需等待超时器溢出 -&gt; <strong>快速重传</strong><ul>
-<li>进入拥塞避免阶段，而不是慢启动  -&gt; <strong>快速恢复</strong></li>
-</ul>
-</li>
-<li>收到重复的确认时，接收方一定收到了大于该确认号的数据段；否则接收方不会有任何响应，只能等待发送方超时器超时进行重传</li>
-</ul>
-<h3 id="流程细节【这里需要进一步的思考，记忆】"><a href="#流程细节【这里需要进一步的思考，记忆】" class="headerlink" title="流程细节【这里需要进一步的思考，记忆】"></a>流程细节【这里需要进一步的思考，记忆】</h3><ul>
-<li>当收到第&#x3D;&#x3D;3个重复的ACK&#x3D;&#x3D;时，将&#x3D;&#x3D;ssthresh设置为当前拥塞窗口cwnd的一半&#x3D;&#x3D;。重传丢失的报文段。&#x3D;&#x3D;设置cwnd为ssthresh加上3倍的报文段大小&#x3D;&#x3D;</li>
-<li>每次收到另一个重复的ACK时，cwnd增加1个报文段大小并发送1个分组（如果新的cwnd允许发送）</li>
-<li>当下一个确认新数据的ACK到达时，设置cwnd为ssthresh（在第1步中设置的值）。这个ACK应该是在进行重传后的一个往返时间内对步骤1中重传的确认。另外，这个ACK也应该<br>是对丢失的分组和收到的第1个重复的ACK之间的所有中间报文段的确认。这一步采用的是拥塞避免，因为当分组丢失时我们将当前的速率减半</li>
-</ul>
-<h2 id="坚持-persist-定时器"><a href="#坚持-persist-定时器" class="headerlink" title="坚持(persist)定时器"></a>坚持(persist)定时器</h2><ul>
-<li>当接收方通告窗口为0时，发送方将不再发送数据，直到接收方通告窗口大于0；<ul>
-<li>但是&#x3D;&#x3D;后续接收方通告窗口大小是通过ACK进行的&#x3D;&#x3D;，然而TCP不对未带数据的ACK进行确认</li>
-<li>如果这个ACK丢包了怎么办？-&gt; 可能会进入“死锁”</li>
-</ul>
-</li>
-<li>为了解决前述提到的问题，TCP在发送端维护一个<strong>坚持(persist)定时器</strong>以周期性地向接收端查询通告窗口的大小</li>
-</ul>
-<h2 id="保活定时器"><a href="#保活定时器" class="headerlink" title="保活定时器"></a>保活定时器</h2><ul>
-<li><p>保活不是TCP规范中的一部分，但是许多实现提供了保活定时器</p>
-<ul>
-<li>保活功能主要为服务器程序提供的；但客户机也可以开启这个功能</li>
-<li>用于主动关闭服务器上存在的半连接【客户机非正常宕机引起】</li>
-</ul>
-</li>
-<li><p>服务器端保活探测的结果</p>
-<ul>
-<li>如果客户机正常，则保活正常，应用程序无感</li>
-<li>如果客户机崩溃，服务器将收不到对探查的响应，服务器应用程序将收到read接口返回的差错信息</li>
-<li>如果客户机关闭后重启，这时客户机会给服务器发回探查响应，但是该响应为RST，使得服务器终止该连接</li>
-<li>如果客户机对于服务器来说不可达，类似于第二种情况</li>
-</ul>
-</li>
-<li><p>这里注意到：</p>
-<ul>
-<li>客户机程序被终止，并且发出了一个FIN，如果该FIN丢包，会重传</li>
-<li>但是整个时间可能会比较长，而客户宿主机上对客户机程序的关闭就导致TCP连接终止异常</li>
-<li>进而可能导致服务器上存在半连接</li>
-</ul>
-</li>
-</ul>
-
+<h2 id="BFS调度器"><a href="#BFS调度器" class="headerlink" title="BFS调度器"></a>BFS调度器</h2>
                 
               </div>
             
@@ -395,6 +337,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%A2%E7%BB%8F/" class="print-no-link">#面经</a>
+      
+    </div>
   
 </div>
 
@@ -404,8 +374,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>TCP学习-超时与重传</div>
-      <div>http://example.com/2024/07/24/TCP学习-超时与重传/</div>
+      <div> Linux - 调度策略</div>
+      <div>http://example.com/2024/08/12/操作系统/Linux - 调度策略/</div>
     </div>
     <div class="license-meta">
       
@@ -417,7 +387,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月24日</div>
+          <div>2024年8月12日</div>
         </div>
       
       
@@ -449,18 +419,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/27/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" title="排序算法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">排序算法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/24/Linux-aarch64-%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A0%88/" title="Linux-aarch64-任务切换与内核栈">
-                        <span class="hidden-mobile">Linux-aarch64-任务切换与内核栈</span>
+                      <a href="/2024/08/12/daily-notes/2024-08-12/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

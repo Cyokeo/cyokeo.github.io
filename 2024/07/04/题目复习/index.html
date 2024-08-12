@@ -16,15 +16,15 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="滑动窗口 904.水果成篮，结合题解，深入理解： 最大滑动窗口 - 模版  123456while j &lt; len(nums):    &#x2F;&#x2F; 判断[i, j]是否满足条件    while 不满足条件：        i +&#x3D; 1 &#x2F;&#x2F;（最保守的压缩i，一旦满足条件了就退出压缩i的过程，使得滑窗尽可能的大）    &#x2F;&#x2F; 不断更新结果（注意在while外更新！）    j +&#x3D; 1 最小滑动窗">
+    <meta name="description" content="滑动窗口 模版总结  一定是条件满足时，更新最终结果 首先最外部的循环while (j &lt; len) 接着内部有一个while循环，需要在里面压缩i 条件成立进while：最小窗口；更新值；更新条件；i++ 条件不成立进while：最大窗口；更新条件；i++   接着走出while循环 j++     破题思路：窗口应该满足什么条件 or 不满足什么条件！！！  904.水果成篮，结合题解，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题目复习">
 <meta property="og:url" content="http://example.com/2024/07/04/%E9%A2%98%E7%9B%AE%E5%A4%8D%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="滑动窗口 904.水果成篮，结合题解，深入理解： 最大滑动窗口 - 模版  123456while j &lt; len(nums):    &#x2F;&#x2F; 判断[i, j]是否满足条件    while 不满足条件：        i +&#x3D; 1 &#x2F;&#x2F;（最保守的压缩i，一旦满足条件了就退出压缩i的过程，使得滑窗尽可能的大）    &#x2F;&#x2F; 不断更新结果（注意在while外更新！）    j +&#x3D; 1 最小滑动窗">
+<meta property="og:description" content="滑动窗口 模版总结  一定是条件满足时，更新最终结果 首先最外部的循环while (j &lt; len) 接着内部有一个while循环，需要在里面压缩i 条件成立进while：最小窗口；更新值；更新条件；i++ 条件不成立进while：最大窗口；更新条件；i++   接着走出while循环 j++     破题思路：窗口应该满足什么条件 or 不满足什么条件！！！  904.水果成篮，结合题解，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-04T13:27:21.000Z">
-<meta property="article:modified_time" content="2024-07-31T04:19:28.616Z">
+<meta property="article:modified_time" content="2024-08-11T10:32:36.045Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.8k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          14 分钟
+          16 分钟
         
       </span>
     
@@ -273,21 +273,54 @@
               <div class="markdown-body">
                 
                 <h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><ul>
-<li>904.水果成篮，结合<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fruit-into-baskets/solutions/1437444/shen-du-jie-xi-zhe-dao-ti-he-by-linzeyin-6crr">题解</a>，深入理解：<ul>
+<li><p>模版总结</p>
+<ul>
+<li>一定是条件满足时，更新最终结果</li>
+<li>首先最外部的循环<code>while (j &lt; len)</code></li>
+<li>接着内部有一个while循环，需要在里面压缩i<ul>
+<li>条件成立进while：最小窗口；更新值；更新条件；<code>i++</code></li>
+<li>条件不成立进while：最大窗口；更新条件；<code>i++</code></li>
+</ul>
+</li>
+<li>接着走出while循环<ul>
+<li><code>j++</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>破题思路：<em><strong>窗口应该满足什么条件</strong></em> or <em><strong>不满足什么条件</strong></em>！！！</p>
+</li>
+<li><p>904.水果成篮，结合<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fruit-into-baskets/solutions/1437444/shen-du-jie-xi-zhe-dao-ti-he-by-linzeyin-6crr">题解</a>，深入理解：</p>
+<ul>
 <li>最大滑动窗口 - 模版  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">while</span> j &lt; <span class="hljs-built_in">len</span>(nums):<br>    // 判断[i, j]是否满足条件<br>    <span class="hljs-keyword">while</span> 不满足条件：<br>        i += <span class="hljs-number">1</span> //（最保守的压缩i，一旦满足条件了就退出压缩i的过程，使得滑窗尽可能的大）<br>    // 不断更新结果（注意在<span class="hljs-keyword">while</span>外更新！）<br>    j += <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
 <li>最小滑动窗口 - 模版  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">while</span> j &lt; <span class="hljs-built_in">len</span>(nums):<br>    // 判断[i, j]是否满足条件<br>    <span class="hljs-keyword">while</span> 满足条件：<br>        // 不断更新结果(注意在<span class="hljs-keyword">while</span>内更新！)<br>        i += <span class="hljs-number">1</span> //（最大程度的压缩i，使得滑窗尽可能的小）<br>    j += <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
-<li>确实，有了模版后，遇到滑窗问题，思路更加<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximize-the-confusion-of-an-exam/submissions/544105543/">清晰了</a></li>
+<li>确实，有了模版后，遇到滑窗问题，思路更加清晰了<ul>
+<li>破题思路：<em><strong>窗口应该满足什么条件</strong></em> or <em><strong>不满足什么条件</strong></em>！！！</li>
+<li>最大窗口：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximize-the-confusion-of-an-exam/">2024. 考试的最大困扰度</a></li>
+<li>最小窗口：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/">1234. 替换子串得到平衡字符串</a><ul>
+<li>这个题目还是比较难，需要好好思考转换一下思路！！！</li>
+<li>窗口应该满足：<em><strong>包含的多的字符的个数应该 <code>&gt;=</code> 需要替换的个数</strong></em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/frequency-of-the-most-frequent-element/submissions/546160358/">1838.最高频元素的频数</a></p>
+<ul>
+<li>需要动脑思考一下，察觉为使用滑动窗口</li>
+<li>而且在做减法的时候有一个溢出问题：<em><strong>啊啊啊啊啊！！！</strong></em></li>
 </ul>
 </li>
 </ul>
 <h2 id="字符串哈希"><a href="#字符串哈希" class="headerlink" title="字符串哈希"></a>字符串哈希</h2><ul>
 <li><p>字符串哈希：使用hash映射，减小索引的存储消耗！！！<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/repeated-dna-sequences/solutions/1035568/zhong-fu-de-dnaxu-lie-by-leetcode-soluti-z8zn">参考</a></p>
-<ul>
-<li>选取一个大于字符集大小的质数作为base</li>
-<li>将字符映射为小于base的数：map()</li>
-<li>‘abccd’ -&gt; map(a)*base^0 + map(b)*base^1 + map(c)*base^2 + map(c)*base^3 + map(d)*base^4</li>
+<ol>
+<li>选取一个大于字符集大小的质数作为<code>base</code></li>
+<li>将字符映射为小于base的数：<code>int fx = map(x)</code></li>
+<li><code>&quot;bccd&quot; = map(a)*base^0 + map(b)*base^1 + map(c)*base^2 + map(c)*base^3 + map(d)*base^4</code></li>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-palindrome/solutions/1396220/by-flix-be4y">参考</a></li>
-</ul>
+</ol>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-area-rectangle/description/">939. 最小面积矩形</a></p>
 <ul>
@@ -299,25 +332,27 @@
 <li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-points-you-can-obtain-from-cards/solutions/2551432/liang-chong-fang-fa-ni-xiang-si-wei-zhen-e3gb">最大&#x2F;小子序和</a></p>
 <ul>
 <li>通过取相反数，将最小子序和转化为最大字序和问题</li>
-<li>前缀和 法</li>
+<li>前缀和法</li>
 <li>贪心 + dp 法  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxScore</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; cardPoints)</span> </span>&#123;<br>        <span class="hljs-keyword">auto</span> maxSubArray = [](vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums) &#123;<br>            <span class="hljs-comment">//实现1：前缀和</span><br>            <span class="hljs-comment">// int res = INT_MIN, pre_sum = 0, min_pre_sum = 0;</span><br>            <span class="hljs-comment">// for (auto&amp; x : nums) &#123;</span><br>            <span class="hljs-comment">//     pre_sum += x;</span><br>            <span class="hljs-comment">//     res = max(res, pre_sum - min_pre_sum);</span><br>            <span class="hljs-comment">//     min_pre_sum = min(min_pre_sum, pre_sum);</span><br>            <span class="hljs-comment">// &#125;</span><br>            <span class="hljs-comment">// return res;</span><br><br>            <span class="hljs-comment">//实现2：贪心 + dp</span><br>            <span class="hljs-comment">//s = 0考虑了k = 0时的情况</span><br>            <span class="hljs-type">int</span> res = INT_MIN, s = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; x : nums) &#123;<br>                <span class="hljs-keyword">if</span> (s &lt;= <span class="hljs-number">0</span>) s = <span class="hljs-number">0</span>;<br>                s += x;<br>                res = <span class="hljs-built_in">max</span>(res, s);<br>            &#125;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;;<br>        <span class="hljs-comment">//累加总和为s</span><br>        <span class="hljs-type">int</span> s = <span class="hljs-built_in">accumulate</span>(cardPoints.<span class="hljs-built_in">begin</span>(), cardPoints.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);<br>        <span class="hljs-comment">//将数组的每个元素乘以-1, 用来求连续子数组的最大和</span><br>        <span class="hljs-built_in">transform</span>(cardPoints.<span class="hljs-built_in">begin</span>(), cardPoints.<span class="hljs-built_in">end</span>(), cardPoints.<span class="hljs-built_in">begin</span>(), [](<span class="hljs-type">int</span> x) &#123; <span class="hljs-keyword">return</span> -x; &#125;);<br>        <span class="hljs-comment">//答案 = 总和 - 连续子数组的最小和</span><br>        <span class="hljs-keyword">return</span> s - (-<span class="hljs-built_in">maxSubArray</span>(cardPoints));<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/frequency-of-the-most-frequent-element/submissions/546160358/">1838.最高频元素的频数</a></p>
-<ul>
-<li>需要动脑思考一下，察觉为使用滑动窗口</li>
 </ul>
 </li>
 </ul>
 <h2 id="回文串"><a href="#回文串" class="headerlink" title="回文串"></a>回文串</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/">最长回文字串</a><ul>
-<li>加深理解：如果字串长度为奇数，则只能为<code>aba</code>类型；但是当字串长度为偶数是，可以为<code>aa</code>，也可以为<code>abaaba</code></li>
+<li>加深理解：如果字串长度为奇数，则只能为<code>aba</code>类型；但是当字串长度为偶数时，可以为<code>aa</code>，也可以为<code>abaaba</code>！！！</li>
 <li>自己想到了使用dp数组，记忆化遍历，以减小重复遍历。但是时间表现还是很差❗️❗️</li>
-<li>注意到回文串的中间部分一定是由连续且相同的字符串组成，因此可以定位到中间字符，再左右扩展查询，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/comments/59461">参考</a>❗️  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestPalindrome</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br><span class="hljs-comment">//         保存起始位置，测试了用数组似乎能比全局变量稍快一点</span><br>        <span class="hljs-type">int</span>[] range = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span>];<br>        <span class="hljs-type">char</span>[] str = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br><span class="hljs-comment">//             把回文看成中间的部分全是同一字符，左右部分相对称</span><br><span class="hljs-comment">//             找到下一个与当前字符不同的字符</span><br>            i = findLongest(str, i, range);<br>        &#125;<br>        <span class="hljs-keyword">return</span> s.substring(range[<span class="hljs-number">0</span>], range[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLongest</span><span class="hljs-params">(<span class="hljs-type">char</span>[] str, <span class="hljs-type">int</span> low, <span class="hljs-type">int</span>[] range)</span> &#123;<br><span class="hljs-comment">//         查找中间部分</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">high</span> <span class="hljs-operator">=</span> low;<br>        <span class="hljs-keyword">while</span> (high &lt; str.length - <span class="hljs-number">1</span> &amp;&amp; str[high + <span class="hljs-number">1</span>] == str[low]) &#123;<br>            high++;<br>        &#125;<br><span class="hljs-comment">//         定位中间部分的最后一个字符</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> high;<br><span class="hljs-comment">//         从中间向左右扩散</span><br>        <span class="hljs-keyword">while</span> (low &gt; <span class="hljs-number">0</span> &amp;&amp; high &lt; str.length - <span class="hljs-number">1</span> &amp;&amp; str[low - <span class="hljs-number">1</span>] == str[high + <span class="hljs-number">1</span>]) &#123;<br>            low--;<br>            high++;<br>        &#125;<br><span class="hljs-comment">//         记录最大长度</span><br>        <span class="hljs-keyword">if</span> (high - low &gt; range[<span class="hljs-number">1</span>] - range[<span class="hljs-number">0</span>]) &#123;<br>            range[<span class="hljs-number">0</span>] = low;<br>            range[<span class="hljs-number">1</span>] = high;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>注意到回文串的<em><strong>中间部分一定是由连续且相同的字符</strong></em>串组成，因此可以定位到中间字符，再左右扩展查询，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/comments/59461">参考</a>❗️<ul>
+<li>这样中间部分根据奇偶，可以统一处理  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestPalindrome</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br><span class="hljs-comment">//         保存起始位置，测试了用数组似乎能比全局变量稍快一点</span><br>        <span class="hljs-type">int</span>[] range = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span>];<br>        <span class="hljs-type">char</span>[] str = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br><span class="hljs-comment">//             把回文看成中间的部分全是同一字符，左右部分相对称</span><br><span class="hljs-comment">//             找到下一个与当前字符不同的字符</span><br>            i = findLongest(str, i, range);<br>        &#125;<br>        <span class="hljs-keyword">return</span> s.substring(range[<span class="hljs-number">0</span>], range[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLongest</span><span class="hljs-params">(<span class="hljs-type">char</span>[] str, <span class="hljs-type">int</span> low, <span class="hljs-type">int</span>[] range)</span> &#123;<br><span class="hljs-comment">//         查找中间部分</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">high</span> <span class="hljs-operator">=</span> low;<br>        <span class="hljs-keyword">while</span> (high &lt; str.length - <span class="hljs-number">1</span> &amp;&amp; str[high + <span class="hljs-number">1</span>] == str[low]) &#123;<br>            high++;<br>        &#125;<br><span class="hljs-comment">//         定位中间部分的最后一个字符</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> high;<br><span class="hljs-comment">//         从中间向左右扩散</span><br>        <span class="hljs-keyword">while</span> (low &gt; <span class="hljs-number">0</span> &amp;&amp; high &lt; str.length - <span class="hljs-number">1</span> &amp;&amp; str[low - <span class="hljs-number">1</span>] == str[high + <span class="hljs-number">1</span>]) &#123;<br>            low--;<br>            high++;<br>        &#125;<br><span class="hljs-comment">//         记录最大长度</span><br>        <span class="hljs-keyword">if</span> (high - low &gt; range[<span class="hljs-number">1</span>] - range[<span class="hljs-number">0</span>]) &#123;<br>            range[<span class="hljs-number">0</span>] = low;<br>            range[<span class="hljs-number">1</span>] = high;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
+</li>
+</ul>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="解题参考"><a href="#解题参考" class="headerlink" title="解题参考"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray-sum-with-one-deletion/solutions/2321829/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-hzz6">解题参考</a></h3><ul>
+<li><p>从寻找子问题的思路出发</p>
+</li>
+<li><p>找到dfs各参数</p>
+</li>
 <li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-product-subarray/description/">152. 乘积最大子数组</a></p>
 <ul>
 <li>double, long long等数据类型的区别</li>
@@ -327,7 +362,6 @@
 <ul>
 <li>需要动态规划，但是没有想起来</li>
 <li>计算递推时要严谨一些，好好看看下面对递归的步步推导与解释❗️</li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray-sum-with-one-deletion/solutions/2321829/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-hzz6">解题参考</a></li>
 <li>动态规划有「选或不选」和「枚举选哪个」这两种基本思考方式。在做题时，可根据题目要求，选择适合题目的一种来思考</li>
 </ul>
 </li>
@@ -335,7 +369,7 @@
 <ul>
 <li>这个困难题对于动归非常典型</li>
 <li>它的递推公式真的很难想到</li>
-<li>典型的先想到递归&#x2F;回溯做法，再反推出动规的做法</li>
+<li>典型的<em><strong>先想到递归&#x2F;回溯做法，再反推出动规的做法</strong></em></li>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-sum-of-subsequence-powers/solutions/2854316/yi-ti-san-jie-pai-xu-ji-yi-hua-sou-suo-y-bj6a">题解</a>：这个题解是比较清楚的</li>
 </ul>
 </li>
@@ -344,7 +378,7 @@
 <li>动态规划递推公式难推导啊！！</li>
 <li>从推导子问题开始</li>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-tile-possibilities/solutions/2275356/on2-ji-shu-dppythonjavacgo-by-endlessche-hmez">题解</a><ul>
-<li>这个题解中，想到使用种类数作为dp[i][j]中的i是有些难度的！！！</li>
+<li>这个题解中，想到使用种类数作为<code>dp[i][j]</code>中的i是有些难度的！！！</li>
 <li>需要较多的<code>数学思考</code></li>
 </ul>
 </li>
