@@ -16,15 +16,15 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]  编程脑子-变迟钝 双重循环中，错误使用相同的计数变量，导致程序出现问题 if (key[i] &#x3D; &#39;T&#39;) -&gt; 注意啊，还真出现了这种错误 &#x3D;&#x3D; 不是 &#x3D; -&gt; 写判断时一定要注意 写判断，把数值写到&#x3D;&#x3D;左边&#x3D;&amp;#x3">
+    <meta name="description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1] 局部变量一定要初始化  编程脑子-变迟钝 双重循环中，错误使用相同的计数变量，导致程序出现问题 if (key[i] &#x3D; &#39;T&#39;) -&gt; 注意啊，还真出现了这种错误 &#x3D;&#x3D; 不是 &#x3D; -&gt; 写判断时一定要注意 写判断，把数值写到&#x3D;&#x3D;左">
 <meta property="og:type" content="article">
 <meta property="og:title" content="刷题心得">
 <meta property="og:url" content="http://example.com/2024/06/24/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]  编程脑子-变迟钝 双重循环中，错误使用相同的计数变量，导致程序出现问题 if (key[i] &#x3D; &#39;T&#39;) -&gt; 注意啊，还真出现了这种错误 &#x3D;&#x3D; 不是 &#x3D; -&gt; 写判断时一定要注意 写判断，把数值写到&#x3D;&#x3D;左边&#x3D;&amp;#x3">
+<meta property="og:description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1] 局部变量一定要初始化  编程脑子-变迟钝 双重循环中，错误使用相同的计数变量，导致程序出现问题 if (key[i] &#x3D; &#39;T&#39;) -&gt; 注意啊，还真出现了这种错误 &#x3D;&#x3D; 不是 &#x3D; -&gt; 写判断时一定要注意 写判断，把数值写到&#x3D;&#x3D;左">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-24T14:08:52.000Z">
-<meta property="article:modified_time" content="2024-08-11T10:33:28.658Z">
+<meta property="article:modified_time" content="2024-08-17T13:28:36.142Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.3k 字
         
       </span>
     
@@ -276,12 +276,18 @@
 <li>注意总结解题模版！！！</li>
 <li>满足条件的最<em><strong>小</strong></em>整数</li>
 <li>涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1]</li>
+<li>局部变量一定要初始化</li>
 </ul>
 <h2 id="编程脑子-变迟钝"><a href="#编程脑子-变迟钝" class="headerlink" title="编程脑子-变迟钝"></a>编程脑子-变迟钝</h2><ul>
 <li><em><strong>双重循环中，错误使用相同的计数变量，导致程序出现问题</strong></em></li>
 <li><em><strong><code>if (key[i] = &#39;T&#39;)</code></strong></em> -&gt; 注意啊，还真出现了这种错误<ul>
 <li><code>==</code> 不是 <code>=</code> -&gt; 写判断时一定要注意</li>
 <li>写判断，把数值写到&#x3D;&#x3D;左边&#x3D;&#x3D;</li>
+</ul>
+</li>
+<li>不要忘记对循环的尾部进行输出处理: 例如将连续数字替换为平方和<ul>
+<li>例如“avc12vd” -&gt; 在循环中碰到新的字母时才对之前的数字进行处理、输出</li>
+<li>“zvc123” -&gt; 这样就忘记了最后一次的处理</li>
 </ul>
 </li>
 </ul>
