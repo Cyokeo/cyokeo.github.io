@@ -24,7 +24,7 @@
 <meta property="og:description" content="参考博客 十大经典排序算法 八大排序算法稳定性分析，原来稳定性是这个意思…  算法稳定性 排序前后两个相等的数相对位置不变，则算法稳定  冒泡排序 小的元素往前调或者把大的元素往后调； 比较是相邻的两个元素比较，交换也发生在这两个元素之间； 稳定排序算法 排序遍历次数为len - 1，每次从头开始冒泡 示例代码 12345678template&lt;typename T&gt; &#x2F;&#x2F;整数或浮点数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-27T03:14:29.000Z">
-<meta property="article:modified_time" content="2024-07-27T13:47:58.823Z">
+<meta property="article:modified_time" content="2024-08-19T13:51:32.172Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          205 字
+          498 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          2 分钟
+          5 分钟
         
       </span>
     
@@ -288,7 +288,20 @@
 </ul>
 </li>
 </ol>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><ol>
+<li>选定的piviot必须位于开始排序的起始位置；即使选中间某个数，也要将其交换至起始位置才能开始排序</li>
+<li>考虑&#x3D;&#x3D;占空&#x3D;&#x3D;来识记算法排序的过程<ul>
+<li>判断起始序号  &lt; 结尾序号</li>
+<li>第一个空位在起始位置，i</li>
+<li>从右边找第一个小于piviot的元素，占据已有的空位；此时形成新的空位在右侧，j</li>
+<li>接着从左边开始找第一个大于piviot的元素，占据前述空位；此时形成新的空位在左侧</li>
+<li>重复上述查找，直至&#x3D;&#x3D;i &gt;&#x3D; j&#x3D;&#x3D;</li>
+<li>最后，将piviot的值放在空位上</li>
+<li>对左序列、右序列进行递归操作<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><br><span class="hljs-keyword">public</span>:<br><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span></span><br><span class="hljs-function">	</span>&#123;<br>	<br>		<span class="hljs-keyword">if</span> (start &gt;= end) <span class="hljs-keyword">return</span>;<br>		<span class="hljs-built_in">swap</span>(nums[start], nums[(start+end)/<span class="hljs-number">2</span>]);<br>		<span class="hljs-type">int</span> piviot = nums[start];<br>		<span class="hljs-type">int</span> i = start, j = end;<br>		<span class="hljs-keyword">while</span> (i &lt; j)<br>		&#123;<br>			<span class="hljs-keyword">while</span> (i &lt; j &amp;&amp; nums[j] &gt;= piviot) --j;<br>			nums[i] = nums[j];<br>			<span class="hljs-keyword">while</span> (i &lt; j &amp;&amp; nums[i] &lt;= piviot) ++i;<br>			nums[j] = nums[i];<br>		&#125;<br>		nums[i] = piviot;<br>		<span class="hljs-built_in">dfs</span>(nums, start, i<span class="hljs-number">-1</span>);<br>		<span class="hljs-built_in">dfs</span>(nums, i+<span class="hljs-number">1</span>, end);<br>	&#125;<br><br>	<span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">sortArray</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-built_in">dfs</span>(nums, <span class="hljs-number">0</span>, nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>);<br>		<span class="hljs-keyword">return</span> nums;<br>	&#125;<br><br>&#125;;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+
                 
               </div>
             
