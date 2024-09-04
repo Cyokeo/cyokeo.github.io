@@ -16,15 +16,15 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="区分多核操作系统 一个操作系统管理多个核 基本只有一个调度器 可以使用负载均衡的调度策略，让所有核负载均衡 进程可以从一个核迁移到另外一个核   就绪列表&#x2F;等待表，等应该都是perCPU的变量？待求证  运行在多个核上的操作系统 这里的标题有些歧义：实际上这些核之间的操作系统可以看作是没有任何关系的 可以共享代码段 可以共享数据">
+    <meta name="description" content="区分多核操作系统 一个操作系统管理多个核 基本只有一个调度器 -&gt; 每个核都有自己的调度器，但是会主动进行负载均衡 每个CPU都有一个时钟中断，周期性的触发，对应的处理函数为scheduler_tick， 如果当前时间已经超过了下一次负载均衡时刻，那么raise_softirq,(SCHED_SOFTIRQ)在这个软中断中进行后续的负载均衡   可以使用负载均衡的调度策略，让所有核负载均衡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多核操作系统 vs 运行在多个核上的操作系统">
 <meta property="og:url" content="http://example.com/2024/08/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%9A%E6%A0%B8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20vs%20%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%A4%9A%E4%B8%AA%E6%A0%B8%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="区分多核操作系统 一个操作系统管理多个核 基本只有一个调度器 可以使用负载均衡的调度策略，让所有核负载均衡 进程可以从一个核迁移到另外一个核   就绪列表&#x2F;等待表，等应该都是perCPU的变量？待求证  运行在多个核上的操作系统 这里的标题有些歧义：实际上这些核之间的操作系统可以看作是没有任何关系的 可以共享代码段 可以共享数据">
+<meta property="og:description" content="区分多核操作系统 一个操作系统管理多个核 基本只有一个调度器 -&gt; 每个核都有自己的调度器，但是会主动进行负载均衡 每个CPU都有一个时钟中断，周期性的触发，对应的处理函数为scheduler_tick， 如果当前时间已经超过了下一次负载均衡时刻，那么raise_softirq,(SCHED_SOFTIRQ)在这个软中断中进行后续的负载均衡   可以使用负载均衡的调度策略，让所有核负载均衡">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-10T13:29:26.527Z">
-<meta property="article:modified_time" content="2024-08-10T13:47:53.000Z">
+<meta property="article:published_time" content="2024-08-10T15:35:30.499Z">
+<meta property="article:modified_time" content="2024-08-26T12:38:52.228Z">
 <meta property="article:author" content="Cyokeo">
 <meta property="article:tag" content="RTOS">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-10 21:29" pubdate>
+        <time datetime="2024-08-10 23:35" pubdate>
           2024年8月10日 晚上
         </time>
       </span>
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          144 字
+          233 字
         
       </span>
     
@@ -275,7 +275,11 @@
                 
                 <h2 id="区分"><a href="#区分" class="headerlink" title="区分"></a>区分</h2><h3 id="多核操作系统"><a href="#多核操作系统" class="headerlink" title="多核操作系统"></a>多核操作系统</h3><ul>
 <li>一个操作系统管理多个核</li>
-<li>基本只有一个调度器<ul>
+<li>基本只有一个调度器 -&gt; <em><strong>每个核都有自己的调度器，但是会主动进行负载均衡</strong></em><ul>
+<li><em><strong>每个CPU都有一个时钟中断，周期性的触发，对应的处理函数为</strong></em><code>scheduler_tick</code>，<ul>
+<li>如果当前时间已经超过了下一次负载均衡时刻，那么<code>raise_softirq</code>,<code>(SCHED_SOFTIRQ)</code>在这个软中断中进行后续的负载均衡</li>
+</ul>
+</li>
 <li>可以使用负载均衡的调度策略，让所有核负载均衡</li>
 <li>进程可以从一个核迁移到另外一个核</li>
 </ul>
@@ -379,9 +383,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/10/daily-notes/2024-08-10/" title="Sat Aug 10 2024 00:00:00 GMT+0800 (中国标准时间)">
+                      <a href="/2024/08/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/" title=" Linux - 调度策略">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Sat Aug 10 2024 00:00:00 GMT+0800 (中国标准时间)</span>
+                        <span class="hidden-mobile"> Linux - 调度策略</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -389,8 +393,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/27/Linux-%E5%9F%BA%E7%A1%80/" title="Linux-基础">
-                        <span class="hidden-mobile">Linux-基础</span>
+                      <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/" title="UART - Console实现">
+                        <span class="hidden-mobile">UART - Console实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

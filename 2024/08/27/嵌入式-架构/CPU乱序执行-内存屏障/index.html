@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cyokeo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="参考博客 HPC(高性能计算第一篇):一文彻底搞懂并发编程与内存屏障(完结篇)  为什么CPU会乱序执行 前后两条指令没有依赖；但是前一条指令访存地址不在L1 cache中，而后一条指令的访存地址在L1 cache中，因此可以先执行第二条指令，等待第一条指令将访存单元加载到L1 cache中再执行第1条指令。有些CPU是这样做的 但是&#x3D;&#x3D;X64&#x3D;&#x3D;架构保证写">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" CPU乱序执行-内存屏障">
+<meta property="og:url" content="http://example.com/2024/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/CPU%E4%B9%B1%E5%BA%8F%E6%89%A7%E8%A1%8C-%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="参考博客 HPC(高性能计算第一篇):一文彻底搞懂并发编程与内存屏障(完结篇)  为什么CPU会乱序执行 前后两条指令没有依赖；但是前一条指令访存地址不在L1 cache中，而后一条指令的访存地址在L1 cache中，因此可以先执行第二条指令，等待第一条指令将访存单元加载到L1 cache中再执行第1条指令。有些CPU是这样做的 但是&#x3D;&#x3D;X64&#x3D;&#x3D;架构保证写">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-27T11:39:52.214Z">
+<meta property="article:modified_time" content="2024-08-27T13:40:10.467Z">
+<meta property="article:author" content="Cyokeo">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title> CPU乱序执行-内存屏障 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=" CPU乱序执行-内存屏障"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-27 19:39" pubdate>
+          2024年8月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header"> CPU乱序执行-内存屏障</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/vZDZGv1n6Ihz3A5sv7coZA">HPC(高性能计算第一篇):一文彻底搞懂并发编程与内存屏障(完结篇)</a></li>
+</ul>
+<h2 id="为什么CPU会乱序执行"><a href="#为什么CPU会乱序执行" class="headerlink" title="为什么CPU会乱序执行"></a>为什么CPU会乱序执行</h2><ol>
+<li>前后两条指令没有依赖；但是前一条指令访存地址不在L1 cache中，而后一条指令的访存地址在L1 cache中，因此可以先执行第二条指令，等待第一条指令将访存单元加载到L1 cache中再执行第1条指令。有些CPU是这样做的<ul>
+<li>但是&#x3D;&#x3D;X64&#x3D;&#x3D;架构保证写操作按序完成【顺序开始、乱序执行、顺序完成】<ul>
+<li>也保证读操作按序完成【顺序开始、乱序执行、顺序完成】</li>
+</ul>
+</li>
+<li>X64也不会将store乱序到之前的load前执行【同一个CPU】</li>
+<li>&#x3D;&#x3D;！！&#x3D;&#x3D; 但是：读可以被乱序到它之前的写之前进行 -&gt; X64平台唯一可能会被重排的内存操作<ul>
+<li>store to ptr_2</li>
+<li>load from ptr_1</li>
+<li>开始执行&#x2F;完成执行都有可能乱序</li>
+<li>这里&#x3D;&#x3D;后来的load有可能被乱序到store之前执行&#x3D;&#x3D;</li>
+<li>当然<em><strong>CPU在这种情况下也不会无缘无故乱序</strong></em>：只有当前面的写操作还不具备执行、完成的条件时，才会跳过写，让后面的读先完成</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="考虑范围"><a href="#考虑范围" class="headerlink" title="考虑范围"></a>考虑范围</h3><ul>
+<li>考虑内存屏障时，基本忽略了不同层级cache、内存之间的写&#x2F;读延时</li>
+</ul>
+<h3 id="什么情况下会有问题"><a href="#什么情况下会有问题" class="headerlink" title="什么情况下会有问题"></a>什么情况下会有问题</h3><h4 id="X64"><a href="#X64" class="headerlink" title="X64"></a>X64</h4><ul>
+<li>两个核均在短时间内执行【同一个核内前后两条&#x2F;有限多条】指令进行<ul>
+<li><em><strong>写我的，读你的</strong></em>操作</li>
+<li>可能会有问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="MESI协议作为硬件层级的协议究竟保护了什么？"><a href="#MESI协议作为硬件层级的协议究竟保护了什么？" class="headerlink" title="MESI协议作为硬件层级的协议究竟保护了什么？"></a>MESI协议作为硬件层级的协议究竟保护了什么？</h2><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>完成硬件级的cache同步<ul>
+<li>但是同步有延迟，因此会带来一系列的问题 &lt;- 需要使用内存屏障解决</li>
+<li>这里的&#x3D;&#x3D;同步&#x3D;&#x3D;概念与应用开发用到的同步有很大的不同？❌<ul>
+<li>本质上是一样的，只是<code>粒度不同</code><ul>
+<li>我要读同一个地址（操作同一个对象）</li>
+<li>如果某些分支依赖于对象某些值<ul>
+<li>但是在进入分支后，其它进&#x2F;线程对该对象的该值进行了修改，那么当前线程后续的操作肯定会出大问题的</li>
+<li>而且这些操作离CPU太远了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>应用开发用到的锁&#x2F;信号量等<code>粗粒度同步机制的内部实现</code><ul>
+<li>肯定会用到<em><strong>内存屏障</strong></em></li>
+<li>例如自旋锁 -&gt; <code>需要结合一个具体的实现仔细看一下</code><ul>
+<li>都在自己的缓存中，lock_val &#x3D; 0</li>
+<li>core 0 尝试获取，将lock_val的值写为1。接着执行关键代码<ul>
+<li>底层MESI协议开始起作用</li>
+<li>但是有一定延迟</li>
+</ul>
+</li>
+<li>接着，core 1尝试获取，发现自己缓存中lock_val的值仍然为0，因此获取成功，也开始执行关键代码</li>
+</ul>
+</li>
+<li>可以看到这里两个core都进入了关键区</li>
+<li>因此 core 0必须等待该写操作执行完成【<code>写到内存中/或者MESI同步完成</code>】才可以继续执行后续的指令<ul>
+<li>因此 core 1 必须在读之前确保拿到被修改后的变量【必须从内存中获取】；即一定要使用内存屏障，确保这之前其它core做的修改均已写入到主存中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="考虑场景"><a href="#考虑场景" class="headerlink" title="考虑场景"></a>考虑场景</h3><ul>
+<li>CPU0 写地址 ptr_a -&gt; 对于CPU来说需要一个周期，之后接着执行后面的指令；但是该写入实际被写入到内存中还没有完成【即指令的完成时间还没到】<ul>
+<li>CPU1 同时读地址 ptr_a</li>
+</ul>
+</li>
+<li>对于每个core，读写变量都是针对L1 cache的【当然要在开启cache的情况下讨论；此外某些MC U的某些地址位段有cache，而有些没有】</li>
+</ul>
+<h3 id="都在各自缓存中"><a href="#都在各自缓存中" class="headerlink" title="都在各自缓存中"></a>都在各自缓存中</h3><ul>
+<li>则标记为S</li>
+<li>CPU0写之后会向另一个CPU发缓存失效信息 ： 这里需要时间<ul>
+<li>CPU0<code>写到自己的缓存后，就不管后续的操作了</code>-&gt;只花费一个周期；<code>接着执行后续的指令</code><ul>
+<li>在之后的时间内，CPU的其它部件会完成剩余的工作，运行MESI协议</li>
+<li>因此前一个写<code>指令实际完成的时间</code>可能晚于后续的读【不同地址】操作</li>
+</ul>
+</li>
+<li>在这段时间内，如果CPU1发起读操作怎么办？-&gt; 如果CPU1那边发出的缓存失效信息还没有到达CPU1，那么CPU1会读到一个无效值！！</li>
+</ul>
+</li>
+<li>这种由<code>MESI协议同步延迟</code>带来的不一致问题，也可以使用内存屏障来解决</li>
+</ul>
+<h2 id="如果两个Core真的同时访存同一个地址怎么办？"><a href="#如果两个Core真的同时访存同一个地址怎么办？" class="headerlink" title="如果两个Core真的同时访存同一个地址怎么办？"></a>如果两个Core真的同时访存同一个地址怎么办？</h2><p>- </p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div> CPU乱序执行-内存屏障</div>
+      <div>http://example.com/2024/08/27/嵌入式-架构/CPU乱序执行-内存屏障/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cyokeo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%90%8C%E6%AD%A5%20vs%20%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" title="同步 vs 内存屏障">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">同步 vs 内存屏障</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/26/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Debug%E6%89%8B%E6%AE%B5/" title="Linux - 开发可以的debug手段">
+                        <span class="hidden-mobile">Linux - 开发可以的debug手段</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

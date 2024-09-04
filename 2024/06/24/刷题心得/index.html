@@ -24,7 +24,7 @@
 <meta property="og:description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1] 局部变量一定要初始化  编程脑子-变迟钝 双重循环中，错误使用相同的计数变量，导致程序出现问题 if (key[i] &#x3D; &#39;T&#39;) -&gt; 注意啊，还真出现了这种错误 &#x3D;&#x3D; 不是 &#x3D; -&gt; 写判断时一定要注意 写判断，把数值写到&#x3D;&#x3D;左">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-24T14:08:52.000Z">
-<meta property="article:modified_time" content="2024-08-17T13:28:36.142Z">
+<meta property="article:modified_time" content="2024-09-04T07:31:24.474Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.5k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          19 分钟
+          22 分钟
         
       </span>
     
@@ -294,7 +294,10 @@
 <h2 id="常用编程技巧"><a href="#常用编程技巧" class="headerlink" title="常用编程技巧"></a>常用编程技巧</h2><ul>
 <li><p>(long long)(m-1) * (m-2) -&gt; 强制类型转换的优先级高于加减乘除</p>
 </li>
-<li><p>使用lambda表达式自定义sort的比较函数</p>
+<li><p>使用<code>std::greater&lt;int&gt;</code>带入sort或者构造声明map</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;functional&gt;</span></span><br><br><span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nume.<span class="hljs-built_in">end</span>(), <span class="hljs-built_in">greater</span>&lt;<span class="hljs-type">int</span>&gt;())<br><br>map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>, greater&lt;<span class="hljs-type">int</span>&gt;&gt;<br><span class="hljs-comment">// 注意它们两个不一样，map声明时需要传入一个类型；而sort需要传入一个函数	</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>使用lambda表达式自定义sort的比较函数，并使用<code>decltype()</code>传给map声明时的自定义key比较函数</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&gt;points;<br><span class="hljs-built_in">sort</span>(points.<span class="hljs-built_in">begin</span>(), points.<span class="hljs-built_in">end</span>(), [](<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; l, <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; r) -&gt; <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> l[<span class="hljs-number">0</span>] &lt; r[<span class="hljs-number">0</span>];<br>&#125;);<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>使用程序块为变量赋值，要注意函数块需要使用<font color=#DC143C>()</font>包裹起来：</p>
@@ -337,6 +340,7 @@
 <h2 id="常用数据结构及其方法"><a href="#常用数据结构及其方法" class="headerlink" title="常用数据结构及其方法"></a>常用数据结构及其方法</h2><h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><ul>
 <li>erase()</li>
 <li>rbegin() -&gt; 最右侧的那个节点</li>
+<li>front()&#x2F;back() -&gt; 用于查看元素</li>
 <li>pop_back()</li>
 <li>push_back() -&gt; 可以用来模拟栈</li>
 <li>rend() -&gt; 第一个节点前面，不在vector中</li>
@@ -386,7 +390,7 @@
 <ul>
 <li>借助<code>find</code>进行划分；但是也只能跳过整体的<code>string</code></li>
 <li>借助getline(string) 和 istringstrem(sstream)对字符串进行划分<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp">string str=<span class="hljs-string">&quot;She is a girl.&quot;</span>; <span class="hljs-comment">// istringstream 默认以空格进行划分</span><br>   <span class="hljs-function">istringstream <span class="hljs-title">is</span><span class="hljs-params">(str)</span></span>;<br>   string buf;<br>   <span class="hljs-keyword">while</span>(is&gt;&gt;buf)<br>   &#123;<br>     cout&lt;&lt;buf&lt;&lt;endl;<br>   &#125;<br>   <br>   <span class="hljs-comment">// 借助getline -&gt; 缺点是只能delimeter只能为单个字符</span><br>   <span class="hljs-comment">// istream&amp; getline ( istream &amp;is , string &amp;str , char delim );</span><br>   <span class="hljs-type">char</span> del = <span class="hljs-string">&#x27; &#x27;</span>;<br>   <span class="hljs-keyword">while</span>(<span class="hljs-built_in">getline</span>(is,buf,del))<br>   &#123;<br>     <span class="hljs-keyword">if</span>(buf.<span class="hljs-built_in">size</span>()) cout&lt;&lt;buf;<br>   &#125;<br></code></pre></td></tr></table></figure></li>
-<li>使用strtok()进行划分 -&gt; 可以忽略很多字符<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// in &lt;string&gt;</span><br><span class="hljs-comment">// char* strtok( char* str, const char* delim );</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-type">char</span> input[] = <span class="hljs-string">&quot;one + two * (three - four)!&quot;</span>;<br>  <span class="hljs-type">const</span> <span class="hljs-type">char</span>* delimiters = <span class="hljs-string">&quot;! +- (*)&quot;</span>;<br>  <span class="hljs-type">char</span>* token = std::<span class="hljs-built_in">strtok</span>(input, delimiters);<br>  <span class="hljs-keyword">while</span> (token)<br>  &#123;<br>      <span class="hljs-comment">// token may do not have &#x27;\0&#x27; at the end</span><br>      std::cout &lt;&lt; <span class="hljs-built_in">string</span>(token) &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span>;<br>      token = std::<span class="hljs-built_in">strtok</span>(<span class="hljs-literal">nullptr</span>, delimiters);<br>  &#125;<br><br>  std::cout &lt;&lt; <span class="hljs-string">&quot;\nContents of the input string now:\n\&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> n = <span class="hljs-number">0</span>; n &lt; <span class="hljs-keyword">sizeof</span> input; ++n)<br>  &#123;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-type">const</span> <span class="hljs-type">char</span> c = input[n]; c != <span class="hljs-string">&#x27;\0&#x27;</span>)<br>          std::cout &lt;&lt; c;<br>      <span class="hljs-keyword">else</span><br>          std::cout &lt;&lt; <span class="hljs-string">&quot;\\0&quot;</span>;<br>  &#125;<br>  std::cout &lt;&lt; <span class="hljs-string">&quot;\&quot;\n&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>使用strtok()进行划分 -&gt; 可以忽略很多字符<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// in &lt;string.h&gt; or &lt;cstring&gt;</span><br><span class="hljs-comment">// char* strtok( char* str, const char* delim );</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-type">char</span> input[] = <span class="hljs-string">&quot;one + two * (three - four)!&quot;</span>;<br>  <span class="hljs-type">const</span> <span class="hljs-type">char</span>* delimiters = <span class="hljs-string">&quot;! +- (*)&quot;</span>;<br>  <span class="hljs-type">char</span>* token = std::<span class="hljs-built_in">strtok</span>(input, delimiters);<br>  <span class="hljs-keyword">while</span> (token)<br>  &#123;<br>      <span class="hljs-comment">// token may do not have &#x27;\0&#x27; at the end</span><br>      std::cout &lt;&lt; <span class="hljs-built_in">string</span>(token) &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span>;<br>      token = std::<span class="hljs-built_in">strtok</span>(<span class="hljs-literal">nullptr</span>, delimiters);<br>  &#125;<br><br>  std::cout &lt;&lt; <span class="hljs-string">&quot;\nContents of the input string now:\n\&quot;&quot;</span>;<br>  <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> n = <span class="hljs-number">0</span>; n &lt; <span class="hljs-keyword">sizeof</span> input; ++n)<br>  &#123;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-type">const</span> <span class="hljs-type">char</span> c = input[n]; c != <span class="hljs-string">&#x27;\0&#x27;</span>)<br>          std::cout &lt;&lt; c;<br>      <span class="hljs-keyword">else</span><br>          std::cout &lt;&lt; <span class="hljs-string">&quot;\\0&quot;</span>;<br>  &#125;<br>  std::cout &lt;&lt; <span class="hljs-string">&quot;\&quot;\n&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>c_str()</p>
@@ -413,7 +417,7 @@
 <li>swap() -&gt; <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/swap/">交换两个栈的内容</a></li>
 </ul>
 <h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><ul>
-<li>&lt;queue&gt;</li>
+<li><code>&lt;queue&gt;</code></li>
 <li>push()</li>
 <li>pop() ❗️ -&gt; 注意返回值为 void，因此取元素只能用front()方法</li>
 <li>top() ❌ -&gt; 没有这个方法，要使用front()</li>
@@ -437,11 +441,20 @@
 <li><p>迭代器加法可以使用<code>advance</code></p>
 <ul>
 <li><code>advance(it, 5);</code></li>
+<li>要注意该函数返回值为void</li>
+<li>且第二个参数可以为负值</li>
+</ul>
+</li>
+<li><p>可以使用<code>distance(begin, end)</code>计算两个迭代器之间的距离，注意end一定要在begin的后面</p>
+<ul>
+<li>是的，必须</li>
 </ul>
 </li>
 </ul>
 <h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><ul>
 <li><p>&lt;map&gt;</p>
+</li>
+<li><p>lower_bound&#x2F;upper_bound</p>
 </li>
 <li><p>erase() -&gt; 参数可以为 <strong>iterator</strong>；<strong>key</strong>；也可以为范围参数’[first it, last it)’</p>
 </li>
@@ -450,13 +463,37 @@
 <li><p>定义map型对象时，如何自定义key比较函数：注意只能定义key的比较函数：也可以定义lambda表达式，并使用<code>decltype</code></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">cmp_key</span><br>&#123;<br>    <span class="hljs-comment">// 注意，函数的参数需要于map的key的参数类型相同</span><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">key_t</span> &amp;k1, <span class="hljs-type">const</span> <span class="hljs-type">key_t</span> &amp;k2)</span><span class="hljs-type">const</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span>(k1.dwBussID != k2.dwBussID)<br>        &#123;<br>            <span class="hljs-keyword">return</span> k1.dwBussID &lt; k2.dwBussID;<br>        &#125;<br><br>        <span class="hljs-keyword">if</span>(k1.dwVersion != k2.dwVersion)<br>        &#123;<br>            <span class="hljs-keyword">return</span> k1.dwVersion &lt; k2.dwVersion;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(k1.dwHashUrl != k2.dwHashUrl)<br>        &#123;<br>            <span class="hljs-keyword">return</span> k1.dwHashUrl &lt; k2.dwHashUrl;<br>        &#125;<br>　　　　　　　　  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h3><h2 id="常用库函数运算"><a href="#常用库函数运算" class="headerlink" title="常用库函数运算"></a>常用库函数运算</h2><h3 id="lower-bound-iterator-start-iterator-end-value"><a href="#lower-bound-iterator-start-iterator-end-value" class="headerlink" title="lower_bound(iterator_start, iterator_end, value) -&gt;"></a>lower_bound(iterator_start, iterator_end, value) -&gt;</h3><ul>
+<h3 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h3><ul>
+<li><code>&lt;queue&gt;</code></li>
+<li>需要指定底层使用什么容器类型存放元素：默认为vector，也支持deque。也可以自定义容器</li>
+<li>top() -&gt; 查看尾部元素</li>
+<li>push()&#x2F;pop()</li>
+</ul>
+<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><ul>
+<li><code>&lt;deque&gt;</code></li>
+<li>元素存储不是连续的</li>
+<li>支持<code>[]</code>下标索引操作</li>
+<li>front&#x2F;back -&gt; 查看元素</li>
+<li>puah_back&#x2F;push_front</li>
+<li>pop_back&#x2F;pop_front</li>
+</ul>
+<h2 id="常用库函数运算"><a href="#常用库函数运算" class="headerlink" title="常用库函数运算"></a>常用库函数运算</h2><h3 id="lower-bound-iterator-start-iterator-end-value"><a href="#lower-bound-iterator-start-iterator-end-value" class="headerlink" title="lower_bound(iterator_start, iterator_end, value) -&gt;"></a>lower_bound(iterator_start, iterator_end, value) -&gt;</h3><ul>
 <li>返回第一个迭代器it，其值<strong>不满足</strong> <code>(*it) &lt; value</code></li>
 <li>即找到第一个迭代器，其值<strong>满足</strong> <code>value &lt;= (*it)</code></li>
 <li>参数可以为&amp;arr[i]，返回值也为该类型，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted/submissions/545900287/">参考</a></li>
 </ul>
 <h3 id="upper-bound-start-end-value"><a href="#upper-bound-start-end-value" class="headerlink" title="upper_bound(start, end, value) -&gt;"></a>upper_bound(start, end, value) -&gt;</h3><ul>
 <li>返回第一个迭代器，其值<strong>满足</strong> <code>(*it) &gt; value</code></li>
+</ul>
+<h3 id="gcd-lcm"><a href="#gcd-lcm" class="headerlink" title="gcd&#x2F;lcm"></a>gcd&#x2F;lcm</h3><ul>
+<li><code>&lt;numeric&gt;</code></li>
+<li>gcd: 最大公因数</li>
+<li>lcm: 最小公倍数</li>
+</ul>
+<h3 id="iota"><a href="#iota" class="headerlink" title="iota"></a>iota</h3><ul>
+<li><code>&lt;numeric&gt;</code></li>
+<li><code>iota(foreard_iterator start, forward_iterator end, init_val)</code></li>
+<li>序列化<code>[start, end)</code>，第一个值为init_val</li>
 </ul>
 <h3 id="atan2-double"><a href="#atan2-double" class="headerlink" title="atan2() -&gt; double"></a>atan2() -&gt; double</h3><ul>
 <li>求坐标(x, y)到x轴的极角，范围为[-pi, pi]。这里要注意坐标上的点在-x轴上时，其极角可能为-pi，也可能为pi，但只能为一个值<ul>
