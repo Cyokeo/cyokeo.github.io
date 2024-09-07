@@ -16,15 +16,15 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux命令常见概念 软链接 VS 硬链接 软连接会产生inode节点，删除软链接对源文件没有影响 硬链接指向同一个inode，每增加一个硬链接会增加节点链接数；只要节点的链接数不为0，文件就一直存在">
+    <meta name="description" content="Linux命令常见概念文件系统四个关键概念 文件描述符（File Descriptor）: 文件描述符是一个非负整数，用于在程序中引用打开的文件、套接字或其他I&#x2F;O资源。 每当一个进程打开一个文件、创建一个套接字或进行其他类似的操作时，内核都会为该进程分配一个新的文件描述符。 文件描述符是进程级的，不同的进程可以有各自的文件描述符表，互不影响。   文件描述符表（File Descrip">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux-基础">
 <meta property="og:url" content="http://example.com/2024/07/27/Linux-%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Linux命令常见概念 软链接 VS 硬链接 软连接会产生inode节点，删除软链接对源文件没有影响 硬链接指向同一个inode，每增加一个硬链接会增加节点链接数；只要节点的链接数不为0，文件就一直存在">
+<meta property="og:description" content="Linux命令常见概念文件系统四个关键概念 文件描述符（File Descriptor）: 文件描述符是一个非负整数，用于在程序中引用打开的文件、套接字或其他I&#x2F;O资源。 每当一个进程打开一个文件、创建一个套接字或进行其他类似的操作时，内核都会为该进程分配一个新的文件描述符。 文件描述符是进程级的，不同的进程可以有各自的文件描述符表，互不影响。   文件描述符表（File Descrip">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-27T06:06:17.000Z">
-<meta property="article:modified_time" content="2024-07-27T06:09:06.121Z">
+<meta property="article:modified_time" content="2024-09-07T06:42:57.450Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          77 字
+          1.7k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          14 分钟
         
       </span>
     
@@ -272,13 +272,58 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><h2 id="常见概念"><a href="#常见概念" class="headerlink" title="常见概念"></a>常见概念</h2><ul>
-<li>软链接 VS 硬链接<ul>
+                <h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><h2 id="常见概念"><a href="#常见概念" class="headerlink" title="常见概念"></a>常见概念</h2><h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="四个关键概念"><a href="#四个关键概念" class="headerlink" title="四个关键概念"></a>四个关键概念</h3><ol>
+<li><strong>文件描述符（File Descriptor）</strong>:<ul>
+<li>文件描述符是一个非负整数，用于在程序中引用打开的文件、套接字或其他I&#x2F;O资源。</li>
+<li>每当一个进程打开一个文件、创建一个套接字或进行其他类似的操作时，内核都会为该进程分配一个新的文件描述符。</li>
+<li>文件描述符是进程级的，不同的进程可以有各自的文件描述符表，互不影响。</li>
+</ul>
+</li>
+<li><strong>文件描述符表（File Descriptor Table）</strong>:<ul>
+<li>每个进程都有一个文件描述符表，它是一个数组结构，数组的每个元素都指向一个文件表项。</li>
+<li>文件描述符作为数组的索引，使得进程能够快速找到对应的文件表项。</li>
+</ul>
+</li>
+<li><strong>文件表项（File Table Entry）</strong>:<ul>
+<li>文件表项包含了关于打开文件的信息，比如文件状态标志（如只读、只写、追加等）、当前文件偏移量（即下一次读写操作的位置）等。</li>
+<li>文件表项还包含一个指向inode的指针，这个指针用于定位文件在文件系统中的实际位置。</li>
+<li><em><strong>同一个文件可以被多个进程打开，但每个进程都有自己的文件表项，这样可以保证每个进程对文件的操作（如偏移量）互不影响</strong></em>。</li>
+<li>只要有打开某个文件的操作，就会生成一个文件表现</li>
+</ul>
+</li>
+<li><strong>inode（索引节点）</strong>:<ul>
+<li>inode是文件系统的核心概念之一，它包含了关于文件本身的信息，如文件大小、时间戳（创建时间、修改时间、访问时间等）、文件类型（普通文件、目录、符号链接等）等。</li>
+<li>inode还包含了磁盘上文件数据的位置信息，比如数据块的位置。</li>
+<li>对于不同的文件系统，inode的结构可能会有所不同，但基本原理是相似的。</li>
+</ul>
+</li>
+</ol>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>一个进程中不同文件描述符可以指向同一个文件表项：通过<code>DUP</code>进行</li>
+<li>不同进程中的不同文件描述符也可以指向同一个文件表现：通过<code>fork+dup</code>进行，fork时子进程会继承父进程的文件描述符表</li>
+<li>不同的打开文件表现可以指向同一个inode节点：对同一个文件打开多次</li>
+</ul>
+<h3 id="软链接-VS-硬链接"><a href="#软链接-VS-硬链接" class="headerlink" title="软链接 VS 硬链接"></a>软链接 VS 硬链接</h3><ul>
 <li>软连接会产生inode节点，删除软链接对源文件没有影响</li>
 <li>硬链接指向同一个inode，每增加一个硬链接会增加节点链接数；只要节点的链接数不为0，文件就一直存在</li>
 </ul>
-</li>
-</ul>
+<h4 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a><a target="_blank" rel="noopener" href="https://gnu-linux.readthedocs.io/zh/latest/Chapter03/00_link.html#id2" title="永久链接至标题">硬链接</a></h4><p>一般情况下，<em>文件名</em>和 inode 号码是”一一对应”的关系，每个 inode 号码对应一个文件名（<em>每个文件默认有一个硬链接</em>）。但是，<em><strong>Unix&#x2F;Linux 系统允许多个文件名指向同一个 inode 号码</strong></em>。</p>
+<p>这意味着，可以用不同的文件名访问同样的内容，对文件内容进行修改后，会影响所有文件名。但是，删除一个文件名，不影响另一个文件名的访问。这种情况就被称为”硬链接”（hard link）。</p>
+<p><em><strong>创建一个硬链接，就会为文件创建了一个新的文件名</strong></em>。硬链接有两个重要局限性：</p>
+<ol>
+<li>硬链接不能链接不在同一系统的文件。也就是说硬链接不能链接与文件不在同一磁盘分区上的文件；</li>
+<li>硬链接不能链接目录。</li>
+</ol>
+<p>一个硬链接和文件本身没有什么区别。当你列出一个包含硬链接的文件时，不会有特殊的链接指示说明。当一个硬链接被删除时，文件本身的内容仍然存在（也就是说，它所占的磁盘空间不会被重新分配），直到所有关联这个文件的硬链接都删掉。</p>
+<blockquote>
+<p>&#x3D;&#x3D;目录文件的硬链接&#x3D;&#x3D;:<br>创建目录时，默认会生成两个目录项： <code>.</code> 和 <code>..</code> 。 <code>.</code> 相当于当前目录的硬链接； <code>..</code> 相当于父目录的硬链接。所以，目录的硬链接总数，等于 2 加上它的子目录总数（含隐藏目录）。其实使用 <code>ln -d</code> 命令也允许 root 用户尝试建立目录硬链接。<br>这些都说明系统限制对目录进行硬链接只是一个硬性规定，并不是逻辑上不允许或技术上不可行。<br>&#x3D;&#x3D;为什么操作系统要进行这个限制呢&#x3D;&#x3D;？<br>由于 Linux 操作系统中的目录是以 <code>/</code> 为节点的树状结构，对目录的硬链接有可能破坏这种结构，甚至形成循环如： <code>/usr/bin -&gt; /usr/</code> ，在使用遍历目录的命令时（如： <code>ls -R</code> ）系统就会陷入无限循环中。软链接的 inode 号码不一样，所以不会出现这种问题。</p>
+</blockquote>
+<h4 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h4><p>除了硬链接以外，还有一种软链接，创建软链接是为了克服硬链接的局限性。</p>
+<p>软链接是通过创建一个特殊类型的文件（指针）链接到文件或目录。就像是 Windows 的快捷方式，当然，符号链接早于 Windows 的快捷方式很多年。</p>
+<p>文件 A 和文件 B 的 <em>inode 号码虽然不一样</em>，但是<em><strong>文件 A 的内容是文件 B 的路径</strong></em>。读取文件 A 时，系统会自动将访问指向文件 B。因此，无论打开哪一个文件，最终读取的都是文件 B。但是，文件 A 依赖于文件 B 而存在，如果删除了文件 B，打开文件 A 就会报错：”No such file or directory”。这是软链接与硬链接最大的不同：<em><strong>文件 A 指向文件 B的文件名，而不是文件 B 的 inode 号码</strong></em>。</p>
+<blockquote>
+<p>&#x3D;&#x3D;软链接的应用&#x3D;&#x3D;<br>想象这样一个情景，一个程序需要使用 foo_1.1 文件中的共享资源，由于 foo 经常改变版本号。每次升级后都得将使用 foo_1.1 的所有程序更新到 foo_1.2 文件，那么每次更新 foo 版本后，都要重复上边的工作。<br>符号链接能很好的解决这个问题。比如，创建一个 foo 的软链接指向 foo_1.2。这时，当一个程序访问 foo 时，实际上是访问 foo_1.2。当升级到 foo_1.3 时，只需要更新软链接指向。这不仅解决了版本升级问题，而且还允许在系统中保存两个不同的版本，如果 foo_1.3 有错误，再更新回原来的 foo_1.2 链接就可以。</p>
+</blockquote>
 
                 
               </div>

@@ -16,15 +16,15 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题单2948. 交换得到字典序最小的数组 如何将数组元素与数组下标绑定排序；即：如何得到数组排序后，其下标的变化">
+    <meta name="description" content="题单2948. 交换得到字典序最小的数组 如何将数组元素与数组下标绑定排序；即：如何得到数组排序后，其下标的变化!!! 新建一个数组，里面填充下标：对该数组进行自定义排序 - 按照对应元素的大小   排序后得到顺序排列数组元素对应的&#x3D;&#x3D;下标块群&#x3D;&#x3D; 遍历排序后的下标数组 新建局部数组，存储所有下标：排序后的元素差值 &lt; limit 对该局部下标数组排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="技巧-分组循环">
 <meta property="og:url" content="http://example.com/2024/09/04/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E6%8A%80%E5%B7%A7-%E5%88%86%E7%BB%84%E5%BE%AA%E7%8E%AF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="题单2948. 交换得到字典序最小的数组 如何将数组元素与数组下标绑定排序；即：如何得到数组排序后，其下标的变化">
+<meta property="og:description" content="题单2948. 交换得到字典序最小的数组 如何将数组元素与数组下标绑定排序；即：如何得到数组排序后，其下标的变化!!! 新建一个数组，里面填充下标：对该数组进行自定义排序 - 按照对应元素的大小   排序后得到顺序排列数组元素对应的&#x3D;&#x3D;下标块群&#x3D;&#x3D; 遍历排序后的下标数组 新建局部数组，存储所有下标：排序后的元素差值 &lt; limit 对该局部下标数组排序">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-04T09:58:50.798Z">
-<meta property="article:modified_time" content="2024-09-04T10:00:47.746Z">
+<meta property="article:modified_time" content="2024-09-05T05:59:52.833Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          47 字
+          219 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -273,7 +273,21 @@
               <div class="markdown-body">
                 
                 <h2 id="题单"><a href="#题单" class="headerlink" title="题单"></a>题单</h2><h3 id="2948-交换得到字典序最小的数组"><a href="#2948-交换得到字典序最小的数组" class="headerlink" title="2948. 交换得到字典序最小的数组"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/make-lexicographically-smallest-array-by-swapping-elements/">2948. 交换得到字典序最小的数组</a></h3><ol>
-<li>如何将数组元素与数组下标绑定排序；即：<code>如何得到数组排序后，其下标的变化</code></li>
+<li>如何将数组元素与数组下标绑定排序；即：<code>如何得到数组排序后，其下标的变化</code>!!!<ul>
+<li>新建一个数组，里面填充下标：对该数组进行自定义排序 - 按照对应元素的大小</li>
+</ul>
+</li>
+<li>排序后得到顺序排列数组元素对应的&#x3D;&#x3D;下标块群&#x3D;&#x3D;</li>
+<li>遍历排序后的下标数组<ul>
+<li>新建局部数组，存储所有下标：排序后的元素差值 &lt; limit</li>
+<li>对该局部下标数组排序</li>
+<li>遍历排序后的局部下标数组，并对应填充旧数组：<ol>
+<li>将原先下标数组对应位置处下标所对应的元素放到旧数组中对应位置 -&gt; </li>
+<li>对应旧数组的下标为：排序后局部下标数组对应的下标</li>
+</ol>
+</li>
+</ul>
+</li>
 </ol>
 
                 
@@ -357,6 +371,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/09/04/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E6%8A%80%E5%B7%A7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B-%E6%8F%92%E5%85%A5%E5%AE%B9%E5%99%A8%E5%B9%B6%E6%8E%92%E5%BA%8F/" title="技巧-自定义类型-插入set容器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">技巧-自定义类型-插入set容器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

@@ -24,7 +24,7 @@
 <meta property="og:description" content="读题关键字 注意总结解题模版！！！ 满足条件的最小整数 涉及到存储长度类似的：[如果最小的不是32位整数，也返回-1] 局部变量一定要初始化  编程脑子-变迟钝 双重循环中，错误使用相同的计数变量，导致程序出现问题 if (key[i] &#x3D; &#39;T&#39;) -&gt; 注意啊，还真出现了这种错误 &#x3D;&#x3D; 不是 &#x3D; -&gt; 写判断时一定要注意 写判断，把数值写到&#x3D;&#x3D;左">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-24T14:08:52.000Z">
-<meta property="article:modified_time" content="2024-09-04T07:31:24.474Z">
+<meta property="article:modified_time" content="2024-09-05T12:56:02.058Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          2.6k 字
         
       </span>
     
@@ -290,6 +290,10 @@
 <li>“zvc123” -&gt; 这样就忘记了最后一次的处理</li>
 </ul>
 </li>
+</ul>
+<h2 id="两个区别"><a href="#两个区别" class="headerlink" title="两个区别"></a>两个区别</h2><ul>
+<li><code>sort(nums.begin(), nums.end(), greater&lt;int&gt;());</code></li>
+<li><code>map&lt;int, int, greater&lt;int&gt;&gt;mp;</code></li>
 </ul>
 <h2 id="常用编程技巧"><a href="#常用编程技巧" class="headerlink" title="常用编程技巧"></a>常用编程技巧</h2><ul>
 <li><p>(long long)(m-1) * (m-2) -&gt; 强制类型转换的优先级高于加减乘除</p>
@@ -432,7 +436,7 @@
 <li><p>set有一个cmp函数，当cmp(l, r)为false且当cmp(r, l)也为false时，说明<strong>l与r为相同的元素</strong></p>
 </li>
 <li><p>自定义cmp函数:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> cmp = [](<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; l, <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; r) -&gt; <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> l[<span class="hljs-number">0</span>]*l[<span class="hljs-number">0</span>] + l[<span class="hljs-number">1</span>]*l[<span class="hljs-number">1</span>] &lt;= r[<span class="hljs-number">0</span>]*r[<span class="hljs-number">0</span>] + r[<span class="hljs-number">1</span>]*r[<span class="hljs-number">1</span>];<br>&#125;;<br>set&lt;vector&lt;<span class="hljs-type">int</span>&gt;, <span class="hljs-keyword">decltype</span>(cmp)&gt; st;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> cmp = [](<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; l, <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; r) -&gt; <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> l[<span class="hljs-number">0</span>]*l[<span class="hljs-number">0</span>] + l[<span class="hljs-number">1</span>]*l[<span class="hljs-number">1</span>] &lt;= r[<span class="hljs-number">0</span>]*r[<span class="hljs-number">0</span>] + r[<span class="hljs-number">1</span>]*r[<span class="hljs-number">1</span>];<br>&#125;;<br>set&lt;vector&lt;<span class="hljs-type">int</span>&gt;, <span class="hljs-keyword">decltype</span>(cmp)&gt; <span class="hljs-built_in">st</span>(cmp);<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>erase() ❗️ multiset在使用这个方法删除某个key时，会把所有相同的key删除；如果想要删除一个，需要先使用find返回迭代器，并将迭代器作为该方法的参数</p>
 </li>
