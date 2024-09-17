@@ -224,15 +224,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/24/TCP%E5%AD%A6%E4%B9%A0-%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0/" target="_self">
-          TCP学习-超时与重传
+        <a href="/2024/08/17/CPP/%E9%9D%A2%E7%BB%8F/" target="_self">
+          cpp-面经待准备
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/24/TCP%E5%AD%A6%E4%B9%A0-%E8%B6%85%E6%97%B6%E4%B8%8E%E9%87%8D%E4%BC%A0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/17/CPP/%E9%9D%A2%E7%BB%8F/" target="_self">
         <div>
-          TCP超时与重传核心问题 发送时设置一个定时器来解决数据和确认可能丢失的问题 如何确定超时判断间隔？ 如何确定重传的频率？ 1，2，4，8， 16，32，64……    典型实现 测量TCP报文段的往返时间 这样才能比较好的确定超时时间 发出数据 -&gt; 收到ACK的时间间隔？   使用测量结果对下一个将要传输的报文段建立重传超时时间  四个定时器 对每个连接，TCP管理四个不同的定时器 重传
+          c++11的新特性，多态，平时如何排查bug，智能指针，多线程，如何避免死锁等等。 智能指针，多线程，原子量 面试真题 | 蔚来嵌入式一二三面面经 介绍一下freertos的任务管理、内存管理、中断管理再介绍一下linux的进程管理、内存管理、中断管理linux怎么管理文件了解什么文件系统freertos的优先级反转了解么如何解决优先级反转问题手撕 反转链表ACM模式继续八股什么是字符设备、块设备
         </div>
       </a>
 
@@ -240,12 +240,19 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-24 19:49" pubdate>
-              2024-07-24
+            <time datetime="2024-08-17 21:37" pubdate>
+              2024-08-17
             </time>
           </div>
         
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
         
       </div>
     </article>
@@ -257,15 +264,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/24/Linux-aarch64-%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A0%88/" target="_self">
-          Linux-aarch64-任务切换与内核栈
+        <a href="/2024/08/14/CPP/struct%20vs%20class/" target="_self">
+          struct vs class
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/24/Linux-aarch64-%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A0%88/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/14/CPP/struct%20vs%20class/" target="_self">
         <div>
-          任务切换 task_struct-&gt;stack成员指向的内存空间就是内核栈  陷入内核时，用户任务上下文保存在其内核栈上：且保存的位置也是固定的，就在内核栈空间最上方预留的的pt_regs区域  参考《vectors.md》种entry_handler的定义：mov	x0, sp; bl	el\el\ht\()_\regsize\()_\label\()_handler 参考 kernel_
+          参考 # C++ 中 class 和 struct 区别  相同与不同cpp中struct 与 class基本是通用的，只有几个细节不一样  class 中类中的成员默认都是 private 属性的 struct 中结构体中的成员默认都是 public 属性的   class 继承默认是 private 继承 struct 继承默认是 public 继承   class 可以用于定义模板参数：te
         </div>
       </a>
 
@@ -273,8 +280,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-24 19:47" pubdate>
-              2024-07-24
+            <time datetime="2024-08-14 18:56" pubdate>
+              2024-08-14
             </time>
           </div>
         
@@ -289,7 +296,253 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  <a href="/categories/cpp%E5%9F%BA%E7%A1%80/" class="category-chain-item">cpp基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E4%B8%AD%E6%96%AD%E4%B8%8B%E5%8D%8A%E9%83%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6/" target="_self">
+          Linux - 中断下半部的三种机制
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E4%B8%AD%E6%96%AD%E4%B8%8B%E5%8D%8A%E9%83%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6/" target="_self">
+        <div>
+          参考博客 # Linux tasklet 机制的理解  Top half vs Bottom Half 上半部关中断 VS 下半部开中断  softirq 内核目前配置了10+个softirq，最多只能注册32个 使用前必须使用open_softirq注册对应的处理函数；使用时调用raise_softirq()触发&#x2F;标记软中断的发生；内核使用softirq_init对软中断系统进行初始化
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-13 20:42" pubdate>
+              2024-08-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/" target="_self">
+           Linux - 调度策略
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/" target="_self">
+        <div>
+          参考博客 Linux进程调度-实时调度器  小结 优先级数值越低，则调度优先级越高 0-99: 实时任务 100-139: 普通任务   每个CPU都有三个运行队列 dl_queue: SHCED_DEADLINE策略的任务会在这个优先级里，距离当前时间点最近的Deadline任务会被选择执行 rt_queue cfs_queue dl &gt; rt &gt; cfs，因此调度点选择下一个待执行
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-12 21:38" pubdate>
+              2024-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%9A%E6%A0%B8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20vs%20%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%A4%9A%E4%B8%AA%E6%A0%B8%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" target="_self">
+          多核操作系统 vs 运行在多个核上的操作系统
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%9A%E6%A0%B8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20vs%20%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%A4%9A%E4%B8%AA%E6%A0%B8%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" target="_self">
+        <div>
+          区分多核操作系统 一个操作系统管理多个核 基本只有一个调度器 -&gt; 每个核都有自己的调度器，但是会主动进行负载均衡 每个CPU都有一个时钟中断，周期性的触发，对应的处理函数为scheduler_tick， 如果当前时间已经超过了下一次负载均衡时刻，那么raise_softirq,(SCHED_SOFTIRQ)在这个软中断中进行后续的负载均衡   可以使用负载均衡的调度策略，让所有核负载均衡
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-10 23:35" pubdate>
+              2024-08-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RTOS/">#RTOS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/" target="_self">
+          UART - Console实现
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/" target="_self">
+        <div>
+          常用开源实现 letter-shell  上位机按下按键 立即通过接口发送给下位机 触发下位机的接收中断  下位机接收中断服务例程 读取寄存器，获取接收到的字符 如果没有按下回车：下位机记录接收到的字符，可能会对特殊字符进行记录；接着回显接收到的字符； 按下回车：代表执行命令，下位机接收到后，将之前的接收缓存投给命令行parser函数，对命令行进行解析并执行相关的指令
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-10 23:35" pubdate>
+              2024-08-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/" class="category-chain-item">嵌入式-开发</a>
   
   
 
@@ -311,15 +564,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/23/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%88%9D%E6%9C%9F%E6%B1%87%E7%BC%96/" target="_self">
-          Linux-aarch64-中断处理初期汇编
+        <a href="/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/" target="_self">
+          子文件夹测试
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/23/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%88%9D%E6%9C%9F%E6%B1%87%E7%BC%96/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/" target="_self">
         <div>
-          中断处理初期汇编码&amp;dup2分析参考博客 ARM-GNU常用汇编伪指令 ARM64底层中断处理  总结 kernel_ventry : el 0 64 sync el0t_64_sync kernel_entry \el -&gt; 保存异常处理的现场[x0-29, lr, sp(sp_el0&#x2F;1), pc(elr_el1), pstate(spsr_el1)]到当前spsp_e
+          测试子文件夹中的md能不能被hexo识别。-&gt; 可以的！！！  git 练习
         </div>
       </a>
 
@@ -327,8 +580,48 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-23 20:33" pubdate>
-              2024-07-23
+            <time datetime="2024-08-10 23:35" pubdate>
+              2024-08-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/" target="_self">
+          aarch64
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/" target="_self">
+        <div>
+          异常路由&#x3D;&#x3D;问题&#x3D;&#x3D;： 如果某个异常发生，处理器应该使用那个人异常等级来处理这个异常？ 中断路由规则 路由到EL3：需要设置SCR_EL3.&#123;EA, IRQ, FIQ&#125;  12345MRS X0, SCR_EL3 // 读取SCR_EL3到X0寄存器ORR X0, X0, #(1&lt;&lt;3) // 设置EA，将SError路由到E
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-10 22:03" pubdate>
+              2024-08-10
             </time>
           </div>
         
@@ -343,7 +636,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/" class="category-chain-item">嵌入式-架构</a>
   
   
 
@@ -365,15 +658,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-MISC/" target="_self">
-          TCP学习-MISC
+        <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/Tricore/" target="_self">
+           TRICORE
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-MISC/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/Tricore/" target="_self">
         <div>
-          TCP学习（misc）参考书籍 《TCPIP详解：卷1》  TCP概览 - 可靠性应用数据被分割成TCP认为最适合发送的数据块；如何确定合适的数据块长度？【18.4】TCP发出一个段后启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段；【21章：自适应超时及重传机制】延迟确认：收到发自TCP连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几
+          任务相关CSA 上下文分别消耗两个CSA 上文CSA包含：SP, 返回的下文序号 下文CSA包含：PC, 参数, 绑定的上文序号   每个核有一个统一的CSA池子  内存相关 0xC0000000: 每个核的local地址，访问其本地的PSPR  0xD0000000: local地址，访问其本地的DSPR perCPU的变量链接地址在这个空间内，可以达到不同核上跑相同的代码，但是数据存取访问到的
         </div>
       </a>
 
@@ -381,140 +674,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-22 20:47" pubdate>
-              2024-07-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-3/" target="_self">
-          TCP学习-3
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-3/" target="_self">
-        <div>
-          TCP学习（三） 滑动窗口是相对于确认号开始的  慢启动 核心点：新分组进入网络的速率应该与另一端返回确认的速率相同而进行工作 拥塞窗口【给发送方使用，cwnd】 发送方使用拥塞窗口与通告窗口的最小值作为发送上限： 拥塞窗口是发送方使用的流量控制：大小根据接收到的ACK数量指数增加，会与延迟确认冲突嘛？ 通告窗口则是接收方使用的流量控制
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-22 20:47" pubdate>
-              2024-07-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-2/" target="_self">
-          TCP学习-2
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-2/" target="_self">
-        <div>
-          TCP学习（二）连接建立 - 三次握手 - 沟通双方的初始序列号 请求端发送SYN段，包含发端初始序号（ISN-C），以及服务器端口，MSS 服务器通过发送SYN进行响应：包含收端初始序号(ISN-S)，ACK被设置为1作为对请求端SYN的确认，确认序号 &#x3D; ISN-C + 1， MSS 请求端发送ACK，响应服务器的SYN：ACK被设置为1作为对服务器SYN的确认，确认序号 &#x3D
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-22 20:47" pubdate>
-              2024-07-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-1/" target="_self">
-          TCP学习-1
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-1/" target="_self">
-        <div>
-          TCP学习（一） TCP只对含有数据的ACK进行确认【发端超时重传】；单独的ACK不会发送不会设置超时定时器  因此TCP要考虑每个阶段中可能出现的ACK丢失的情况！！！     报文类型 通过头部的控制位（6bit）区分不同的报文类型：  SYN报文：用于建立连接，包含SYN标志    -&gt; 需要占用一个序号；其中包含最大报文段长度信息，且该信息只能出现在SYN中 ACK报文：用于确认接收
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-22 20:47" pubdate>
-              2024-07-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/22/Linux-Macros/" target="_self">
-          Linux-Macros
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/Linux-Macros/" target="_self">
-        <div>
-          常用宏 WRITE_ONCE &amp;&amp; READ_ONCE 从__native_word的定义可以看出，所谓的原子读写并不能保证，只是尽可能地避免 对一个10字节的数据进行读写，肯定要分成2次以上的内存访问操作 如果为一个原始类型：char, short, int, long, long long，对其进行读写操作就只产生一次内存访问 有些需要避免竞态的，需要加锁  123456789
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-22 20:43" pubdate>
-              2024-07-22
+            <time datetime="2024-08-10 21:41" pubdate>
+              2024-08-10
             </time>
           </div>
         
@@ -529,7 +690,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/" class="category-chain-item">嵌入式-架构</a>
   
   
 
@@ -551,15 +712,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/22/APUE-Learning-%E9%AB%98%E7%BA%A7IO/" target="_self">
-          APUE-Learning-高级IO
+        <a href="/2024/08/10/daily-notes/2024-08-10/" target="_self">
+          Sat Aug 10 2024 00:00:00 GMT+0800 (中国标准时间)
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/APUE-Learning-%E9%AB%98%E7%BA%A7IO/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/daily-notes/2024-08-10/" target="_self">
         <div>
-          高级I&#x2F;O I&#x2F;O多路复用 有多个描述符，数据可能在任一个描述符上到达（可用），但是事先无法知道究竟是哪一个描述符 不能对任意一个描述符进行阻塞读操作，因为数据可能已经在其它描述符上到达 使用两个或多个进程&#x2F;线程分别处理一个描述符，但是带来资源开销、同步处理的问题 不使用阻塞I&#x2F;O：对所有描述符进行轮询处理 异步I&#x2F;O+信号：信号数量有限，无法与描
+          明日计划 算法题复习 大疆真题刷一刷 投递一下字节的机器人工程师 -&gt; 大疆笔试结束后投递
         </div>
       </a>
 
@@ -567,44 +728,32 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-22 20:42" pubdate>
-              2024-07-22
+            <time datetime="2024-08-10 21:38" pubdate>
+              2024-08-10
             </time>
           </div>
         
         
-        
-      </div>
-    </article>
-  </div>
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
 
-  <div class="row mx-auto index-card">
+<span class="category-chains">
+  
+  
     
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
+  
+  
+
+      </span>
     
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/22/APUE-Learning-%E7%BA%BF%E7%A8%8B/" target="_self">
-          APUE-Learning-线程
-        </a>
-      </h2>
+  
+</span>
 
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/APUE-Learning-%E7%BA%BF%E7%A8%8B/" target="_self">
-        <div>
-          线程 每个线程都包含有表示执行环境所必须的信息  进程中标识线程的线程ID。pthread_t，所有可移植的操作系统实现不能把它作为整数处理，因此必须提供一个函数来对两个线程ID进行比较 一组寄存器值 栈 调度优先级和调度策略 信号屏蔽字 -&gt; 继承于创建它的线程 errno变量 线程私有数据   POSIX线程的功能测试宏是**_POSIX_THREADS**，可以用它在编译时确定是否支持
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-22 20:35" pubdate>
-              2024-07-22
-            </time>
           </div>
-        
         
         
       </div>
@@ -615,7 +764,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

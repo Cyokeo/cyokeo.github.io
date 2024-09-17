@@ -24,7 +24,7 @@
 <meta property="og:description" content="参考博客 小林-内存布局  内存碎片🧩内部内存碎片外部内存碎片解决的办法就是内存交换：即把某个程序占用的内存先写到硬盘中，接着释放其占用的内存空间；之后再把信息读回到内存中。不过再读回时占用的内存和之前占用的内存不一样，而是紧邻之前分配过的内存，以期减少外部内存碎片。内存交换空间，从硬盘划分出来，用于内存与硬盘的交换，对应Linux中的Swap分区 内存分段按需分配内存，因此不会有内部碎片；但是">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-07T14:11:23.215Z">
-<meta property="article:modified_time" content="2024-09-07T14:51:17.313Z">
+<meta property="article:modified_time" content="2024-09-08T11:25:45.592Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          852 字
+          884 字
         
       </span>
     
@@ -286,10 +286,11 @@
 <h2 id="段页式内存管理"><a href="#段页式内存管理" class="headerlink" title="段页式内存管理"></a>段页式内存管理</h2><h2 id="X86的内存分页机制"><a href="#X86的内存分页机制" class="headerlink" title="X86的内存分页机制"></a>X86的内存分页机制</h2><p>分页运行在分段基础上：先由分段管理机制将程序的「逻辑地址」转换为「线性地址」（虚拟地址），再由页式管理单元将「线性地址」转换为「物理地址」。</p>
 <p>为了屏蔽x86的这一硬件要求，运行在x86上的Linux中的每个段都是从0开始的整个4GB地址空间，因此OS代码、应用程序代码看到的都是<em><strong>线性地址</strong></em></p>
 <h2 id="程序虚拟内存布局"><a href="#程序虚拟内存布局" class="headerlink" title="程序虚拟内存布局"></a>程序虚拟内存布局</h2><p>每个程序都有自己的页表</p>
-<h4 id="用户空间布局"><a href="#用户空间布局" class="headerlink" title="用户空间布局"></a>用户空间布局</h4><p>用户空间最上方：栈 -&gt; 文件映射区 &lt;- 堆 &lt;-&gt;「 BSS」、「数据段」、「代码段」、「保留区」。</p>
+<h4 id="用户空间布局"><a href="#用户空间布局" class="headerlink" title="用户空间布局"></a>用户空间布局</h4><p>用户空间最上方：栈 -&gt; 「待分配区域」| 文件映射区 | 「待分配区域」&lt;- 堆 &lt;-&gt;「 BSS」、「数据段」、「代码段」、「保留区」。</p>
 <ul>
 <li>malloc : 从堆区分配内存</li>
 <li>mmap : 从文件映射区分配内存</li>
+<li>文件映射区：还会存放动态库中的代码段、数据段、BSS段</li>
 </ul>
 
                 
@@ -373,6 +374,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/09/08/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%86%85%E5%AD%98%E9%A1%B5%E7%B1%BB%E5%9E%8B%F0%9F%90%9F%E9%A1%B5%E9%9D%A2%E5%9B%9E%E6%94%B6/" title="内存页类型🐟页面回收">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">内存页类型🐟页面回收</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

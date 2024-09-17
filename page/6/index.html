@@ -224,15 +224,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/08/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E4%B8%AD%E6%96%AD%E4%B8%8B%E5%8D%8A%E9%83%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6/" target="_self">
-          Linux - 中断下半部的三种机制
+        <a href="/2024/08/25/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E5%9B%9E%E6%BA%AF%E6%B3%95/" target="_self">
+          回溯法
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E4%B8%AD%E6%96%AD%E4%B8%8B%E5%8D%8A%E9%83%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/25/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E5%9B%9E%E6%BA%AF%E6%B3%95/" target="_self">
         <div>
-          参考博客 # Linux tasklet 机制的理解  Top half vs Bottom Half 上半部关中断 VS 下半部开中断  softirq 内核目前配置了10+个softirq，最多只能注册32个 使用前必须使用open_softirq注册对应的处理函数；使用时调用raise_softirq()触发&#x2F;标记软中断的发生；内核使用softirq_init对软中断系统进行初始化
+          常用剪枝技巧经典题目 698. 划分为k个相等的子集 思路 共有k个桶 每个球都要选择划分到哪一个桶，并进行回溯   重要剪枝：如果当前桶与上一个桶的和相同，则跳过当前桶
         </div>
       </a>
 
@@ -240,8 +240,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-13 20:42" pubdate>
-              2024-08-13
+            <time datetime="2024-08-25 16:38" pubdate>
+              2024-08-25
             </time>
           </div>
         
@@ -256,7 +256,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
   
   
 
@@ -268,13 +268,6 @@
           </div>
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-          </div>
-        
       </div>
     </article>
   </div>
@@ -285,15 +278,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/08/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/" target="_self">
-           Linux - 调度策略
+        <a href="/2024/08/22/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/" target="_self">
+          记忆化搜索
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%20-%20%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/22/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/" target="_self">
         <div>
-          参考博客 Linux进程调度-实时调度器  小结 优先级数值越低，则调度优先级越高 0-99: 实时任务 100-139: 普通任务   每个CPU都有三个运行队列 dl_queue: SHCED_DEADLINE策略的任务会在这个优先级里，距离当前时间点最近的Deadline任务会被选择执行 rt_queue cfs_queue dl &gt; rt &gt; cfs，因此调度点选择下一个待执行
+          常见的记忆化key方案常用技巧 得先想出递归的完整方案 将递归的参数引入记忆化搜索中 记忆化搜索key压缩技术  经典题目 3154. 到达第 K 级台阶的方案数  想到了递归方案 -&gt; 但是边界条件的处理不适合转化为记忆化 想到的递归没有带返回值   但是没有想出如何进行递归化搜索 边界条件处理的逻辑 还是子问题的逻辑没有想好   3144. 分割字符频率相等的最少子字符串  记忆化递归的
         </div>
       </a>
 
@@ -301,8 +294,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-12 21:38" pubdate>
-              2024-08-12
+            <time datetime="2024-08-22 22:58" pubdate>
+              2024-08-22
             </time>
           </div>
         
@@ -317,7 +310,115 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/22/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7/" target="_self">
+          位运算技巧
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/22/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7/" target="_self">
+        <div>
+          熟悉位运算 3133. 数组最后一个元素的最小值  零位，1位单独处理 需要思考清楚再动手   3145. 大数组元素的乘积
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-22 22:55" pubdate>
+              2024-08-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/22/CPP/%E4%B8%BA%E4%BB%80%E4%B9%88C++%E7%9A%84%E6%88%90%E5%91%98%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E4%B8%8D%E8%83%BD%E6%98%AF%20virtual/" target="_self">
+          为什么C++的成员模板函数不能是 virtual
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/22/CPP/%E4%B8%BA%E4%BB%80%E4%B9%88C++%E7%9A%84%E6%88%90%E5%91%98%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E4%B8%8D%E8%83%BD%E6%98%AF%20virtual/" target="_self">
+        <div>
+          参考资料 为什么C++的成员模板函数不能是 virtual  自己分析模版可以作为非虚成员函数 成员函数，也就是代码，存储在代码段；是与具体的对象无关的；其不会影响类实例化对象的大小 借助name mangling，类中成员函数，类的作用基本就是给该函数进行name mangling提供名称前缀 因此，当在某个编译单元中实例化某个模版成员函数时，只需要对其进行name mangling；为了防止重
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-22 21:26" pubdate>
+              2024-08-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/cpp%E5%9F%BA%E7%A1%80/" class="category-chain-item">cpp基础</a>
   
   
 
@@ -334,8 +435,6 @@
             
               <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
             
-              <a href="/tags/Linux/">#Linux</a>
-            
           </div>
         
       </div>
@@ -348,15 +447,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/08/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%9A%E6%A0%B8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20vs%20%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%A4%9A%E4%B8%AA%E6%A0%B8%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" target="_self">
-          多核操作系统 vs 运行在多个核上的操作系统
+        <a href="/2024/08/22/CPP/%E9%87%8D%E8%BD%BD%E3%80%81%E9%87%8D%E5%86%99%E3%80%81%E9%9A%90%E8%97%8F/" target="_self">
+          重载、重写、隐藏
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%9A%E6%A0%B8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20vs%20%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%A4%9A%E4%B8%AA%E6%A0%B8%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/22/CPP/%E9%87%8D%E8%BD%BD%E3%80%81%E9%87%8D%E5%86%99%E3%80%81%E9%9A%90%E8%97%8F/" target="_self">
         <div>
-          区分多核操作系统 一个操作系统管理多个核 基本只有一个调度器 -&gt; 每个核都有自己的调度器，但是会主动进行负载均衡 每个CPU都有一个时钟中断，周期性的触发，对应的处理函数为scheduler_tick， 如果当前时间已经超过了下一次负载均衡时刻，那么raise_softirq,(SCHED_SOFTIRQ)在这个软中断中进行后续的负载均衡   可以使用负载均衡的调度策略，让所有核负载均衡
+          参考资料 重载、重写、隐藏的区别  总结重载 发生在同一个作用域中 函数名字相同，但是参数列表不同 函数返回值不参与   依赖于name mangling - g++ std空间使用St 其余空间使用名字长度+名字 +函数名 +参数列表类型首字母    重写 派生类重写基类虚方法【只识记这一种情况】 返回值相同 函数名相同 参数列表相同   基类方法中必须含有virtual关键字 基类的析构函数最
         </div>
       </a>
 
@@ -364,8 +463,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-10 23:35" pubdate>
-              2024-08-10
+            <time datetime="2024-08-22 20:58" pubdate>
+              2024-08-22
             </time>
           </div>
         
@@ -380,7 +479,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  <a href="/categories/cpp%E5%9F%BA%E7%A1%80/" class="category-chain-item">cpp基础</a>
   
   
 
@@ -395,7 +494,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/RTOS/">#RTOS</a>
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
             
           </div>
         
@@ -409,15 +508,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/" target="_self">
-          UART - Console实现
+        <a href="/2024/08/22/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Pytest-%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B/" target="_self">
+          Pytest-简单上手
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Console%E5%AE%9E%E7%8E%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/22/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Pytest-%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B/" target="_self">
         <div>
-          常用开源实现 letter-shell  上位机按下按键 立即通过接口发送给下位机 触发下位机的接收中断  下位机接收中断服务例程 读取寄存器，获取接收到的字符 如果没有按下回车：下位机记录接收到的字符，可能会对特殊字符进行记录；接着回显接收到的字符； 按下回车：代表执行命令，下位机接收到后，将之前的接收缓存投给命令行parser函数，对命令行进行解析并执行相关的指令
+          简介Pytest是基于Python的一套测试框架，venv虚拟环境配置好&#x2F;并激活后，安装好Pytest时，可以直接命令行执行pytest指令 参考文档 Pytest测试框架基础及进阶  测试执行 默认识别以test_开头的函数和类，进行执行  @pytest.fixture 一般用于修饰函数，而且修饰的函数一般集中存放，供其他模块复用 其修饰的函数可以作为其他模块函数定义时的参数；修饰函
         </div>
       </a>
 
@@ -425,8 +524,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-10 23:35" pubdate>
-              2024-08-10
+            <time datetime="2024-08-22 20:43" pubdate>
+              2024-08-22
             </time>
           </div>
         
@@ -463,15 +562,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/" target="_self">
-          子文件夹测试
+        <a href="/2024/08/21/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" target="_self">
+          动态规划
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/daily-notes/%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/21/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" target="_self">
         <div>
-          测试子文件夹中的md能不能被hexo识别。-&gt; 可以的！！！  git 练习
+          数位DP基础知识 OI-Wiki  3007. 价值和小于等于 K 的最大数字  只想到了普通的记忆化搜索    位运算2088. 统计农场中肥沃金字塔的数目 二维转化为一维DP的时候，一定要注意递归过程中会不会覆盖此次递归需要的旧值 这题第一次提交错误，就是因为当前更新时覆盖了旧值，但是之后的计算需要被覆盖的旧值；但是忘记了另外存储旧值导致的！！！ dp[i][j] = 1 + min(dp[i
         </div>
       </a>
 
@@ -479,264 +578,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-10 23:35" pubdate>
-              2024-08-10
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/" target="_self">
-          aarch64
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/aarch64/" target="_self">
-        <div>
-          异常路由&#x3D;&#x3D;问题&#x3D;&#x3D;： 如果某个异常发生，处理器应该使用那个人异常等级来处理这个异常？ 中断路由规则 路由到EL3：需要设置SCR_EL3.&#123;EA, IRQ, FIQ&#125;  12345MRS X0, SCR_EL3 // 读取SCR_EL3到X0寄存器ORR X0, X0, #(1&lt;&lt;3) // 设置EA，将SError路由到E
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-10 22:03" pubdate>
-              2024-08-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/" class="category-chain-item">嵌入式-架构</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/Tricore/" target="_self">
-           TRICORE
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/Tricore/" target="_self">
-        <div>
-          任务相关CSA 上下文分别消耗两个CSA 上文CSA包含：SP, 返回的下文序号 下文CSA包含：PC, 参数, 绑定的上文序号   每个核有一个统一的CSA池子  内存相关 0xC0000000: 每个核的local地址，访问其本地的PSPR  0xD0000000: local地址，访问其本地的DSPR perCPU的变量链接地址在这个空间内，可以达到不同核上跑相同的代码，但是数据存取访问到的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-10 21:41" pubdate>
-              2024-08-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/" class="category-chain-item">嵌入式-架构</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/08/10/daily-notes/2024-08-10/" target="_self">
-          Sat Aug 10 2024 00:00:00 GMT+0800 (中国标准时间)
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/10/daily-notes/2024-08-10/" target="_self">
-        <div>
-          明日计划 算法题复习 大疆真题刷一刷 投递一下字节的机器人工程师 -&gt; 大疆笔试结束后投递
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-10 21:38" pubdate>
-              2024-08-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/27/Linux-%E5%9F%BA%E7%A1%80/" target="_self">
-          Linux-基础
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/27/Linux-%E5%9F%BA%E7%A1%80/" target="_self">
-        <div>
-          Linux命令常见概念文件系统四个关键概念 文件描述符（File Descriptor）: 文件描述符是一个非负整数，用于在程序中引用打开的文件、套接字或其他I&#x2F;O资源。 每当一个进程打开一个文件、创建一个套接字或进行其他类似的操作时，内核都会为该进程分配一个新的文件描述符。 文件描述符是进程级的，不同的进程可以有各自的文件描述符表，互不影响。   文件描述符表（File Descrip
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-27 14:06" pubdate>
-              2024-07-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/27/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" target="_self">
-          排序算法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/27/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" target="_self">
-        <div>
-          参考博客 十大经典排序算法 八大排序算法稳定性分析，原来稳定性是这个意思…  算法稳定性 排序前后两个相等的数相对位置不变，则算法稳定  冒泡排序 小的元素往前调或者把大的元素往后调； 比较是相邻的两个元素比较，交换也发生在这两个元素之间； 稳定排序算法 排序遍历次数为len - 1，每次从头开始冒泡 示例代码 12345678template&lt;typename T&gt; //整数或浮点数
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-27 11:14" pubdate>
-              2024-07-27
+            <time datetime="2024-08-21 22:18" pubdate>
+              2024-08-21
             </time>
           </div>
         
@@ -767,11 +610,154 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/21/CPP/cpp%20-%20%E5%9F%BA%E7%A1%80%E6%89%AB%E7%9B%B2/" target="_self">
+          cpp-基础扫盲
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/21/CPP/cpp%20-%20%E5%9F%BA%E7%A1%80%E6%89%AB%E7%9B%B2/" target="_self">
+        <div>
+          从管理数据的角度理解cpp   定义位于类声明中的函数都将自动成为内联函数  定义在类声明外部的，也可使用inline限定符使其成为内联的；类内声明无需加上inline限定符   类中的函数不占用类&#x2F;对象的内存空间，即使用sizeof()结果不受类中成员函数的影响，仅与数据部分相关  想想：确实应该是这样的 但是含有虚函数的话，可能含有额外的虚函数表指针   类中的静态成员变量也不占用
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-21 20:28" pubdate>
+              2024-08-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/21/CPP/cpp-%E5%B8%B8%E8%A7%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+          cpp-常见的关键字
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/21/CPP/cpp-%E5%B8%B8%E8%A7%81%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+        <div>
+          static 类中静态成员变量&#x2F;方法，是属于类的；即不创建对象时也可以直接使用 类中静态成员变量需要在类外显示的初始化定义 会由cpp运行时环境，在程序加载初期进行全局的初始化（包括初始化的全局变量） 编译器在编译每个单元时，会生成一个全局变量、局部静态变量的初始化函数 里面会调用相应的类构造函数 该初始化函数会由cpp运行时环境调用吧！！！      静态成员变量 静态成员变量的定义必
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-21 19:42" pubdate>
+              2024-08-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/18/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" target="_self">
+          cpp-内存屏障-MESI
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/18/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" target="_self">
+        <div>
+          参考博客 ✨ memory-barriers in Linux memory ordering at compile time Memory Barriers Are Like Source Control Operations # C++多线程序列——理解 memory barrier 跟我学C++中级篇——内存屏障内存栅栏和编译器屏障以及相关  CPU内存屏障在CPU运行时防止指令乱序执行；另
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-18 22:28" pubdate>
+              2024-08-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/" class="category-chain-item">嵌入式-开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%87%AA%E6%88%91%E6%80%9D%E8%80%83/">#自我思考</a>
+            
+              <a href="/tags/cpp/">#cpp</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
