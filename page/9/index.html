@@ -224,6 +224,192 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-MISC/" target="_self">
+          TCP学习-MISC
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-MISC/" target="_self">
+        <div>
+          TCP学习（misc）参考书籍 《TCPIP详解：卷1》  TCP概览 - 可靠性应用数据被分割成TCP认为最适合发送的数据块；如何确定合适的数据块长度？【18.4】TCP发出一个段后启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段；【21章：自适应超时及重传机制】延迟确认：收到发自TCP连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:47" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-3/" target="_self">
+          TCP学习-3
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-3/" target="_self">
+        <div>
+          TCP学习（三） 滑动窗口是相对于确认号开始的  慢启动 核心点：新分组进入网络的速率应该与另一端返回确认的速率相同而进行工作 拥塞窗口【给发送方使用，cwnd】 发送方使用拥塞窗口与通告窗口的最小值作为发送上限： 拥塞窗口是发送方使用的流量控制：大小根据接收到的ACK数量指数增加，会与延迟确认冲突嘛？ 通告窗口则是接收方使用的流量控制
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:47" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-2/" target="_self">
+          TCP学习-2
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-2/" target="_self">
+        <div>
+          TCP学习（二）连接建立 - 三次握手 - 沟通双方的初始序列号 请求端发送SYN段，包含发端初始序号（ISN-C），以及服务器端口，MSS 服务器通过发送SYN进行响应：包含收端初始序号(ISN-S)，ACK被设置为1作为对请求端SYN的确认，确认序号 &#x3D; ISN-C + 1， MSS 请求端发送ACK，响应服务器的SYN：ACK被设置为1作为对服务器SYN的确认，确认序号 &#x3D
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:47" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-1/" target="_self">
+          TCP学习-1
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/TCP%E5%AD%A6%E4%B9%A0-1/" target="_self">
+        <div>
+          TCP学习（一） TCP只对含有数据的ACK进行确认【发端超时重传】；单独的ACK不会发送不会设置超时定时器  因此TCP要考虑每个阶段中可能出现的ACK丢失的情况！！！     报文类型 通过头部的控制位（6bit）区分不同的报文类型：  SYN报文：用于建立连接，包含SYN标志    -&gt; 需要占用一个序号；其中包含最大报文段长度信息，且该信息只能出现在SYN中 ACK报文：用于确认接收
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:47" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/22/Linux-Macros/" target="_self">
+          Linux-Macros
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/Linux-Macros/" target="_self">
+        <div>
+          常用宏 WRITE_ONCE &amp;&amp; READ_ONCE 从__native_word的定义可以看出，所谓的原子读写并不能保证，只是尽可能地避免 对一个10字节的数据进行读写，肯定要分成2次以上的内存访问操作 如果为一个原始类型：char, short, int, long, long long，对其进行读写操作就只产生一次内存访问 有些需要避免竞态的，需要加锁  123456789
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:43" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2024/07/22/APUE-Learning-%E9%AB%98%E7%BA%A7IO/" target="_self">
           APUE-Learning-高级IO
         </a>
@@ -425,281 +611,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" target="_self">
-          Linux-aarch64-系统调用-1
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/Linux-aarch64-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8-1/" target="_self">
-        <div>
-          Linux系统调用定义相关 相关代码：   for general arch: sys_*name -&gt; aliased to _se_sys*name -&gt; call _do_sys*name to do actual work for arm64 arch: _arm64_sys* -&gt; call  _se_sys* -&gt; call _do_sys*name to do
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 19:10" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/" target="_self">
-          Linux-aarch64-中断处理流程
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/Linux-aarch64-%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/" target="_self">
-        <div>
-          中断处理流程总结*    *        *  aarch64 参考《vectors.md》可知，中断响应时，执行部分汇编码[kernel_ventry宏]后，进入el0t_64_irq[in file entry.S，用entry_handler宏定义]，紧接着调用el0t_64_irq_handler[in file: entry-common.c]，进行后续的处理  el0t_64_irq
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 19:06" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/Linux-aarch64-%E5%90%91%E9%87%8F%E8%A1%A8/" target="_self">
-          Linux-aarch64-向量表
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/Linux-aarch64-%E5%90%91%E9%87%8F%E8%A1%A8/" target="_self">
-        <div>
-          arm64(aarch64)的中断入口 总结  部分汇编码，由宏kernel_ventry定义 el0t_64_irq el0t_64_irq_handler ret_to_user&#x2F;kernel   相关两个宏定义：下面 \el，对宏参数展开   1234567891011121314151617181920212223242526272829303132333435363738394
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 19:02" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux%E7%9B%B8%E5%85%B3/" class="category-chain-item">Linux相关</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/APUE-Learning-1/" target="_self">
-          APUE-Learning-1
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/APUE-Learning-1/" target="_self">
-        <div>
-          UNIX基础知识主要介绍了基础的UNIX知识，帮助初学者在UNIX环境下“存活下来”  标准系统函数的返回值，一般来解释如下  &gt;= 0 -&gt; 表示程序正常执行 &lt; 0 -&gt; 表示程序出错，返回的负数可以表征具体的错误码   三个标准“文件描述符”  STDIN_FILENO = 0 STDOUT_FILENO = 1 STDERR_FILENO = 2   &lt;uni
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 19:00" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/C%E8%AF%AD%E8%A8%80%E5%86%8D%E5%AD%A6%E4%B9%A0/" target="_self">
-          C语言再学习
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/C%E8%AF%AD%E8%A8%80%E5%86%8D%E5%AD%A6%E4%B9%A0/" target="_self">
-        <div>
-          C语言再学习 #incude &lt;&gt; &#x2F; #include “”的区别  有三个路径需要区分： 系统库路径 -&gt; 无需配置，这个路径已经硬写入了编译器的配置中 工程定义头文件搜索目录 -&gt; 需要使用编译器提供的参数选项进行配置，例如gcc -I &lt;search_path&gt; 当前目录 -&gt; 无需配置，但是只有使用#include &quot;xxx.
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 18:59" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/8/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/10/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/8/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><a class="extend next" rel="next" href="/page/10/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
