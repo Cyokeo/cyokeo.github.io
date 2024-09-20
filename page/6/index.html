@@ -224,6 +224,93 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2024/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%90%8C%E6%AD%A5%20vs%20%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" target="_self">
+          同步 vs 内存屏障
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%90%8C%E6%AD%A5%20vs%20%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-27 20:08" pubdate>
+              2024-08-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/" class="category-chain-item">嵌入式-开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/CPU%E4%B9%B1%E5%BA%8F%E6%89%A7%E8%A1%8C-%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" target="_self">
+           CPU乱序执行-内存屏障
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/CPU%E4%B9%B1%E5%BA%8F%E6%89%A7%E8%A1%8C-%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" target="_self">
+        <div>
+          参考博客 HPC(高性能计算第一篇):一文彻底搞懂并发编程与内存屏障(完结篇)  为什么CPU会乱序执行 前后两条指令没有依赖；但是前一条指令访存地址不在L1 cache中，而后一条指令的访存地址在L1 cache中，因此可以先执行第二条指令，等待第一条指令将访存单元加载到L1 cache中再执行第1条指令。有些CPU是这样做的 但是&#x3D;&#x3D;X64&#x3D;&#x3D;架构保证写
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-27 19:39" pubdate>
+              2024-08-27
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2024/08/26/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Debug%E6%89%8B%E6%AE%B5/" target="_self">
           Linux - 开发可以的debug手段
         </a>
@@ -631,128 +718,6 @@
 
           </div>
         
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/08/22/CPP/%E4%B8%BA%E4%BB%80%E4%B9%88C++%E7%9A%84%E6%88%90%E5%91%98%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E4%B8%8D%E8%83%BD%E6%98%AF%20virtual/" target="_self">
-          为什么C++的成员模板函数不能是 virtual
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/22/CPP/%E4%B8%BA%E4%BB%80%E4%B9%88C++%E7%9A%84%E6%88%90%E5%91%98%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E4%B8%8D%E8%83%BD%E6%98%AF%20virtual/" target="_self">
-        <div>
-          参考资料 为什么C++的成员模板函数不能是 virtual  自己分析模版可以作为非虚成员函数 成员函数，也就是代码，存储在代码段；是与具体的对象无关的；其不会影响类实例化对象的大小 借助name mangling，类中成员函数，类的作用基本就是给该函数进行name mangling提供名称前缀 因此，当在某个编译单元中实例化某个模版成员函数时，只需要对其进行name mangling；为了防止重
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-22 21:26" pubdate>
-              2024-08-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/cpp%E5%9F%BA%E7%A1%80/" class="category-chain-item">cpp基础</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/08/22/CPP/%E9%87%8D%E8%BD%BD%E3%80%81%E9%87%8D%E5%86%99%E3%80%81%E9%9A%90%E8%97%8F/" target="_self">
-          重载、重写、隐藏
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/22/CPP/%E9%87%8D%E8%BD%BD%E3%80%81%E9%87%8D%E5%86%99%E3%80%81%E9%9A%90%E8%97%8F/" target="_self">
-        <div>
-          参考资料 重载、重写、隐藏的区别  总结重载 发生在同一个作用域中 函数名字相同，但是参数列表不同 函数返回值不参与   依赖于name mangling - g++ std空间使用St 其余空间使用名字长度+名字 +函数名 +参数列表类型首字母    重写 派生类重写基类虚方法【只识记这一种情况】 返回值相同 函数名相同 参数列表相同   基类方法中必须含有virtual关键字 基类的析构函数最
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-22 20:58" pubdate>
-              2024-08-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/cpp%E5%9F%BA%E7%A1%80/" class="category-chain-item">cpp基础</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%9D%A2%E7%BB%8F/">#面经</a>
-            
-          </div>
         
       </div>
     </article>

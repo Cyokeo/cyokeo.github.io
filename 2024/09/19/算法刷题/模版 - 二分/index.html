@@ -24,7 +24,7 @@
 <meta property="og:description" content="两类模版 参考  二分模板一共有两个，分别适用于不同情况。  模板1和模板2本质上是根据代码来区分的，而不是应用场景: 如果写完之后发现是l &#x3D; mid，那么在计算mid时需要加上1 否则如果写完之后发现是 r &#x3D; mid，那么在计算mid时不能加1    总结 -&gt; 解决最大最小问题 先判断想要拿到什么 -&gt; 写出isTrue()函数 isTrue(mid) -&gt; 接着判断是更">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-18T16:19:17.913Z">
-<meta property="article:modified_time" content="2024-09-19T15:36:49.248Z">
+<meta property="article:modified_time" content="2024-09-19T15:42:42.250Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          758 字
+          896 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -308,7 +308,7 @@
 </li>
 <li>需要的在左边，那么<code>l</code>就是答案</li>
 <li>需要的在右边，那么<code>r</code>就是答案</li>
-<li>结束时：<code>l + 1 == r</code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bsearch_3</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">while</span> (l + <span class="hljs-number">1</span> &lt; r)<br>	&#123;<br>		<span class="hljs-type">int</span> mid = l + ((r - l) &gt;&gt; <span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">check</span>(mid)) r = mid; <span class="hljs-comment">// 根据具体的逻辑选择更新l，还是 r</span><br>		<span class="hljs-keyword">else</span> l = mid;<br>	&#125;<br>	<span class="hljs-keyword">return</span> r;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>结束时：<code>l + 1 == r</code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bsearch_3</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">while</span> (l + <span class="hljs-number">1</span> &lt; r)<br>	&#123;<br>		<span class="hljs-type">int</span> mid = l + ((r - l) &gt;&gt; <span class="hljs-number">1</span>);<br>		<span class="hljs-comment">// 根据具体的逻辑选择更新l，还是r:</span><br>		<span class="hljs-comment">// 需要的在左边则更新 l；否则更新r</span><br>		<span class="hljs-comment">// 需要意味着：check == true</span><br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">check</span>(mid)) r = mid;<br>		<span class="hljs-keyword">else</span> l = mid;<br>	&#125;<br>	<span class="hljs-keyword">return</span> r;<br>&#125;<br><br>vector&lt;<span class="hljs-type">int</span>&gt;vec = &#123;<span class="hljs-number">9</span>, <span class="hljs-number">7</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-3</span>, <span class="hljs-number">-4</span>&#125;;<br><br><span class="hljs-comment">// 找到第一个 &gt;= 0 的数的下标</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bsearch1</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> l = <span class="hljs-number">-1</span>, r = nums.<span class="hljs-built_in">size</span>();<br>	<span class="hljs-keyword">while</span> (l + <span class="hljs-number">1</span> &lt; r)<br>	&#123;<br><br>		<span class="hljs-type">int</span> mid = l + ((r - l) &gt;&gt; <span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">if</span> (nums[mid] &gt;= <span class="hljs-number">0</span>) l = mid;<br>		<span class="hljs-keyword">else</span> r = mid;<br>	&#125;<br>	<span class="hljs-keyword">return</span> l;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bsearch2</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> l = <span class="hljs-number">-1</span>, r = nums.<span class="hljs-built_in">size</span>();<br>	<span class="hljs-keyword">while</span> (l + <span class="hljs-number">1</span> &lt; r)<br>	&#123;<br><br>		<span class="hljs-type">int</span> mid = l + ((r - l) &gt;&gt; <span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">if</span> (nums[mid] &lt; <span class="hljs-number">0</span>) r = mid;<br>		<span class="hljs-keyword">else</span> l = mid;<br>	&#125;<br>	<span class="hljs-keyword">return</span> r<span class="hljs-number">-1</span>; <span class="hljs-comment">// return l;</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h4 id="2560-打家劫舍-IV"><a href="#2560-打家劫舍-IV" class="headerlink" title="2560. 打家劫舍 IV"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iv/solutions/2093952/er-fen-da-an-dp-by-endlesscheng-m558">2560. 打家劫舍 IV</a></h4><ul>
 <li>这个的二分解法很抽象 -&gt; 需要理解二分最本质的原理</li>
@@ -320,6 +320,9 @@
 <h5 id="答疑"><a href="#答疑" class="headerlink" title="答疑"></a>答疑</h5><p>问：有没有可能，二分出来的答案，不在 nums 中？</p>
 <p>答：不可能。二分出来的答案，一定在 nums 中。证明如下：</p>
 <p>设答案为 ans，那么当最大金额为 ans 时，可以偷至少 k 间房子。如果 ans 不在 nums 中，那么当最大金额为 ans−1 时，也可以偷至少 k 间房子。这与二分算法相矛盾：根据视频中讲的红蓝染色法，循环结束时，ans 和 ans−1 的颜色必然是不同的，即 ans 可以满足题目要求，而 ans−1 不满足题目要求。所以，二分出来的答案，一定在 nums 中。</p>
+<h4 id="162-寻找峰值"><a href="#162-寻找峰值" class="headerlink" title="162. 寻找峰值"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-peak-element/">162. 寻找峰值</a></h4><ul>
+<li>局部最大值</li>
+</ul>
 
                 
               </div>

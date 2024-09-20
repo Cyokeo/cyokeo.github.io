@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考博客">
+    <meta name="description" content="参考资料 7.10 动态链接共享库  程序编译加载流程![[Pasted image 20240920214033.png]] 描述基本的思路是当创建可执行文件时，静态执行一些链接，然后在程序加载时，动态完成链接过程。认识到这一点是很重要的：此时，没有任何 libvector.so 的代码和数据节真的被复制到可执行文件 prog2l 中。反之，链接器复制了一些重定位和符号表信息，它们使得运行时可以">
 <meta property="og:type" content="article">
-<meta property="og:title" content="enable_shared_from_this">
-<meta property="og:url" content="http://example.com/2024/08/28/CPP/enable_shared_from_this/index.html">
+<meta property="og:title" content="动态链接库">
+<meta property="og:url" content="http://example.com/2024/09/20/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="参考博客">
+<meta property="og:description" content="参考资料 7.10 动态链接共享库  程序编译加载流程![[Pasted image 20240920214033.png]] 描述基本的思路是当创建可执行文件时，静态执行一些链接，然后在程序加载时，动态完成链接过程。认识到这一点是很重要的：此时，没有任何 libvector.so 的代码和数据节真的被复制到可执行文件 prog2l 中。反之，链接器复制了一些重定位和符号表信息，它们使得运行时可以">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-28T14:48:29.626Z">
-<meta property="article:modified_time" content="2024-08-28T14:49:14.127Z">
+<meta property="article:published_time" content="2024-09-20T13:46:48.949Z">
+<meta property="article:modified_time" content="2024-09-20T13:46:48.949Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>enable_shared_from_this - Hexo</title>
+  <title>动态链接库 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="enable_shared_from_this"></span>
+            <span id="subtitle" data-typed-text="动态链接库"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-28 22:48" pubdate>
-          2024年8月28日 晚上
+        <time datetime="2024-09-20 21:46" pubdate>
+          2024年9月20日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4 字
+          401 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -267,12 +267,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">enable_shared_from_this</h1>
+            <h1 id="seo-header">动态链接库</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2>
+                <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://hansimov.gitbook.io/csapp/part2/ch07-linking/7.10-dynamic-linking-with-shared-libraries">7.10 动态链接共享库</a></li>
+</ul>
+<h2 id="程序编译加载流程"><a href="#程序编译加载流程" class="headerlink" title="程序编译加载流程"></a>程序编译加载流程</h2><p>![[Pasted image 20240920214033.png]]</p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>基本的思路是当创建可执行文件时，静态执行一些链接，然后在程序加载时，动态完成链接过程。认识到这一点是很重要的：此时，<em><strong>没有任何 libvector.so 的代码和数据节真的被复制到可执行文件 prog2l 中</strong></em>。反之，链接器<em><strong>复制了一些重定位和符号表信息</strong></em>，它们使得运行时可以解析对 libvector.so 中代码和数据的引用。</p>
+<p>当加载器加载和运行可执行文件 prog2l 时，它利用 7.9 节中讨论过的技术，加载部分链接的可执行文件 prog2l。接着，它注意到 prog2l 包含一个 <code>.interp</code> 节，这一节包含<em><strong>动态链接器</strong></em>的路径名，<em><strong>动态链接器本身就是一个共享目标</strong></em>（如在 Linux 系统上的 ld-linux.so）。 <code>加载器</code>不会像它通常所做地那样将控制传递给应用，而是<em><strong>加载和运行这个动态链接器</strong></em>。然后，动态链接器通过执行下面的<code>重定位</code>完成链接任务：</p>
+<ul>
+<li>重定位 libc.so 的文本和数据到某个内存段。</li>
+<li>重定位 libvector.so 的文本和数据到另一个内存段。</li>
+<li>重定位 prog2l 中所有对由 libc.so 和 libvector.so 定义的符号的引用。</li>
+</ul>
+<p>最后，动态链接器将<code>控制传递给应用程序</code>。<em><strong>从这个时刻开始，共享库的位置就固定了</strong></em>，并且<em><strong>在程序执行的过程中都不会改变</strong></em>。</p>
+
                 
               </div>
             
@@ -290,7 +302,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/cpp%E5%9F%BA%E7%A1%80/" class="category-chain-item">cpp基础</a>
+  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/" class="category-chain-item">嵌入式-开发</a>
   
   
 
@@ -310,8 +322,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>enable_shared_from_this</div>
-      <div>http://example.com/2024/08/28/CPP/enable_shared_from_this/</div>
+      <div>动态链接库</div>
+      <div>http://example.com/2024/09/20/嵌入式-开发/动态链接库/</div>
     </div>
     <div class="license-meta">
       
@@ -323,7 +335,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月28日</div>
+          <div>2024年9月20日</div>
         </div>
       
       
@@ -355,9 +367,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/30/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E4%BC%98%E5%85%88%E7%BA%A7%E7%BF%BB%E8%BD%AC/" title="优先级翻转">
+                      <a href="/2024/09/20/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/AUTOSAR%20-%20Automatic%20Tcp%20Client/" title="AUTOSAR - Automatic Tcp Client">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">优先级翻转</span>
+                        <span class="hidden-mobile">AUTOSAR - Automatic Tcp Client</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -365,8 +377,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/28/CPP/weak_ptr/" title="cpp - weak_ptr">
-                        <span class="hidden-mobile">cpp - weak_ptr</span>
+                      <a href="/2024/09/20/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E6%9E%B6%E6%9E%84/MESI%20-%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C/" title=" MESI：为什么还需要内存屏障">
+                        <span class="hidden-mobile"> MESI：为什么还需要内存屏障</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
