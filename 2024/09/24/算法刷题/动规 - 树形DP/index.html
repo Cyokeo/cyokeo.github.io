@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MainFunction 周期性可配置 里面进行socket connection的连接工作  Maintain Conn会对如下三种情况下的socket connection进行open操作  SoAdSocketAutomaticSoConSetup &#x3D;&#x3D; True 这种类型的管理全部交由SoAd模块进行，不允许用户主动使用open&#x2F;close   in reconnect stat">
+    <meta name="description" content="难点一 从上往下计算：dfs时要传入多个参数 从下往上计算：dfs返回多个值  网友评论这种题的话，需要实现节点之间信息的交流，二叉树有3种遍历，那就有3种信息交流的方式，前序的「自上而下」，后序的「自下而上」，中序的「左上右下」 从下往上 - 后序遍历968. 监控二叉树 代码随想录 根据题目要求，这题选用后续遍历是传递信息的最佳选择。需要传递的信息有三种：1.要求父节点安装相机；2.说自己有相">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AUTOSAR - Automatic Tcp Client">
-<meta property="og:url" content="http://example.com/2024/09/21/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/AUTOSAR%20-%20Automatic%20Tcp%20Client/index.html">
+<meta property="og:title" content="动规 - 树形DP">
+<meta property="og:url" content="http://example.com/2024/09/24/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E5%8A%A8%E8%A7%84%20-%20%E6%A0%91%E5%BD%A2DP/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="MainFunction 周期性可配置 里面进行socket connection的连接工作  Maintain Conn会对如下三种情况下的socket connection进行open操作  SoAdSocketAutomaticSoConSetup &#x3D;&#x3D; True 这种类型的管理全部交由SoAd模块进行，不允许用户主动使用open&#x2F;close   in reconnect stat">
+<meta property="og:description" content="难点一 从上往下计算：dfs时要传入多个参数 从下往上计算：dfs返回多个值  网友评论这种题的话，需要实现节点之间信息的交流，二叉树有3种遍历，那就有3种信息交流的方式，前序的「自上而下」，后序的「自下而上」，中序的「左上右下」 从下往上 - 后序遍历968. 监控二叉树 代码随想录 根据题目要求，这题选用后续遍历是传递信息的最佳选择。需要传递的信息有三种：1.要求父节点安装相机；2.说自己有相">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-21T09:34:46.183Z">
-<meta property="article:modified_time" content="2024-09-21T09:34:46.183Z">
+<meta property="article:published_time" content="2024-09-24T13:35:34.975Z">
+<meta property="article:modified_time" content="2024-09-24T14:04:54.080Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>AUTOSAR - Automatic Tcp Client - Hexo</title>
+  <title>动规 - 树形DP - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="AUTOSAR - Automatic Tcp Client"></span>
+            <span id="subtitle" data-typed-text="动规 - 树形DP"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-21 17:34" pubdate>
-          2024年9月21日 下午
+        <time datetime="2024-09-24 21:35" pubdate>
+          2024年9月24日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          683 字
+          255 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          6 分钟
+          3 分钟
         
       </span>
     
@@ -267,76 +267,21 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">AUTOSAR - Automatic Tcp Client</h1>
+            <h1 id="seo-header">动规 - 树形DP</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="MainFunction"><a href="#MainFunction" class="headerlink" title="MainFunction"></a>MainFunction</h2><ul>
-<li>周期性可配置</li>
-<li>里面进行socket connection的连接工作</li>
+                <h2 id="难点一"><a href="#难点一" class="headerlink" title="难点一"></a>难点一</h2><ul>
+<li>从上往下计算：dfs时要传入多个参数</li>
+<li>从下往上计算：dfs返回多个值</li>
 </ul>
-<h2 id="Maintain-Conn"><a href="#Maintain-Conn" class="headerlink" title="Maintain Conn"></a>Maintain Conn</h2><p>会对如下三种情况下的socket connection进行<code>open</code>操作</p>
-<ul>
-<li><code>SoAdSocketAutomaticSoConSetup == True</code><ul>
-<li>这种类型的管理全部交由SoAd模块进行，不允许用户主动使用open&#x2F;close</li>
+<h3 id="网友评论"><a href="#网友评论" class="headerlink" title="网友评论"></a>网友评论</h3><p>这种题的话，需要实现节点之间信息的交流，二叉树有3种遍历，那就有3种信息交流的方式，<em><strong>前序的「自上而下」</strong></em>，<em><strong>后序的「自下而上」</strong></em>，<em><strong>中序的「左上右下」</strong></em></p>
+<h2 id="从下往上-后序遍历"><a href="#从下往上-后序遍历" class="headerlink" title="从下往上 - 后序遍历"></a>从下往上 - 后序遍历</h2><h5 id="968-监控二叉树"><a href="#968-监控二叉树" class="headerlink" title="968. 监控二叉树"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-cameras/">968. 监控二叉树</a></h5><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-cameras/solutions/423212/968-jian-kong-er-cha-shu-di-gui-shang-de-zhuang-ta">代码随想录</a></li>
+<li>根据题目要求，这题选用后续遍历是传递信息的最佳选择。需要传递的信息有三种：1.要求父节点安装相机；2.说自己有相机；3.自己不需要相机或空节点；那么，每个节点在接受了两个子节点的信息后，还要判断自己要向父节点传递哪种信息，如此层层向上传递，便解决了问题</li>
 </ul>
-</li>
-<li><code>in reconnect state</code><ul>
-<li>处于这种状态的socket conn，可能是 &#x3D;&#x3D;AUTOMATIC&#x3D;&#x3D; 的，也可能不是</li>
-<li>对于非AUTOMATIC，可以主动关闭。但是关闭后，仍有可能处于RECONNECT状态，因此可能需要手动将状态切换为<em><strong>offline</strong></em> 【使用案例 - DoIP】</li>
-</ul>
-</li>
-<li><strong>主动调用open()请求建立连接</strong></li>
-</ul>
-<p>使用event queue，向SoConState queue插入事件；每次MainFunction均会检查队列是否空闲；不空闲的话，就会进行Conn的维护工作。显然，当某个Conn open 失败时，会向该queue中插入事件，这样下次周期性SoAd_MainFunction就会继续尝试open and connect。插入的事件信息中包含SoConId信息。</p>
-<p>如果该状态事件对应的SoCon上没有Close请求，则会检查并尝试Open：</p>
-<ul>
-<li>处于RECONNECT状态，或者配置为AUTOMATIC</li>
-<li>不处于ONLINE状态，且配置了local address<br>继续检查：</li>
-<li>SoCon对应的socket处于关闭状态，且remote address的 (ip, port)都已经设置<br>如果检查均通过：</li>
-</ul>
-<ol>
-<li>调用底层接口，获取socket</li>
-<li>bind</li>
-<li>connect -&gt; 设置socket状态为：SOAD_SOCK_STATE_CONNECT</li>
-<li>不成功则进行socket的清理，并插入SO_CON_STATE事件，在下一次MainFunction中重试<br>如果open成功，且调用connect成功:</li>
-<li>如果SoCon的状态不为RECONNECT，则设置SoCon的状态为&#x3D;&#x3D;RECONNECT&#x3D;&#x3D;，且通知应用层状态改变【changeCbk】</li>
-<li>这些接口都是同步非阻塞的，如何通知连接状态？</li>
-</ol>
-<h2 id="两个相关回调-主要被TcpIp模块调用"><a href="#两个相关回调-主要被TcpIp模块调用" class="headerlink" title="两个相关回调 - 主要被TcpIp模块调用"></a>两个相关回调 - 主要被TcpIp模块调用</h2><h3 id="SoAd-TcpConnected"><a href="#SoAd-TcpConnected" class="headerlink" title="SoAd_TcpConnected"></a>SoAd_TcpConnected</h3><p>连接成功</p>
-<h3 id="SoAd-TcpIpEvent"><a href="#SoAd-TcpIpEvent" class="headerlink" title="SoAd_TcpIpEvent"></a>SoAd_TcpIpEvent</h3><p>对于TCP，仅有如下几种事件：</p>
-<ul>
-<li>SOAD_TCP_RESET</li>
-<li>SOAD_TCP_CLOSED<ul>
-<li>将tcp client设置为SOAD_CLOSE_SOCKET_RECONNECT状态</li>
-<li>并设置SoCon state 事件，等待MainFunc处理: 后续会被设置为RECONNECT状态，并且设置SoCon state事件</li>
-</ul>
-</li>
-<li>SOAD_TCP_FIN_RECEIVED<ul>
-<li>对于tcp client 处理类似</li>
-</ul>
-</li>
-</ul>
-<h2 id="SoAd-SoCon有三种状态"><a href="#SoAd-SoCon有三种状态" class="headerlink" title="SoAd SoCon有三种状态"></a>SoAd SoCon有三种状态</h2><h3 id="OFFLINE"><a href="#OFFLINE" class="headerlink" title="OFFLINE:"></a><code>OFFLINE</code>:</h3><h3 id="RECONNECT"><a href="#RECONNECT" class="headerlink" title="RECONNECT:"></a><code>RECONNECT</code>:</h3><p>每个SoCon有几个关闭状态，包括：</p>
-<ul>
-<li>SOAD_CLOSE_SOCKET_RECONNECT</li>
-<li>SOAD_CLOSE_RECONNECT<br>此时，如果关闭状态对应上面两个，则SoCon会被设置为RECONNECT状态</li>
-</ul>
-<p>设置remote address也可能导致SoCon的状态被设置为RECONNECT。只有在OFFLINE状态下才能设置remote。</p>
-<h3 id="ONLINE"><a href="#ONLINE" class="headerlink" title="ONLINE:"></a><code>ONLINE</code>:</h3><h2 id="使用案例-DoIP"><a href="#使用案例-DoIP" class="headerlink" title="使用案例 - DoIP"></a>使用案例 - DoIP</h2><p>DoIP在调用SoAd模块的<em><strong>请求关闭连接</strong></em>API后，会继续判断当前连接的状态是否为RECONNECT，如果是，则<em><strong>主动将状态变更为OFFLINE</strong></em>。这样是为了避免一次额外的状态改变回调？</p>
-<p>但是主动调用SoCon_close，正常情况下，SoCon的状态会被设置为： SOAD_CLOSE_OFFLINE。被设置为RECONNECT，会在下面这种情况下发生：</p>
-<ol>
-<li>Close最终也是在MainFunc中进行</li>
-<li>这段时间内</li>
-</ol>
-<h2 id="启发-GUID-LocalIdx"><a href="#启发-GUID-LocalIdx" class="headerlink" title="启发 - GUID -&gt; LocalIdx"></a>启发 - GUID -&gt; LocalIdx</h2><ul>
-<li>只能for所有本地idxs，检查其绑定的GUID信息是否与当前查找的GUID相同！！！</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.autosar.org/fileadmin/standards/R20-11/CP/AUTOSAR_SWS_SocketAdaptor.pdf">SoAd_CloseSoCon &#x2F; </a></li>
-</ul>
-
+<h2 id="从上往下-前序遍历"><a href="#从上往下-前序遍历" class="headerlink" title="从上往下 - 前序遍历"></a>从上往下 - 前序遍历</h2><h5 id="129-求根节点到叶节点数字之和"><a href="#129-求根节点到叶节点数字之和" class="headerlink" title="129. 求根节点到叶节点数字之和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-root-to-leaf-numbers/">129. 求根节点到叶节点数字之和</a></h5><h5 id="257-二叉树的所有路径"><a href="#257-二叉树的所有路径" class="headerlink" title="257. 二叉树的所有路径"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-paths/">257. 二叉树的所有路径</a></h5>
                 
               </div>
             
@@ -354,7 +299,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/" class="category-chain-item">嵌入式-开发</a>
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
   
   
 
@@ -374,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>AUTOSAR - Automatic Tcp Client</div>
-      <div>http://example.com/2024/09/21/嵌入式-开发/AUTOSAR - Automatic Tcp Client/</div>
+      <div>动规 - 树形DP</div>
+      <div>http://example.com/2024/09/24/算法刷题/动规 - 树形DP/</div>
     </div>
     <div class="license-meta">
       
@@ -387,7 +332,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月21日</div>
+          <div>2024年9月24日</div>
         </div>
       
       
@@ -419,18 +364,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/22/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E7%BC%96%E7%A8%8B%E9%94%99%E8%AF%AF/" title="编程错误🙅">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">编程错误🙅</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/21/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/" title="动态链接库">
-                        <span class="hidden-mobile">动态链接库</span>
+                      <a href="/2024/09/23/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E6%8A%80%E5%B7%A7%20-%20%E4%B8%8B%E6%A0%87%E5%8F%82%E4%B8%8E%E8%BF%90%E7%AE%97%E6%97%B6/" title="技巧 - 下标参与运算时">
+                        <span class="hidden-mobile">技巧 - 下标参与运算时</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

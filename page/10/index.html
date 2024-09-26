@@ -224,6 +224,105 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2024/07/22/APUE-Learning-%E9%AB%98%E7%BA%A7IO/" target="_self">
+          APUE-Learning-高级IO
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/APUE-Learning-%E9%AB%98%E7%BA%A7IO/" target="_self">
+        <div>
+          高级I&#x2F;O I&#x2F;O多路复用 有多个描述符，数据可能在任一个描述符上到达（可用），但是事先无法知道究竟是哪一个描述符 不能对任意一个描述符进行阻塞读操作，因为数据可能已经在其它描述符上到达 使用两个或多个进程&#x2F;线程分别处理一个描述符，但是带来资源开销、同步处理的问题 不使用阻塞I&#x2F;O：对所有描述符进行轮询处理 异步I&#x2F;O+信号：信号数量有限，无法与描
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:42" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/22/APUE-Learning-%E7%BA%BF%E7%A8%8B/" target="_self">
+          APUE-Learning-线程
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/APUE-Learning-%E7%BA%BF%E7%A8%8B/" target="_self">
+        <div>
+          线程 每个线程都包含有表示执行环境所必须的信息  进程中标识线程的线程ID。pthread_t，所有可移植的操作系统实现不能把它作为整数处理，因此必须提供一个函数来对两个线程ID进行比较 一组寄存器值 栈 调度优先级和调度策略 信号屏蔽字 -&gt; 继承于创建它的线程 errno变量 线程私有数据   POSIX线程的功能测试宏是**_POSIX_THREADS**，可以用它在编译时确定是否支持
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:35" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/22/APUE-Learning-%E6%A0%87%E5%87%86IO-%E4%BF%A1%E5%8F%B7/" target="_self">
+          APUE-Learning-标准IO &amp; 信号
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/22/APUE-Learning-%E6%A0%87%E5%87%86IO-%E4%BF%A1%E5%8F%B7/" target="_self">
+        <div>
+          标准I&#x2F;O流与FILE对象 注意与struct file[打开文件表项]结构的不同 一个字符可以使用单个(ASCII字符集)或多个(国际字符集)字节表示 多字节I&#x2F;O函数 (wchar.h) 标准I&#x2F;O打开文件时，创建了一个流对象，并将其与该文件关联起来 fopen()打开一个流时，返回一个指向FILE对象的指针 FILE对象中包含详尽的信息：用于实际I&#x2F;O
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-22 20:32" pubdate>
+              2024-07-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2024/07/22/%E7%A0%B4%E9%99%A4%E8%BF%B7%E9%9B%BE-%E9%87%8D%E5%AE%9A%E4%BD%8D/" target="_self">
           破除迷雾-重定位
         </a>
@@ -565,168 +664,6 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
             <time datetime="2024-07-10 18:59" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" target="_self">
-          设计规范
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" target="_self">
-        <div>
-          设计规范 使用指定长度的数据类型，需编译器提供&lt;stdint.h&gt;头文件，或者已知硬件芯片字长的情况下自定义  在结构体中，人为添加pad以实现结构体内成员的自然对齐，不要依赖编译器进行  CPU间通信的数据结构中，不能包含enum类型的变量  静态数据表应使用const进行修饰  一方面，const修饰的通常保存在flash中，节省RAM空间 其次，防止数据被篡改   指针对齐考虑
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 18:58" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/CI-CD%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80/" target="_self">
-          CI/CD相关基础
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/CI-CD%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80/" target="_self">
-        <div>
-          CI&#x2F;CD相关 CI -&gt; 自动化测试持续集成， 参考 **持续集成(CI)**：借助工具对软件项目进行持续的自动化的编译、打包、构建、测试、发布，来检查软件交付质量的一种行为 **持续部署(CD)**：基于__持续交付__的优势自动将经过测试的代码推入生产环境的过程  CI各阶段 代码提交阶段：会用到“版本控制工具”进行源代码的版本控制 静态代码检查阶段：只能检查代码语法错误等问
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 18:57" pubdate>
-              2024-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" class="category-chain-item">日常记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/10/SVN%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" target="_self">
-          SVN简单学习
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/10/SVN%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" target="_self">
-        <div>
-          SVN command “改名”操作需要使用SVN进行，不要使用Windows下面的重命名，因为这个操作不受 SVN 控制，SVN 会将其理解为删除原文件、增加一个新文件，从而导致文件改名后不能跟踪到改名前的状态  “受SVN控制”是个挺重要的概念，在本地新建文件后，需要使用add操作将该新建文件纳入SVN的控制中；因此所有的操作最好都使用SVN进行，包括  创建新文件&#x2F;夹，创建后要使用
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-10 18:56" pubdate>
               2024-07-10
             </time>
           </div>
