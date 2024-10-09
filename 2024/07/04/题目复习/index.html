@@ -24,7 +24,7 @@
 <meta property="og:description" content="滑动窗口 模版总结  一定是条件满足时，更新最终结果 首先最外部的循环while (j &lt; len) 接着内部有一个while循环，需要在里面压缩i 条件成立进while：最小窗口；更新值；更新条件；i++ 条件不成立进while：最大窗口；更新条件；i++   接着走出while循环 j++     破题思路：窗口应该满足什么条件 or 不满足什么条件！！！  904.水果成篮，结合题解，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-04T13:27:21.000Z">
-<meta property="article:modified_time" content="2024-09-01T10:55:04.137Z">
+<meta property="article:modified_time" content="2024-10-09T14:26:05.539Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.8k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          23 分钟
+          24 分钟
         
       </span>
     
@@ -536,7 +536,23 @@
 <li>并查集</li>
 </ul>
 </li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-consecutive-sequence/">128. 最长连续序列</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-consecutive-sequence/description/comments/13385">参考题解</a></li>
+<li>用哈希表存储每个端点值对应连续区间的长度</li>
+<li>若数已在哈希表中：跳过不做处理</li>
+<li>若是新数加入：<ul>
+<li>取出其左右相邻数已有的连续区间长度 left 和 right</li>
+<li>计算当前数的区间长度为：<code>cur_length = left + right + 1</code></li>
+<li>根据 cur_length 更新最大长度 max_length 的值</li>
+<li>更新区间两端点的长度值</li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>(<span class="hljs-title class_ inherited__">object</span>): <br>	<span class="hljs-keyword">def</span> <span class="hljs-title function_">longestConsecutive</span>(<span class="hljs-params">self, nums</span>):<br>		hash_dict = <span class="hljs-built_in">dict</span>()<br>		max_length = <span class="hljs-number">0</span><br>		<span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>			<span class="hljs-keyword">if</span> num <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> hash_dict:<br>				left = hash_dict.get(num - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<br>				right = hash_dict.get(num + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<br>				cur_length = <span class="hljs-number">1</span> + left + right<br>				<span class="hljs-keyword">if</span> cur_length &gt; max_length:<br>					max_length = cur_length<br>				hash_dict[num] = cur_length<br>				hash_dict[num - left] = cur_length<br>				hash_dict[num + right] = cur_length<br>		<span class="hljs-keyword">return</span> max_length<br></code></pre></td></tr></table></figure>
+
 <h2 id="对一个数组求子序列的两种回溯方法差异"><a href="#对一个数组求子序列的两种回溯方法差异" class="headerlink" title="对一个数组求子序列的两种回溯方法差异"></a>对一个数组求子序列的两种回溯方法差异</h2><ul>
 <li><p><a href="">3098. 求出所有子序列的能量和</a></p>
 </li>
