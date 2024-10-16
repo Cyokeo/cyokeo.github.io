@@ -16,21 +16,21 @@
   <meta name="author" content="Cyokeo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="stack-refactor 分支 简要说明 期望实现支持多participant，多核多线程。限制🚫如下： 每个pp有一个接收线程；后续应该也要有一个timer线程 每个pp只会监听两个地址： well-known address: 239.255.0.1:7400 -&gt; 可以配置不监听 specific unicast address     🈲止所有的内存动态申请与释放 Linux">
+    <meta name="description" content="合并两个有序链表 148. 排序链表 25. K 个一组翻转链表 707. 设计链表 使用二级指针来标记前驱节点的next地址123456789101112131415161718192021222324ListNode* merge(ListNode* l, ListNode* r)&#123;	ListNode* head &#x3D; ((l-&gt;val &lt;&#x3D; r-&gt;val) ? l">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LW-DDS (一)">
-<meta property="og:url" content="http://example.com/2024/10/01/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/LW-DDS%20(%E4%B8%80)/index.html">
+<meta property="og:title" content="技巧 - 链表操作">
+<meta property="og:url" content="http://example.com/2024/10/15/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E6%8A%80%E5%B7%A7%20-%20%E9%93%BE%E8%A1%A8%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="stack-refactor 分支 简要说明 期望实现支持多participant，多核多线程。限制🚫如下： 每个pp有一个接收线程；后续应该也要有一个timer线程 每个pp只会监听两个地址： well-known address: 239.255.0.1:7400 -&gt; 可以配置不监听 specific unicast address     🈲止所有的内存动态申请与释放 Linux">
+<meta property="og:description" content="合并两个有序链表 148. 排序链表 25. K 个一组翻转链表 707. 设计链表 使用二级指针来标记前驱节点的next地址123456789101112131415161718192021222324ListNode* merge(ListNode* l, ListNode* r)&#123;	ListNode* head &#x3D; ((l-&gt;val &lt;&#x3D; r-&gt;val) ? l">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-01T13:40:37.997Z">
-<meta property="article:modified_time" content="2024-10-16T13:46:41.732Z">
+<meta property="article:published_time" content="2024-10-15T03:13:28.267Z">
+<meta property="article:modified_time" content="2024-10-15T07:12:21.198Z">
 <meta property="article:author" content="Cyokeo">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>LW-DDS (一) - Hexo</title>
+  <title>技巧 - 链表操作 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LW-DDS (一)"></span>
+            <span id="subtitle" data-typed-text="技巧 - 链表操作"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-01 21:40" pubdate>
-          2024年10月1日 晚上
+        <time datetime="2024-10-15 11:13" pubdate>
+          2024年10月15日 上午
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          618 字
+          211 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          6 分钟
+          2 分钟
         
       </span>
     
@@ -267,81 +267,20 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LW-DDS (一)</h1>
+            <h1 id="seo-header">技巧 - 链表操作</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="stack-refactor-分支-简要说明"><a href="#stack-refactor-分支-简要说明" class="headerlink" title="stack-refactor 分支 简要说明"></a>stack-refactor 分支 简要说明</h2><ol>
-<li>期望实现支持多participant，多核多线程。限制🚫如下：<ul>
-<li>每个pp有一个接收线程；后续应该也要有一个timer线程</li>
-<li>每个pp只会监听两个地址：<ol>
-<li>well-known address: 239.255.0.1:7400 -&gt; 可以配置不监听</li>
-<li>specific unicast address</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>🈲止所有的内存动态申请与释放<ul>
-<li>Linux等平台下，sem&#x2F;mutex等还是会使用到堆上内存</li>
-<li>但是MCU平台，AUTOSAR&#x2F;FreeRTOS将全面禁用所有动态内存申请与释放</li>
-</ul>
-</li>
-<li>更改数据结构，全面参考AUTOSAR，仅使用数组进行<ul>
-<li>存储participants, writers, readers</li>
-<li>存储远端参与者、实体</li>
-</ul>
-</li>
-<li>增加简易开源log组件，方便后续log</li>
-</ol>
-<h2 id="24-10-01分支更新说明"><a href="#24-10-01分支更新说明" class="headerlink" title="24-10-01分支更新说明"></a>24-10-01分支更新说明</h2><ol>
-<li>当前重构仅进展到：<ul>
-<li>接收RTPS Msg，并对RTPS Header进行处理</li>
-</ul>
-</li>
-<li>提供了一个简单的程序，<code>main</code>为主入口；可以简单运行，并处理接收到的RTPS Msg， 但是只能处理头部</li>
-<li>后续步骤<ol>
-<li>process_cdr，完成数据子消息的处理</li>
-<li>发现阶段SPDP -&gt; SEDP</li>
-<li>……</li>
-</ol>
-</li>
-</ol>
-<h2 id="24-10-16-发送架构"><a href="#24-10-16-发送架构" class="headerlink" title="24-10-16 发送架构"></a>24-10-16 发送架构</h2><ol>
-<li><p>从writer的history获取空闲chang buff -&gt; 需要保护起来【而且要考虑多核】</p>
-</li>
-<li><p>对该buff进行序列化，这里就不需要保护了</p>
-</li>
-<li><p>遍历writer的【有效：是否有效设置应该采用原子操作保护起来】matched reader进行发送，将数据交给底层 -&gt; 这里应该也不需要保护</p>
-<ol>
-<li>对于删除matched reader操作，应该需要延迟进行！！！；当该reader处于使用状态时，就需要延迟删除该matched reader！！！，连带的可能需要延迟删除该matched reader所属的proxy participant</li>
-</ol>
-<ul>
-<li>matched reader 三个状态：ok, sending, deleting</li>
-</ul>
-</li>
-<li><p>底层是否支持多核发送，这就是底层需要考虑的事情了！！！</p>
-</li>
-<li><p><em><strong>还是需要实现一个多核通信queue机制，使用spin lock保护</strong></em></p>
-<ol>
-<li>队列满了直接警告 - 并丢弃此次事件！！</li>
-<li>是否需要提供同步等待接口？</li>
-</ol>
-</li>
-<li><p>Tx event提供QoS</p>
-<ul>
-<li>Direct Send 不经过Tx Event，直接在dds_write的调用上下文环境中将报文发送出去</li>
-<li>In Direct Send 要经过Tx Event而且可以设置不同的传输优先级队列！<ul>
-<li>优先发送高优先级队列中的数据</li>
+                <h2 id="合并两个有序链表"><a href="#合并两个有序链表" class="headerlink" title="合并两个有序链表"></a>合并两个有序链表</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-list/">148. 排序链表</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-nodes-in-k-group/">25. K 个一组翻转链表</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/">707. 设计链表</a><ul>
+<li>使用二级指针来标记前驱节点的next地址<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">ListNode* <span class="hljs-title">merge</span><span class="hljs-params">(ListNode* l, ListNode* r)</span></span><br><span class="hljs-function"></span>&#123;<br>	ListNode* head = ((l-&gt;val &lt;= r-&gt;val) ? l : r);<br>	ListNode** prev_ptr = &amp;head;<br>	<span class="hljs-keyword">while</span>(l &amp;&amp; r)<br>	&#123;<br>		<span class="hljs-keyword">if</span> (l-&gt;val &lt;= r-&gt;val)<br>		&#123;<br>			*prev_ptr = l;<br>			prev_ptr = &amp;l-&gt;next;<br>			l = l-&gt;next;<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			*prev_ptr = r;<br>			prev_ptr = &amp;r-&gt;next;<br>			r = r-&gt;next;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">while</span> (l) &#123;*prev_ptr = l; prev_ptr = &amp;l-&gt;next; l = l-&gt;next;&#125;<br>	<span class="hljs-keyword">while</span> (r) &#123;*prev_ptr = r; prev_ptr = &amp;r-&gt;next; r = r-&gt;next;&#125;<br>	<span class="hljs-comment">/* return ptr of head !!! */</span><br>	<span class="hljs-keyword">return</span> head;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
-</li>
-</ol>
-<h3 id="local-reader-and-remote-writer"><a href="#local-reader-and-remote-writer" class="headerlink" title="local reader and remote writer"></a>local reader and remote writer</h3><ol>
-<li>changes_received 存储所有收到的不连续的数据，不能无限制的收这样的数据；因为这样的数据如果确认接收了，那么它和low_marker之间的所有change也要被缓存；因此如果一个change与change_low_marker不连续，则还需要判断是否超过了极限；才能接收</li>
-</ol>
-
+<h2 id="获取下标为index的节点值"><a href="#获取下标为index的节点值" class="headerlink" title="获取下标为index的节点值"></a>获取下标为index的节点值</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinkedList</span> &#123;<br><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">MyLinkedList</span>() : <span class="hljs-built_in">count</span>(<span class="hljs-number">0</span>), <span class="hljs-built_in">head</span>(<span class="hljs-literal">nullptr</span>) &#123;&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span></span>;<br><br><span class="hljs-keyword">private</span>:<br>	LinkNode* head;<br>	<span class="hljs-type">size_t</span> count;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> ret = <span class="hljs-number">-1</span>;<br>	<span class="hljs-keyword">if</span> (index &lt; count)<br>	&#123;<br>		LinkNode** prev_ptr = &amp;head;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; index; ++i)<br>		&#123;<br>			prev_ptr = &amp;((*prev_ptr)-&gt;next);<br>		&#125;<br>		<span class="hljs-comment">/* *prev_ptr即：下标为index的节点指针 */</span><br>		ret = (*prev_ptr)-&gt;val;<br>	&#125;<br>	<br>	<span class="hljs-keyword">return</span> ret;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -359,7 +298,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/" class="category-chain-item">嵌入式-开发</a>
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
   
   
 
@@ -379,8 +318,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LW-DDS (一)</div>
-      <div>http://example.com/2024/10/01/嵌入式-开发/LW-DDS (一)/</div>
+      <div>技巧 - 链表操作</div>
+      <div>http://example.com/2024/10/15/算法刷题/技巧 - 链表操作/</div>
     </div>
     <div class="license-meta">
       
@@ -392,7 +331,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月1日</div>
+          <div>2024年10月15日</div>
         </div>
       
       
@@ -424,9 +363,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/15/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/%E6%8A%80%E5%B7%A7%20-%20%E9%93%BE%E8%A1%A8%E6%93%8D%E4%BD%9C/" title="技巧 - 链表操作">
+                      <a href="/2024/10/16/Untitled%201/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">技巧 - 链表操作</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -434,8 +373,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/30/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/Fast-DDS%20(%E4%B8%80)/" title="Fast-DDS (一)">
-                        <span class="hidden-mobile">Fast-DDS (一)</span>
+                      <a href="/2024/10/01/%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%BC%80%E5%8F%91/LW-DDS%20(%E4%B8%80)/" title="LW-DDS (一)">
+                        <span class="hidden-mobile">LW-DDS (一)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
